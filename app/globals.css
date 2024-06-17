@@ -18,12 +18,6 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -31,3 +25,20 @@ body {
     text-wrap: balance;
   }
 }
+
+
+
+.bg-black-gradient {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.20) 100%), #272728;
+}
+
+.bg-section-gradient-black {
+  background: linear-gradient(180deg, rgba(67, 67, 67, 0.00) 0%, rgba(67, 67, 67, 0.50) 100%), #0B0B0B
+}
+
+.text-gradient-white {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.32), rgba(255, 255, 255, 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

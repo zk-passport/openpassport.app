@@ -1,0 +1,197 @@
+"use client";
+
+import { classed } from "@tw-classed/react";
+import { AppLink } from "./AppLink";
+import { useState, useEffect } from "react";
+import useSettings from "../hooks/useSettings";
+import { AppContainer } from "./AppContainer";
+import { Button } from "./elements/Button";
+import { LINKS, MENU_ITEMS, SOCIAL_LINKS } from "@/common/settings";
+import { Icons } from "./elements/Icons";
+import Image from "next/image";
+
+const LinkItem = classed.div(
+  "relative flex items-center text-sm py-2 px-4 font-alliance text-light-black/60 duration-300 tracking-[0.16px]"
+);
+
+function MobileNav() {
+  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const { clientHeight } = useSettings();
+
+  // prevent scrolling of body element when mobile nav is open
+  useEffect(() => {
+    if (!isMobileNavOpen) {
+      document.body.style.overflow = "auto";
+      document.body.style.height = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+      document.body.style.height = `${clientHeight}px`;
+    }
+  }, [clientHeight, isMobileNavOpen]);
+
+  return (
+    <div className="flex items-center lg:hidden">
+      <button
+        type="button"
+        aria-label="burgher menu"
+        onClick={() => {
+          setMobileNavOpen(true);
+        }}
+      >
+        <Icons.Burgher className="text-black" />
+      </button>
+      {isMobileNavOpen && (
+        <div
+          aria-hidden="true"
+          aria-label="mobile nav overlay"
+          onClick={() => setMobileNavOpen(false)}
+          className="z-5 fixed inset-0 flex justify-end bg-light-black opacity-100"
+        />
+      )}
+      {isMobileNavOpen && (
+        <div className="fixed gap-4 pt-4 px-4 sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white">
+          <div className="flex justify-end h-10 items-center">
+            <button
+              type="button"
+              aria-label="close mobile nav"
+              onClick={() => setMobileNavOpen(false)}
+            >
+              <Icons.Close className="text-white" />
+            </button>
+          </div>
+          <div className="flex flex-col h-full">
+            <div className="flex w-full flex-col items-center gap-4 sm:gap-5 text-base font-medium">
+              <AppLink href="#" external>
+                <Button className="mx-auto">Try App</Button>
+              </AppLink>
+              {MENU_ITEMS.map(
+                (
+                  { footerOnly, label, href, external, showInMobile },
+                  index
+                ) => {
+                  if (footerOnly && !showInMobile) return null;
+
+                  return (
+                    <AppLink
+                      key={index}
+                      href={href}
+                      onClick={() => setMobileNavOpen(false)}
+                      external={external}
+                      className="flex items-center gap-0.5 p-2"
+                    >
+                      {label}
+                      {external && (
+                        <Icons.ExternalLink className="text-black" size={20} />
+                      )}
+                    </AppLink>
+                  );
+                }
+              )}
+            </div>
+            <div className="flex flex-col gap-4 md:gap-12 mt-auto overflow-hidden">
+              <div className="grid grid-cols-1 gap-5 pb-6 items-center border-b border-white/25">
+                <div className=" flex  items-center mx-auto gap-2">
+                  <AppLink className="w-8" href={LINKS.GITHUB} external>
+                    <Icons.Github size={32} className="text-white" />
+                  </AppLink>
+                  <AppLink
+                    className="flex w-8 ml-2 items-center justify-center"
+                    href={LINKS.TWITTER}
+                    external
+                  >
+                    <Icons.X size={22} className="text-white" />
+                  </AppLink>
+                  <AppLink className="w-8" href={LINKS.TELEGRAM} external>
+                    <Icons.Telegram size={48} className="text-white" />
+                  </AppLink>
+                </div>
+                <span className="text-center font-alliance text-white/70 text-sm">
+                  MIT Licence. 2024.
+                </span>
+                <span className="text-center font-alliance text-white/70 text-sm">
+                  © proofofpassport.com
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DesktopNav() {
+  return (
+    <>
+      <ul className="hidden lg:flex lg:items-center">
+        {MENU_ITEMS.map(({ label, href, footerOnly, external }, index) => {
+          if (footerOnly) return null; // this is a footer only item
+
+          return (
+            <div key={index} className="flex items-center group">
+              <LinkItem key={index}>
+                <div className="flex items-center gap-[6px]">
+                  <AppLink href={href} external={external}>
+                    {label}
+                  </AppLink>
+                </div>
+              </LinkItem>
+              {external && (
+                <Icons.ExternalLink className="duration-300  group-hover:text-classic-rose-500" />
+              )}
+            </div>
+          );
+        })}
+      </ul>
+
+      <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0">
+        <AppLink href={LINKS.APP_STORE} external>
+          <Button icon={<Icons.ExternalLink />}>App Store</Button>
+        </AppLink>
+        <AppLink href={LINKS.DOCUMENTATION} external>
+          <Button
+            variant="secondary"
+            icon={<Icons.ExternalLink />}
+            className="!border-none"
+          >
+            Read Docs
+          </Button>
+        </AppLink>
+      </div>
+    </>
+  );
+}
+
+const AppHeader = () => {
+  return (
+    <div className="top-0 sticky z-50 bg-white">
+      <AppContainer
+        size="md"
+        className="flex items-center justify-between py-[10px]"
+      >
+        <AppLink href="/">
+          <Image
+            className="hidden md:block"
+            src="/images/logo.svg"
+            width={207}
+            height={24}
+            alt="logo"
+          />
+          <Image
+            className="block md:hidden"
+            src="/images/logo-mobile.svg"
+            width={57}
+            height={24}
+            alt="logo"
+          />
+        </AppLink>
+        <DesktopNav />
+        <MobileNav />
+      </AppContainer>
+    </div>
+  );
+};
+
+AppHeader.displayName = "AppHeader";
+
+export { AppHeader };
