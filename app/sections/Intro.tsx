@@ -1,9 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { AppContainer } from "@/components/AppContainer";
 import { Button } from "@/components/elements/Button";
 import { Icons } from "@/components/elements/Icons";
 import { AppLink } from "@/components/AppLink";
 import { LINKS } from "@/common/settings";
+import { motion } from "framer-motion";
 
 const Intro = () => {
   return (
@@ -12,7 +15,12 @@ const Intro = () => {
       className="flex flex-col gap-12 relative min-h-[80vh] md:gap-0"
     >
       <AppContainer className="grid grid-cols-1 lg:grid-cols-5">
-        <div className="flex flex-col gap-[70px] col-span-1 md:col-span-2 pt-14 md:pt-24 md:max-w-[438px]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex flex-col gap-[70px] col-span-1 md:col-span-2 pt-14 md:pt-24 md:max-w-[438px]"
+        >
           <h1 className="text-brand-black tracking-[-0.77px] text-2xl leading-6 md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
             Prove your humanity while staying
             <br />
@@ -35,7 +43,7 @@ const Intro = () => {
               </AppLink>
             </div>
           </div>
-        </div>
+        </motion.div>
       </AppContainer>
       <div className="overflow-hidden w-full min-h-[430px] relative lg:w-7/12 max-w-[920px] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 bg-cover">
         <Image

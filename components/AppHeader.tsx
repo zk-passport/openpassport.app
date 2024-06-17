@@ -49,48 +49,70 @@ function MobileNav() {
         />
       )}
       {isMobileNavOpen && (
-        <div className="fixed gap-4 pt-4 px-4 sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white">
-          <div className="flex justify-end h-10 items-center">
+        <div className="fixed gap-10 pt-4 px-4 sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white">
+          <div className="flex justify-center ml-auto items-center border border-dashed border-white rounded-full h-[54px] w-[50px]">
             <button
               type="button"
               aria-label="close mobile nav"
               onClick={() => setMobileNavOpen(false)}
             >
-              <Icons.Close className="text-white" />
+              <Icons.CloseModal className="text-white" />
             </button>
           </div>
           <div className="flex flex-col h-full">
-            <div className="flex w-full flex-col items-center gap-4 sm:gap-5 text-base font-medium">
-              <AppLink href="#" external>
-                <Button className="mx-auto">Try App</Button>
-              </AppLink>
-              {MENU_ITEMS.map(
-                (
-                  { footerOnly, label, href, external, showInMobile },
-                  index
-                ) => {
-                  if (footerOnly && !showInMobile) return null;
+            <div className="flex w-full flex-col gap-5 text-base font-medium">
+              <div className="flex items-center gap-4">
+                <AppLink href={LINKS.APP_DEMO} external>
+                  <Button
+                    icon={<Icons.ExternalLink />}
+                    variant="secondary"
+                    className="mx-auto text-[15px]"
+                  >
+                    Try App
+                  </Button>
+                </AppLink>
+                <AppLink href={LINKS.APP_DEMO} external>
+                  <Button
+                    icon={<Icons.ExternalLink />}
+                    variant="transparent"
+                    className="mx-auto text-[15px]"
+                  >
+                    Read Docs
+                  </Button>
+                </AppLink>
+              </div>
+              <div className="flex flex-col gap-2">
+                {MENU_ITEMS.map(
+                  (
+                    { footerOnly, label, href, external, showInMobile },
+                    index
+                  ) => {
+                    if (footerOnly && !showInMobile) return null;
 
-                  return (
-                    <AppLink
-                      key={index}
-                      href={href}
-                      onClick={() => setMobileNavOpen(false)}
-                      external={external}
-                      className="flex items-center gap-0.5 p-2"
-                    >
-                      {label}
-                      {external && (
-                        <Icons.ExternalLink className="text-black" size={20} />
-                      )}
-                    </AppLink>
-                  );
-                }
-              )}
+                    return (
+                      <AppLink
+                        key={index}
+                        href={href}
+                        onClick={() => setMobileNavOpen(false)}
+                        external={external}
+                        className="flex items-center py-3 font-alliance font-base gap-0.5 p-2 border-b border-dashed border-white/40"
+                      >
+                        {label}
+                        {external && (
+                          <Icons.ExternalLink
+                            className="text-white"
+                            size={20}
+                          />
+                        )}
+                      </AppLink>
+                    );
+                  }
+                )}
+              </div>
             </div>
             <div className="flex flex-col gap-4 md:gap-12 mt-auto overflow-hidden">
-              <div className="grid grid-cols-1 gap-5 pb-6 items-center border-b border-white/25">
-                <div className=" flex  items-center mx-auto gap-2">
+              <div className="grid grid-cols-1 gap-8 py-6 items-center border-t border-white/25">
+                <div className="flex items-center gap-2">
                   <AppLink className="w-8" href={LINKS.GITHUB} external>
                     <Icons.Github size={32} className="text-white" />
                   </AppLink>
@@ -105,12 +127,14 @@ function MobileNav() {
                     <Icons.Telegram size={48} className="text-white" />
                   </AppLink>
                 </div>
-                <span className="text-center font-alliance text-white/70 text-sm">
-                  MIT Licence. 2024.
-                </span>
-                <span className="text-center font-alliance text-white/70 text-sm">
-                  © proofofpassport.com
-                </span>
+                <div className="flex flex-col gap-1">
+                  <span className="font-alliance text-white/70 text-sm">
+                    MIT Licence. 2024.
+                  </span>
+                  <span className="font-alliance text-white/40 text-sm">
+                    © proofofpassport.com
+                  </span>
+                </div>
               </div>
             </div>
           </div>

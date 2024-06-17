@@ -23,6 +23,8 @@ const ButtonComponent = classed(ButtonBase, {
     variant: {
       primary: "bg-black-gradient text-white border border-black-gradient",
       secondary: "bg-white border text-light-black border-[#15151580]",
+      transparent:
+        "bg-transparent text-white border border-white border-dashed",
     },
     size: {
       md: "px-8 py-3 text-sm font-normal",
