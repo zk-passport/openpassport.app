@@ -24,7 +24,22 @@ const Intro = () => {
           <h1 className="text-brand-black tracking-[-0.77px] text-2xl leading-6 md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
             Prove your humanity while staying
             <br />
-            anonymous
+            <motion.div
+              initial={{
+                filter: "blur(2px)",
+                opacity: 0.48,
+              }}
+              animate={{
+                filter: "blur(0px)",
+              }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                delay: 0.3,
+              }}
+            >
+              anonymous
+            </motion.div>
           </h1>
           <div className="flex flex-col gap-8 md:gap-12">
             <span className="border-l border-[#2E2E2F] [&>strong]:text-light-black py-0.5 pl-6 text-light-black/60 text-sm font-normal leading-5">
