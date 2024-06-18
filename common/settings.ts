@@ -13,17 +13,17 @@ export const SITE_CONFIG = {
 
 export const LINKS: Record<string, string> = {
   //social
-  GITHUB: "https://github.com/zk-passport",
+  GITHUB: "https://github.com/zk-passport/proof-of-passport",
   TWITTER: "https://twitter.com/proofofpassport",
   TELEGRAM: "https://t.me/proofofpassport",
   // app
-  APP_DEMO: "#",
-  APP_STORE: "#",
-  DOCUMENTATION: "#",
-  BOOK_DEMO: "#",
+  APP_DEMO: "https://testflight.apple.com/join/WfZnZWfn",
+  APP_STORE: "https://testflight.apple.com/join/WfZnZWfn",
+  DOCUMENTATION: "https://proof-of-passport.gitbook.io",
+  BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   MEDIA: "#",
   BLOG: "#",
-  BOUNTIES: "#",
+  BOUNTIES: "https://github.com/zk-passport/proof-of-passport/issues",
   READ_MORE: "#",
 };
 
