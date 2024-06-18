@@ -9,6 +9,7 @@ import { Button } from "./elements/Button";
 import { LINKS, MENU_ITEMS, SOCIAL_LINKS } from "@/common/settings";
 import { Icons } from "./elements/Icons";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const LinkItem = classed.div(
   "relative flex items-center text-sm py-2 px-4 font-alliance text-light-black/60 duration-300 tracking-[0.16px]"
@@ -145,17 +146,32 @@ function MobileNav() {
 }
 
 function DesktopNav() {
+  const pathname = usePathname();
   return (
     <>
       <ul className="hidden lg:flex lg:items-center">
         {MENU_ITEMS.map(({ label, href, footerOnly, external }, index) => {
           if (footerOnly) return null; // this is a footer only item
 
+          const pathParts = href.split("/").filter(Boolean);
+          const isHome = pathname === "/" && href === "/";
+
+          // is home or the first part of the path matches the first part of the href
+          const isActive =
+            isHome ||
+            (pathname !== null && pathParts[0] === pathname.split("/")[1]);
+
           return (
             <div key={index} className="flex items-center group">
               <LinkItem key={index}>
-                <div className="flex items-center gap-[6px]">
-                  <AppLink href={href} external={external}>
+                <div className={`flex items-center gap-[6px]`}>
+                  <AppLink
+                    className={
+                      isActive ? "text-black border-b border-b-black" : ""
+                    }
+                    href={href}
+                    external={external}
+                  >
                     {label}
                   </AppLink>
                 </div>

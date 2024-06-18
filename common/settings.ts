@@ -30,15 +30,19 @@ export const LINKS: Record<string, string> = {
 export const MENU_ITEMS: MenuItem[] = [
   {
     label: "How it works",
-    href: "#how-it-works",
+    href: "/#how-it-works",
   },
   {
     label: "User cases",
-    href: "#use-cases",
+    href: "/#use-cases",
   },
   {
     label: "Develop",
-    href: "#develop",
+    href: "/#develop",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
   },
   {
     label: "Docs",
