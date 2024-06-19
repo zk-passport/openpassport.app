@@ -17,7 +17,7 @@ const TestFlightBanner = () => {
   if (!showBanner) return null;
 
   return (
-    <Banner className="flex fixed left-0 right-0 z-[2] top-[52px] md:top-[66px] w-full">
+    <Banner className="flex sticky left-0 right-0 z-[2] top-[52px] md:top-[66px] w-full">
       <div className="flex items-center gap-4 mx-auto">
         <AppLink
           href={LINKS.APP_STORE}
