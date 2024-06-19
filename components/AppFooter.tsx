@@ -30,9 +30,9 @@ const FOOTER_LINKS: MenuItem[] = [
 const AppFooter = () => {
   return (
     <footer className="pt-8 overflow-hidden bg-cover bg-[url('/pattern/footer-gradient.jpg')]">
-      <AppContainer size="md" className="relative flex flex-col items-center ">
+      <AppContainer className="!relative flex flex-col items-center ">
         <div className="w-full">
-          <div className="flex flex-col gap-6 pb-28 md:pb-56">
+          <div className="flex flex-col gap-6 pb-56">
             <div className="grid grid-cols-1 gap-5 pb-6 items-center border-b border-white/25 md:pb-2 md:grid-cols-3 md:gap-0">
               <div className=" flex items-center gap-2">
                 <AppLink className="w-8" href={LINKS.GITHUB} external>
@@ -81,12 +81,7 @@ const AppFooter = () => {
             </div>
           </div>
         </div>
-        <span
-          className="text-white text-gradient-white leading-none absolute bottom-0 lg:bottom-[-3rem]"
-          style={{
-            fontSize: "calc(100vw / 10)",
-          }}
-        >
+        <span className="text-white text-gradient-white leading-none absolute left-5 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/5)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)]">
           Proof of Passport
         </span>
       </AppContainer>

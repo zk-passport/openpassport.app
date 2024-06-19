@@ -36,6 +36,13 @@ section[id] {
   scroll-margin-top: 60px;
 }
 
+.h-full-screen {
+  min-height: calc(100vh - 66px);
+  @media screen and (min-height: 640px) {
+    min-height: calc(100vh - 52px);
+  }
+}
+
 .bg-black-gradient {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.20) 100%), #272728;
 }

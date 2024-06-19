@@ -74,9 +74,9 @@ const HowItWorks = () => {
       id="how-it-works"
       className="bg-section-gradient-black pt-14 lg:pt-16"
     >
-      <AppContainer className="flex flex-col md:block relative gap-24 lg:pb-36 lg:gap-0">
-        <div className="flex flex-col gap-16 lg:gap-36">
-          <h3 className="max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-normal tracking-[-0.22px] text-white/70 md:text-[32px]">
+      <AppContainer className="h-full-screen flex flex-col relative gap-24 lg:gap-0">
+        <div className="my-auto h-full flex flex-col gap-16 lg:gap-36">
+          <h3 className=" max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-normal tracking-[-0.22px] text-white/70 md:text-[32px]">
             <strong>Introduction Proof of Passport,</strong> a digital identity
             powered by zero-knowledge technology.
           </h3>

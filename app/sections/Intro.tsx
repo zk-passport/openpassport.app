@@ -12,7 +12,7 @@ const Intro = () => {
   return (
     <section
       id="intro"
-      className="flex flex-col gap-12 relative h-screen pt-10 md:pt-0 md:gap-0"
+      className="flex flex-col gap-12 relative h-full-screen pt-10 md:pt-0 md:gap-0"
     >
       <AppContainer className="grid grid-cols-1 lg:grid-cols-5">
         <motion.div
