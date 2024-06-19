@@ -11,8 +11,8 @@ import { motion } from "framer-motion";
 const Intro = () => {
   return (
     <section
-      id="#intro"
-      className="flex flex-col gap-12 relative min-h-[80vh] md:gap-0"
+      id="intro"
+      className="flex flex-col gap-12 relative h-screen pt-10 md:pt-0 md:gap-0"
     >
       <AppContainer className="grid grid-cols-1 lg:grid-cols-5">
         <motion.div

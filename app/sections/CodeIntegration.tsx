@@ -8,7 +8,10 @@ import React from "react";
 
 const CodeIntegration = () => {
   return (
-    <section className="py-14 md:pb-20 md:pt-28 bg-center bg-cover bg-[url('/pattern/code-integration.jpg')]">
+    <section
+      id="develop"
+      className="py-14 md:pb-20 md:pt-28 bg-center bg-cover bg-[url('/pattern/code-integration.jpg')]"
+    >
       <AppContainer className="flex flex-col gap-16 md:gap-24">
         <div className="flex flex-col gap-12 mx-auto w-full max-w-[480px]">
           <div className="flex flex-col gap-6">

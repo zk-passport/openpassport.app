@@ -16,10 +16,6 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -27,6 +23,18 @@ body {
 }
 
 
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+}
+
+section[id] {
+  scroll-margin-top: 60px;
+}
 
 .bg-black-gradient {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.20) 100%), #272728;

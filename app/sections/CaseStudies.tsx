@@ -43,7 +43,7 @@ const CaseStudies = () => {
                   </span>
                 </div>
                 <AppLink
-                  className="flex items-center gap-1 border-t border-b border-dashed py-3 border-light-black/25"
+                  className="flex items-center gap-1 border-t border-b border-dashed py-3 border-light-black/25 duration-200 hover:border-light-black"
                   href={url.href}
                   external
                 >

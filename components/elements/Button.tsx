@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 type Position = "top" | "right" | "bottom" | "left";
 
 const ButtonBase = classed.button(
-  "font-alliance relative self-start duration-200 ease-in-out disabled:cursor-not-allowed",
+  "font-alliance relative self-start duration-300 ease-in-out hover:shadow-md disabled:cursor-not-allowed",
   {
     variants: {
       rounded: {
@@ -21,8 +21,10 @@ const ButtonBase = classed.button(
 const ButtonComponent = classed(ButtonBase, {
   variants: {
     variant: {
-      primary: "bg-black-gradient text-white border border-black-gradient",
-      secondary: "bg-white border text-light-black border-[#15151580]",
+      primary:
+        "bg-black-gradient text-white border border-black-gradient hover:bg-black",
+      secondary:
+        "bg-white border text-light-black border-[#0f0f0f]/20 hover:border-[#0f0f0f]/10",
       transparent:
         "bg-transparent text-white border border-white border-dashed",
     },

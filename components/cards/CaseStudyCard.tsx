@@ -20,8 +20,10 @@ const CaseStudyCard = ({
   return (
     <AppLink
       href={href}
-      className={`flex flex-col gap-8  ${
-        !inEvidence ? "border-b border-dashed border-light-black/25 py-6" : ""
+      className={`flex flex-col gap-8 duration-200 group ${
+        !inEvidence
+          ? "border-b border-dashed border-light-black/25 py-6 hover:border-light-black"
+          : ""
       }`}
     >
       {image && inEvidence && (
@@ -41,7 +43,7 @@ const CaseStudyCard = ({
           <Icons.ExternalLink />
         </div>
         <span
-          className={`text-black/70 font-normal leading-5 font-alliance text-sm ${
+          className={`text-black/70 font-normal leading-5 font-alliance text-sm duration-200 group-hover:text-black ${
             !inEvidence ? "md:w-3/4" : ""
           }`}
         >

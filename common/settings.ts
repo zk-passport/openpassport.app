@@ -7,6 +7,7 @@ export interface MenuItem {
 }
 
 export const SITE_CONFIG = {
+  ID: "proof-of-passport",
   NAME: "Proof of Passport",
   DESCRIPTION: "Prove your humanity while staying anonymous",
 };

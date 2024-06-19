@@ -1,9 +1,11 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   href: string;
+  to?: string;
   external?: boolean;
 }
 
