@@ -81,7 +81,7 @@ const AppFooter = () => {
             </div>
           </div>
         </div>
-        <span className="text-white text-gradient-white leading-none absolute left-5 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/5)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)]">
+        <span className="text-white text-gradient-white leading-none absolute left-0 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/5)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)] xl:text-[calc(100vw/11)]">
           Proof of Passport
         </span>
       </AppContainer>
