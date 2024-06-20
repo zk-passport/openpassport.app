@@ -28,21 +28,22 @@ export default function BlogArticle({ params }: any) {
   if (!post) return null;
   return (
     <div className="flex flex-col">
-      <div className="flex items-start justify-center background-gradient z-0 pt-10 pb-8 md:pb-[80px]">
+      <div className="flex items-start justify-center background-gradient z-0 pt-10 pb-8 md:pb-10">
         <section className={`relative my-6 w-full z-0`}>
           <AppContainer>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4 w-full">
-                <small className="text-sm font font-alliance text-light-black">
+                <small className="text-xs font font-alliance text-light-black/60">
                   {post?.date ?? "Loading..."}
                 </small>
-                <h1 className="w-full text-3xl md:text-[48px] font-black text-black dark:text-white md:leading-[48px] text-left">
-                  {post?.title ?? "Loading..."}
-                </h1>
-
-                <span className="text-[20px] font-alliance text-gray-600">
-                  {post?.tldr ?? "Loading..."}
-                </span>
+                <div className="flex flex-col gap-4">
+                  <h1 className="text-brand-black tracking-[-0.77px] text-2xl leading-6 md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
+                    {post?.title ?? "Loading..."}
+                  </h1>
+                  <span className="border-l border-[#2E2E2F] [&>strong]:text-light-black py-0.5 pl-6 text-light-black/60 text-sm font-normal leading-5">
+                    {post?.tldr ?? "Loading..."}
+                  </span>
+                </div>
               </div>
             </div>
           </AppContainer>
