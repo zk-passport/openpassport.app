@@ -1,11 +1,13 @@
+"use client";
 import { AppContainer } from "@/components/AppContainer";
 import Image from "next/image";
+import { HtmlHTMLAttributes, useState } from "react";
 
-interface HowItWorkCardProps {
+interface HowItWorkCardProps
+  extends Pick<HtmlHTMLAttributes<HTMLDivElement>, "className" | "onClick"> {
   title: string;
   description: string;
   isActive?: boolean;
-  className?: string;
   stepIndex: number; // number of the step
 }
 
@@ -31,9 +33,11 @@ const HowItWorkCard = ({
   isActive,
   className = "",
   stepIndex,
+  ...props
 }: HowItWorkCardProps) => {
   return (
     <div
+      {...props}
       className={`relative group cursor-pointer flex flex-col gap-2 py-6 px-8 duration-200 before:duration-300 before:bg-black before:absolute before:will-change-transform before:left-0 before:origin-bottom before:w-full before:h-full before:content-[''] before:bottom-0 before:scale-y-0 hover:before:scale-y-100  ${className}`}
       style={{
         background: isActive
@@ -69,6 +73,7 @@ const HowItWorkCard = ({
 };
 
 const HowItWorks = () => {
+  const [activeStep, setActiveStep] = useState(1);
   return (
     <section
       id="how-it-works"
@@ -82,6 +87,7 @@ const HowItWorks = () => {
           </h3>
           <div className="w-full max-w-[720px] grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-2">
             {HOW_IT_WORKS.map(({ label, description }, index) => {
+              const isActive = activeStep === index + 1;
               return (
                 <HowItWorkCard
                   className={index !== 0 ? "lg:col-start-2" : ""}
@@ -89,7 +95,8 @@ const HowItWorks = () => {
                   key={index}
                   title={label}
                   description={description}
-                  isActive={index === 0}
+                  isActive={isActive}
+                  onClick={() => setActiveStep(index + 1)}
                 />
               );
             })}
