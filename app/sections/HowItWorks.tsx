@@ -43,10 +43,8 @@ const HowItWorkCard = ({
     >
       <div className="flex gap-3 items-center z-[2]">
         <div
-          className={`rounded-full text-[8px] font-bold w-[18px] h-[18px] flex items-center text-center justify-center" ${
-            isActive
-              ? "text-white bg-black group-hover:bg-white group-hover:text-black"
-              : "text-[#DCD5D5] bg-white/25 group-hover:bg-black group-hover:text-white"
+          className={`rounded-full  text-[8px] group-hover:!bg-white group-hover:!text-black font-bold w-[18px] h-[18px] flex items-center text-center justify-center" ${
+            isActive ? "text-white bg-black" : "text-[#DCD5D5] bg-white/25"
           }`}
         >
           <div className="mx-auto">{stepIndex}</div>
