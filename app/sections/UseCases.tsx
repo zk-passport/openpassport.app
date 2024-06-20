@@ -72,7 +72,7 @@ export const UseCases = () => {
                           key={index}
                           className="grid grid-cols-[13px_1fr] items-start gap-2"
                         >
-                          <Icons.CheckedCircle className="mt-1" />
+                          <Icons.CheckedCircle className="mt-1 text-black/80" />
                           <span className=" font-alliance text-black/80 text-sm leading-5">
                             {item}
                           </span>

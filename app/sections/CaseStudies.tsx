@@ -50,7 +50,7 @@ const CaseStudies = () => {
                   <span className="text-light-black text-base font-alliance">
                     {url.label}
                   </span>
-                  <Icons.ExternalLink />
+                  <Icons.ExternalLink className="text-light-black" />
                 </AppLink>
               </div>
             );
@@ -64,7 +64,11 @@ const CaseStudies = () => {
               Case studies
             </h4>
             <AppLink href={LINKS.READ_MORE} external>
-              <Button icon={<Icons.ExternalLink />}>Read More</Button>
+              <Button
+                icon={<Icons.ExternalLink className="text-light-black" />}
+              >
+                Read More
+              </Button>
             </AppLink>
           </div>
         </div>
