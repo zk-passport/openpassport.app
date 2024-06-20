@@ -41,16 +41,18 @@ export const UseCases = () => {
                   ease: "easeOut",
                   delay: index * 0.2,
                 }}
-                className={`col-span-1 ${
+                className={`col-span-1 flex h-full w-full  ${
                   inEvidence ? "md:col-span-3" : "md:col-span-2"
                 }`}
               >
-                <Card.Base>
-                  <div
-                    className={`relative  min-h-[210px]  ${
-                      inEvidence ? "md:min-h-[180x]" : "md:min-h-[190px]"
-                    } ${!image ? "bg-black/20" : ""}`}
-                  >
+                <Card.Base
+                  className={`grid grid-rows-[210px_1fr] w-full ${
+                    inEvidence
+                      ? "md:grid-rows-[180px_1fr]"
+                      : "md:grid-rows-[190px_1fr]"
+                  }`}
+                >
+                  <div className={`relative ${!image ? "bg-black/20" : ""}`}>
                     {image && (
                       <Image
                         className=" object-cover"
