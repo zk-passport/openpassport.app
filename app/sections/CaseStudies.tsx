@@ -64,9 +64,7 @@ const CaseStudies = () => {
               Case studies
             </h4>
             <AppLink href={LINKS.READ_MORE} external>
-              <Button
-                icon={<Icons.ExternalLink className="text-light-black" />}
-              >
+              <Button icon={<Icons.ExternalLink className="text-white" />}>
                 Read More
               </Button>
             </AppLink>
