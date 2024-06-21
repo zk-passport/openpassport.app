@@ -1,0 +1,98 @@
+body.globalMap {
+    background: #f1f1f1;
+}
+
+.globalMap path {
+    cursor: pointer;
+    outline: 0;
+}
+
+.globalMap .main {
+    padding: 20px;
+    background: #f1f1f1;
+}
+
+.globalMap .homeTitle {
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    max-width: 250px;
+    text-align: left;
+}
+
+.globalMap .mapSection {
+    width: 90%;
+    margin-right: auto;
+}
+
+.globalMap .mapRow {
+    display: flex;
+    margin-top: -3.5rem;
+}
+
+.globalMap header {
+    display: none;
+}
+
+.globalMap footer {
+    /* background: #dedede; */
+    margin-top: auto;
+}
+
+.globalMap footer .py-4 {
+    padding: 0.5rem 0;
+}
+
+.globalMap .legend-info .legend-info-item {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .globalMap .homeTitle {
+        font-size: 14px;
+    }
+
+    .globalMap .legend-info .legend-info-item {
+        font-size: 12px;
+    }
+
+    .globalMap .mapSection {
+        width: 100%;
+    }
+
+    .globalMap .mapRow {
+        margin-top: 0;
+    }
+
+    .globalMap .highlightInfo p, .globalMap .workInProgress p {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .globalMap .main {
+        height: calc(100vh - 86px);
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 0;
+    }
+    .globalMap .countryDetailsRow{
+        flex: auto;
+    }
+    .globalMap .legend-info{
+        padding-top: 10px;
+        margin-top: auto;
+    }
+}
+@media screen and (min-width: 640px) {
+    .globalMap #countryDetails{
+        border: 0;
+    }
+}
+
+.country-tooltip {
+    max-width: none !important;
+    /* Override the default max-width */
+}
