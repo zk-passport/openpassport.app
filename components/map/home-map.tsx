@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Tooltip, Zoom } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Tooltip, Zoom } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import {
   ComposableMap,
   Geographies,
   Geography,
   Graticule,
   Sphere,
-} from "react-simple-maps";
-import { createRoot } from "react-dom/client";
+} from 'react-simple-maps';
+import { createRoot } from 'react-dom/client';
 
-const geoUrl = "data/countries-110m.json";
+const geoUrl = 'data/countries-110m.json';
 
 export default function MapChart() {
   enum issuePassTypes {
@@ -20,26 +20,14 @@ export default function MapChart() {
     ISSUE_WITH_SUPPORT = 1002,
   }
   const SUPPORTED_ALGORITHMS = {
-    "RSA with SHA256": true,
+    'RSA with SHA256': true,
+    'RSA-PSS with SHA256': true,
   };
 
-  const [selectedCountryInfo, setSelectedCountryInfo] = useState([]);
   const [allCountriesData, setAllCountriesData] = useState({});
-  const [selectedCountryName, setSelectedCountryName] = useState("");
   const [allIssuesCountry, setAllIssuesCountry] = useState({});
   const size = useWindowSize();
   const [isMobileView, setIsMobileView] = useState(false);
-
-  const handleToolTip = (countryName: string) => {
-    setSelectedCountryName(countryName);
-    if (countryName) {
-      const selectedCountryInfo = allCountriesData[countryName];
-      setSelectedCountryInfo([]);
-      if (selectedCountryInfo) {
-        setSelectedCountryInfo(selectedCountryInfo);
-      }
-    }
-  };
 
   const formatJsonData = (
     dscInput: any = {},
@@ -62,32 +50,35 @@ export default function MapChart() {
         // countryData[name] = {};
         const countryObj = {};
 
-        countryObj["name"] = name;
-        countryObj["countryCode"] = countryCode;
-        countryObj["dscExist"] = false;
-        countryObj["cscaExist"] = false;
+        countryObj['name'] = name;
+        countryObj['countryCode'] = countryCode;
+        countryObj['dscExist'] = false;
+        countryObj['cscaExist'] = false;
 
         let count = 0;
         if (dscCountryData?.length > 0) {
-          countryObj["dscExist"] = true;
-          countryObj["dscRecords"] = [...dscCountryData];
+          countryObj['dscExist'] = true;
+          countryObj['dscRecords'] = [...dscCountryData];
           const signatureCountryAlgs = {};
           for (const dscEachAlg of dscCountryData) {
             count += dscEachAlg?.amount;
+            if(dscEachAlg.signature_algorithm === 'rsapss'){
+              dscEachAlg.signature_algorithm = 'rsa-pss';
+            }
             const signatureStr = `${dscEachAlg.signature_algorithm.toUpperCase()} with ${dscEachAlg.hash_algorithm.toUpperCase()}`;
             signatureCountryAlgs[signatureStr] = true;
           }
-          countryObj["dscAlgs"] = Object.keys(signatureCountryAlgs);
+          countryObj['dscAlgs'] = Object.keys(signatureCountryAlgs);
         }
 
         if (cscaCountryData?.length > 0) {
-          countryObj["cscaExist"] = true;
-          countryObj["cscaRecords"] = [...cscaCountryData];
+          countryObj['cscaExist'] = true;
+          countryObj['cscaRecords'] = [...cscaCountryData];
           for (const cscaEachAlg of cscaCountryData) {
             count += cscaEachAlg?.amount;
           }
         }
-        countryObj["amount"] = count;
+        countryObj['amount'] = count;
 
         countryData[name] = countryObj;
       }
@@ -100,18 +91,18 @@ export default function MapChart() {
     try {
       // Intermediate Certificates (DSC) issued by each country
       const dscFetchData = await fetch(
-        "https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/dsc_formatted.json"
+        'https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/dsc_formatted.json'
       );
       const dscData = await dscFetchData.json();
 
       // Top-level Certificates (CSCA) issued by each country
       const cscaFetchData = await fetch(
-        "https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/csca_formatted.json"
+        'https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/csca_formatted.json'
       );
       const cscaData = await cscaFetchData.json();
 
       const countryNames = await import(
-        "./../../public/data/all-countries.json"
+        './../../public/data/all-countries.json'
       );
 
       if (!dscData || !cscaData) {
@@ -123,12 +114,12 @@ export default function MapChart() {
         { ...cscaData },
         countryNames
       );
-      console.log("allCountriesData :>> ", allCountriesData);
+      console.log('allCountriesData :>> ', allCountriesData);
       setAllCountriesData(allCountriesData);
 
       // e-passport supported countries
       let ePassSupportCountries: any = await import(
-        "./../../public/data/supported-countries.json"
+        './../../public/data/supported-countries.json'
       );
       if (ePassSupportCountries?.default?.length) {
         ePassSupportCountries = ePassSupportCountries.default;
@@ -140,7 +131,7 @@ export default function MapChart() {
         countryNames
       );
     } catch (err) {
-      console.log("err :>> ", err);
+      console.log('err :>> ', err);
     }
   };
 
@@ -167,11 +158,17 @@ export default function MapChart() {
       countryRes[countryName] = {
         name: countryName,
         issueType: issuePassTypes.DO_NOT_ISSUE,
-        defaultColor: "#b0bfa7",
+        defaultColor: '#b0bfa7',
       };
 
       if (supportedCountriesObj[country]) {
-        countryRes[countryName].defaultColor = "#70ac48";
+        countryRes[countryName].defaultColor = '#70ac48';
+        countryRes[countryName].issueType =
+          issuePassTypes.ISSUE_WITHOUT_SUPPORT;
+      }
+
+      if (countryData?.cscaRecords?.length) {
+        countryRes[countryName].defaultColor = '#70ac48';
         countryRes[countryName].issueType =
           issuePassTypes.ISSUE_WITHOUT_SUPPORT;
       }
@@ -182,11 +179,13 @@ export default function MapChart() {
           if (SUPPORTED_ALGORITHMS[alg]) {
             countryRes[countryName].issueType =
               issuePassTypes.ISSUE_WITH_SUPPORT;
-            countryRes[countryName].defaultColor = "#548233";
+            countryRes[countryName].defaultColor = '#548233';
           }
         }
       }
     }
+
+    console.log('countryRes :>> ', countryRes);
 
     setAllIssuesCountry(countryRes);
   };
@@ -195,10 +194,10 @@ export default function MapChart() {
     fetchJsonInfo();
 
     // apply custom styles to map page
-    document.body.classList.add("globalMap");
+    document.body.classList.add('globalMap');
     // Clean up: Remove classes from body
     return () => {
-      document.body.classList.remove("globalMap");
+      document.body.classList.remove('globalMap');
     };
   }, []);
 
@@ -207,68 +206,105 @@ export default function MapChart() {
     setIsMobileView(isMobile);
   }, [size]);
 
-  const highLightInfo = (countryDscs: any = []) => {
+  //   {
+  //     "name": "Morocco",
+  //     "countryCode": "MA",
+  //     "dscExist": true,
+  //     "cscaExist": true,
+  //     "dscRecords": [
+  //         {
+  //             "signature_algorithm": "rsa",
+  //             "hash_algorithm": "sha256",
+  //             "curve_exponent": "65537",
+  //             "bit_length": 2048,
+  //             "amount": 3
+  //         }
+  //     ],
+  //     "dscAlgs": [
+  //         "RSA with SHA256"
+  //     ],
+  //     "cscaRecords": [
+  //         {
+  //             "signature_algorithm": "rsa",
+  //             "hash_algorithm": "sha256",
+  //             "curve_exponent": "65537",
+  //             "bit_length": 4096,
+  //             "amount": 5
+  //         }
+  //     ],
+  //     "amount": 8
+  // }
+
+  const highLightInfo = (countryName: string) => {
     let info: React.JSX.Element;
-    return "";
-    // if (countryDscs?.length > 0) {
-    //   info = (
-    //     <div className="highlightInfo">
-    //       <h3 className="flex items-center">
-    //         <b>{selectedCountryName || ''}</b>
-    //       </h3>{' '}
-    //       <div className="issued-dscs">
-    //         {countryDscs.map((dsc) => {
-    //           return (
-    //             <p
-    //               key={dsc.ENCRYPTION_CODE}
-    //               className="flex items-center text-nowrap"
-    //             >
-    //               <span className="me-1">
-    //                 {new Intl.NumberFormat().format(
-    //                   dsc.COUNT ? dsc.COUNT * 100_000 : dsc.COUNT
-    //                 )}
-    //               </span>
-    //               passports issued with{' '}
-    //               <span className="ms-1">{dsc.ENCRYPTION}</span>
-    //               <span>&nbsp;{dsc.SUPPORTED ? '✅' : '🚧'}</span>
-    //             </p>
-    //           );
-    //         })}
-    //       </div>
-    //     </div>
-    //   );
-    // } else {
-    //   info = (
-    //     <div className="workInProgress">
-    //       <h3 className="flex items-center">
-    //         <b>{selectedCountryName || ''}</b>
-    //         &nbsp;
-    //         {allIssuesCountry[`${selectedCountryName}`] ? '🚧' : null}
-    //       </h3>
-    //       {allIssuesCountry[`${selectedCountryName}`] && isMobileView ? (
-    //         <>
-    //           <p>Work in progress</p>
-    //         </>
-    //       ) : (
-    //         isMobileView && (
-    //           <>
-    //             <p>Not issuing e-passport</p>
-    //           </>
-    //         )
-    //       )}
-    //     </div>
-    //   );
-    // }
+    const countryData = allCountriesData[countryName];
+    if (countryData) {
+      info = (
+        <div className="highlightInfo">
+          <h3 className="flex items-center">
+            <b>{countryName || ''} </b>
+          </h3><br />
+          <div className="issued-dscs">
+            {countryData?.amount && (
+              <p>
+                ~ &nbsp;
+                {new Intl.NumberFormat().format(
+                  countryData?.amount
+                    ? countryData?.amount * 100_000
+                    : countryData?.amount
+                )}{' '}
+                passports issued
+              </p>
+            )}
+            <br />
+            {countryData?.dscAlgs && <p>Signature algorithms:</p>}
+            {countryData?.dscAlgs?.length > 0
+              ? countryData?.dscAlgs.map((dsc) => {
+                  return (
+                    <p key={dsc} className="flex items-center text-nowrap">
+                      &emsp;&emsp;&emsp;{dsc}
+                      <span>
+                        &nbsp;{SUPPORTED_ALGORITHMS[dsc] ? '✅' : '🚧'}
+                      </span>
+                    </p>
+                  );
+                })
+              : null}
+          </div>
+        </div>
+      );
+    } else {
+      info = (
+        <div className="workInProgress">
+          <h3 className="flex items-center">
+            <b>{countryName || ''}</b>
+            &nbsp;
+            {allIssuesCountry[`${countryName}`] ? '🚧' : null}
+          </h3>
+          {allIssuesCountry[`${countryName}`] && isMobileView ? (
+            <>
+              <p>Work in progress</p>
+            </>
+          ) : (
+            isMobileView && (
+              <>
+                <p>Not issuing e-passport</p>
+              </>
+            )
+          )}
+        </div>
+      );
+    }
 
-    // if (isMobileView && selectedCountryName != '') {
-    //   const mobInfoEl = document.getElementById('countryDetails');
-    //   if (mobInfoEl) {
-    //     const root = createRoot(mobInfoEl);
-    //     root.render(info);
-    //   }
-    // }
+    if (isMobileView && countryName != '') {
+      const mobInfoEl = document.getElementById('countryDetails');
+      if (mobInfoEl) {
+        const root = createRoot(mobInfoEl);
+        root.render(info);
+      }
+    }
 
-    // return info;
+    return info;
   };
 
   return (
@@ -282,8 +318,8 @@ export default function MapChart() {
         <Sphere
           stroke="#fff"
           strokeWidth={0.1}
-          id={"sphereline"}
-          fill={"#ffffff00"}
+          id={'sphereline'}
+          fill={'#ffffff00'}
         />
         <Geographies
           geography={geoUrl}
@@ -296,11 +332,11 @@ export default function MapChart() {
               <Tooltip
                 enterTouchDelay={0}
                 leaveTouchDelay={6000}
-                classes={{ tooltip: "country-tooltip" }}
-                title={highLightInfo(selectedCountryInfo)}
+                classes={{ tooltip: 'country-tooltip' }}
+                title={highLightInfo(geo.properties.name)}
                 disableTouchListener={isMobileView}
                 disableHoverListener={isMobileView}
-                placement={"right"}
+                placement={'right'}
                 arrow
                 key={geo.rsmKey}
                 TransitionComponent={Zoom}
@@ -313,15 +349,13 @@ export default function MapChart() {
                     if (!isMobileView) {
                       return;
                     }
-                    handleToolTip(`${geo.properties.name}`);
                     if (isMobileView) {
-                      highLightInfo(selectedCountryInfo);
+                      highLightInfo(geo.properties.name);
                     }
                   }}
                   onMouseEnter={() => {
-                    handleToolTip(`${geo.properties.name}`);
                     if (isMobileView) {
-                      highLightInfo(selectedCountryInfo);
+                      highLightInfo(geo.properties.name);
                     }
                   }}
                   style={{
@@ -329,17 +363,17 @@ export default function MapChart() {
                       fill: allIssuesCountry[`${geo.properties.name}`]
                         ? allIssuesCountry[`${geo.properties.name}`]
                             .defaultColor
-                        : "#b0bfa7",
+                        : '#b0bfa7',
                     },
                     hover: {
                       fill: allIssuesCountry[`${geo.properties.name}`]
-                        ? "#4d7332"
-                        : "#b0bfa7",
+                        ? '#4d7332'
+                        : '#b0bfa7',
                     },
                     pressed: {
                       fill: allIssuesCountry[`${geo.properties.name}`]
-                        ? "#507f3a"
-                        : "#b0bfa7",
+                        ? '#507f3a'
+                        : '#b0bfa7',
                     },
                   }}
                 />
@@ -373,15 +407,15 @@ function useWindowSize() {
     }
 
     // Only execute on the client-side
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       // Add event listener
-      window.addEventListener("resize", handleResize);
+      window.addEventListener('resize', handleResize);
 
       // Call handler right away so state gets updated with initial window size
       handleResize();
 
       // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
