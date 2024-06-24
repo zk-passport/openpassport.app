@@ -12,7 +12,7 @@ const Intro = () => {
   return (
     <section
       id="intro"
-      className="flex flex-col gap-12 relative h-full-screen pt-10 md:pt-0 md:gap-0"
+      className="flex flex-col gap-12 relative h-full-screen pt-10 md:pt-0 lg:gap-0"
     >
       <AppContainer className="grid grid-cols-1 lg:grid-cols-5">
         <motion.div
@@ -60,7 +60,7 @@ const Intro = () => {
           </div>
         </motion.div>
       </AppContainer>
-      <div className="overflow-hidden w-full min-h-[430px] relative lg:w-7/12 max-w-[920px] lg:absolute lg:right-0 lg:bottom-0 lg:top-0 bg-cover">
+      <div className="overflow-hidden w-full min-h-[430px] pt-10 md:mt-0 relative lg:w-1/2 md:max-w-1/2 lg:absolute lg:right-0 lg:bottom-0 lg:top-0 bg-cover">
         <Image
           src="/images/intro-pop.jpg"
           alt="intro proof of password"

@@ -40,7 +40,7 @@ const CaseStudyCard = ({
           <h5 className="text-light-black text-[13px] font-alliance font-medium leading-3">
             {title}
           </h5>
-          <Icons.ExternalLink />
+          <Icons.ExternalLink className="text-light-black" />
         </div>
         <span
           className={`text-black/70 font-normal leading-5 font-alliance text-sm duration-200 group-hover:text-black ${

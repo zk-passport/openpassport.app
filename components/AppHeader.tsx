@@ -166,9 +166,9 @@ function DesktopNav() {
               <LinkItem key={index}>
                 <div className={`flex items-center gap-[6px]`}>
                   <AppLink
-                    className={
+                    className={`duration-200 hover:text-black ${
                       isActive ? "text-black border-b border-b-black" : ""
-                    }
+                    }`}
                     href={href}
                     external={external}
                   >

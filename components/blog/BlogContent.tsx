@@ -135,13 +135,15 @@ export function BlogContent({ post }: BlogContentProps) {
 
         <div className="flex flex-col gap-8">
           <div className="flex items-center justify-between">
-            <span className="text-black font-alliance text-base md:text-xl leading-6">
-              More from the team
-            </span>
+            {moreArticles.length > 0 && (
+              <span className="text-black font-alliance text-base md:text-xl leading-6">
+                More from the team
+              </span>
+            )}
 
             <AppLink
               href="/blog"
-              className="text-black font-bold font-alliance text-base leading-6"
+              className="text-black font-bold font-alliance text-base ml-auto leading-6"
             >
               <Button> View all</Button>
             </AppLink>
