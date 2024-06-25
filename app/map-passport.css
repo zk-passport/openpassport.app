@@ -95,4 +95,5 @@ body.globalMap {
 .country-tooltip {
     max-width: none !important;
     /* Override the default max-width */
+    background-color: rgb(11, 65, 26);
 }
