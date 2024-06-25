@@ -6,18 +6,17 @@ import { Icons } from "./elements/Icons";
 
 const FOOTER_LINKS: MenuItem[] = [
   {
-    label: "Docs",
-    href: LINKS.DOCUMENTATION,
-    external: true,
-  },
-  {
-    label: "Media",
-    href: LINKS.MEDIA,
-    external: true,
-  },
-  {
     label: "Blog",
     href: LINKS.BLOG,
+  },
+  {
+    label: "Github",
+    href: LINKS.GITHUB,
+    external: true,
+  },
+  {
+    label: "Docs",
+    href: LINKS.DOCUMENTATION,
     external: true,
   },
   {

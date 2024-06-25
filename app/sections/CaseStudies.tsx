@@ -26,8 +26,8 @@ const CaseStudies = () => {
           />
           <span className="md:max-w-[340px] font-alliance text-sm leading-5 text-brand-black pl-6 border-l border-[#D9D9D9]">
             Proof of Passport lets users scan the NFC chip in their
-            government-issued passport and prove the correctness of the
-            signature in a zk-SNARK.
+            government-issued passport and prove the validity of their
+            ID anonymously.
           </span>
         </div>
         <div className="md:col-span-5">
