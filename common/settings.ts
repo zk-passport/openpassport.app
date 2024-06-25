@@ -23,9 +23,10 @@ export const LINKS: Record<string, string> = {
   DOCUMENTATION: "https://proof-of-passport.gitbook.io",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   MEDIA: "#",
-  BLOG: "#",
+  BLOG: "/blog",
   BOUNTIES: "https://github.com/zk-passport/proof-of-passport/issues",
-  READ_MORE: "#",
+  READ_MORE: "https://proof-of-passport.gitbook.io",
+  INTRODUCTION_TO_ZK: "#",
 };
 
 export const MENU_ITEMS: MenuItem[] = [

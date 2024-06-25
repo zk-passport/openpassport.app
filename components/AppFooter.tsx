@@ -6,6 +6,15 @@ import { Icons } from "./elements/Icons";
 
 const FOOTER_LINKS: MenuItem[] = [
   {
+    label: "Blog",
+    href: LINKS.BLOG,
+  },
+  {
+    label: "Github",
+    href: LINKS.GITHUB,
+    external: true,
+  },
+  {
     label: "Docs",
     href: LINKS.DOCUMENTATION,
     external: true,
@@ -15,11 +24,7 @@ const FOOTER_LINKS: MenuItem[] = [
     href: LINKS.MEDIA,
     external: true,
   },
-  {
-    label: "Blog",
-    href: LINKS.BLOG,
-    external: true,
-  },
+
   {
     label: "Bounties",
     href: LINKS.BOUNTIES,

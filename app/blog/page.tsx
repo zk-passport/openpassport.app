@@ -10,7 +10,7 @@ export default function BlogPage() {
         <section className={`relative my-6 z-[2] w-full`}>
           <AppContainer className="flex flex-col gap-6">
             <div className="flex flex-col gap-8">
-              <h1 className="text-brand-black tracking-[-0.77px] text-2xl leading-6 md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
+              <h1 className="text-brand-black border-l-[1.88px] border-l-black pl-3 tracking-[-0.77px] text-2xl leading-6 md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
                 Blog
               </h1>
             </div>
