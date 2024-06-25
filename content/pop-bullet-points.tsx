@@ -21,7 +21,7 @@ export const bulletPoints: BulletPointProps[] = [
     description:
       "Proof of Passport uses zero-knowledge proofs to guarantee privacy. Proofs disclosing specific attributes are generated, and the full passport data never leaves the device. ",
     url: {
-      label: "Introduction to ZK",
+      label: "Introduction",
       href: LINKS.INTRODUCTION_TO_ZK,
     },
   },
@@ -32,7 +32,7 @@ export const bulletPoints: BulletPointProps[] = [
       </>
     ),
     description:
-      "Users can consciously disclose specific information about themselves such as: age range (non) nationality",
+      "Users can selectively disclose specific information about themselves such as age and nationality.",
     url: {
       label: "Read Docs",
       href: LINKS.DOCUMENTATION,

@@ -20,12 +20,6 @@ const FOOTER_LINKS: MenuItem[] = [
     external: true,
   },
   {
-    label: "Media",
-    href: LINKS.MEDIA,
-    external: true,
-  },
-
-  {
     label: "Bounties",
     href: LINKS.BOUNTIES,
     external: true,

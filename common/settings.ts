@@ -20,13 +20,12 @@ export const LINKS: Record<string, string> = {
   // app
   APP_DEMO: "https://testflight.apple.com/join/WfZnZWfn",
   APP_STORE: "https://testflight.apple.com/join/WfZnZWfn",
-  DOCUMENTATION: "https://proof-of-passport.gitbook.io",
+  DOCUMENTATION: "https://docs.proofofpassport.com/",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
-  MEDIA: "#",
   BLOG: "/blog",
   BOUNTIES: "https://github.com/zk-passport/proof-of-passport/issues",
   READ_MORE: "https://proof-of-passport.gitbook.io",
-  INTRODUCTION_TO_ZK: "#",
+  INTRODUCTION_TO_ZK: "https://docs.proofofpassport.com/",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -49,12 +48,6 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     label: "Docs",
     href: LINKS.DOCUMENTATION,
-    external: true,
-    footerOnly: true,
-  },
-  {
-    label: "Media",
-    href: LINKS.MEDIA,
     external: true,
     footerOnly: true,
   },
