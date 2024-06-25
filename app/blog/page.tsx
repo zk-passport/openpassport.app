@@ -5,7 +5,7 @@ import { BlogArticles } from "@/components/blog/BlogArticles";
 export default function BlogPage() {
   return (
     <div className="flex flex-col">
-      <div className="flex items-start justify-center background-gradient z-0 pt-20 md:pt-20 overflow-hidden !bg-auto md:!bg-cover">
+      <div className="flex items-start justify-center background-gradient z-0 pt-10 md:pt-20 overflow-hidden !bg-auto md:!bg-cover">
         <div className="hidden bg-intro-gradient dark:bg-intro-gradient-dark md:absolute z-0"></div>
         <section className={`relative my-6 z-[2] w-full`}>
           <AppContainer className="flex flex-col gap-6">
@@ -18,7 +18,7 @@ export default function BlogPage() {
         </section>
       </div>
 
-      <div className="bg-white dark:bg-gray-1000 pt-10 -mt-16 md:mt-0 md:pt-16 pb-16 z-[4]">
+      <div className="bg-white dark:bg-gray-1000 pt-10 md:mt-0 md:pt-16 pb-16 z-[4]">
         <BlogArticles />
       </div>
     </div>
