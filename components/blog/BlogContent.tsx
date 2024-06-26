@@ -109,7 +109,7 @@ export function BlogContent({ post }: BlogContentProps) {
                 <p className="text-black">{children}</p>
               ),
               strong: ({ children }) => (
-                <strong className="font-bold text-black">
+                <strong className="font-bold very-strong text-black">
                   {children}
                 </strong>
               ),
@@ -128,7 +128,7 @@ export function BlogContent({ post }: BlogContentProps) {
               ),
             },
           }}
-          className="!w-full !max-w-full prose flex flex-col gap-10"
+          className="!w-full !max-w-full prose flex flex-col gap-6"
         >
           {post?.content ?? ""}
         </Markdown>
