@@ -1,0 +1,153 @@
+body.globalMap {
+    background: #f1f1f1;
+}
+
+.globalMap path {
+    cursor: pointer;
+    outline: 0;
+}
+
+.globalMap .main {
+    padding: 20px;
+    background: #f1f1f1;
+}
+
+.globalMap .homeTitle {
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    text-align: left;
+}
+
+.globalMap .mapSection {
+    width: 100%;
+}
+
+.globalMap .mapRow {
+    display: flex;
+    margin-top: -3.5rem;
+}
+
+.globalMap header {
+    display: none;
+}
+
+.globalMap footer {
+    margin-top: auto;
+}
+
+.globalMap .customHeader {
+    display: none;
+}
+
+.globalMap footer .py-4 {
+    padding: 0.5rem 0;
+}
+
+.globalMap .legend-info .legend-info-item {
+    font-size: 14px;
+}
+
+.globalMap .highlightInfo p {
+    text-indent: 16px;
+}
+
+.globalMap .highlightInfo .algorithmTitle {
+    text-indent: 0;
+}
+
+.globalMap .highlightInfo .issuedCount {
+    margin-top: 8px;
+    text-indent: 0;
+}
+
+.globalMap .highlightInfo .algorithmTitle {
+    margin-top: 8px;
+}
+
+.globalMap .devToggleBtn {
+    margin-right: 0;
+}
+
+.globalMap .devToggleBtn span {
+    font-family: unset;
+    font-size: unset;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .globalMap .homeTitle {
+        font-size: 14px;
+    }
+
+    .globalMap .legend-info .legend-info-item {
+        font-size: 12px;
+    }
+
+    .globalMap .mapSection {
+        width: 100%;
+    }
+
+    .globalMap .mapRow {
+        margin-top: 0;
+    }
+
+    .globalMap .highlightInfo p,
+    .globalMap .workInProgress p {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .globalMap .main {
+        padding-bottom: 0;
+    }
+
+    .globalMap .homeTitle {
+        max-width: unset;
+        text-align: right;
+    }
+
+    .globalMap .legend-info {
+        padding-top: 16px;
+    }
+
+    .globalMap .legend-info .legend-info-item {
+        justify-content: right;
+        flex-direction: row-reverse;
+    }
+
+    .globalMap .highlightInfo,
+    .globalMap .workInProgress {
+        color: #1f1f1f;
+    }
+
+    .globalMap .highlightInfo p {
+        text-indent: 8px;
+    }
+
+    .globalMap .highlightInfo .algorithmTitle {
+        text-indent: 0;
+    }
+
+    .globalMap .normalMode .issued-dscs p {
+        font-size: 12px;
+    }
+
+    .globalMap .countryDetailsRow {
+        margin-top: 8px;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .globalMap #countryDetails {
+        border: 0;
+    }
+}
+
+.country-tooltip {
+    max-width: none !important;
+    /* Override the default max-width */
+    background-color: rgb(11, 65, 26);
+}
