@@ -26,7 +26,7 @@ const FOOTER_LINKS: MenuItem[] = [
   },
   {
     label: "Map",
-    href: "/map",
+    href: LINKS.MAP,
   },
 ];
 
