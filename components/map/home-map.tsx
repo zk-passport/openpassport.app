@@ -20,10 +20,14 @@ export default function MapChart() {
     ISSUE_WITHOUT_SUPPORT = 1001,
     ISSUE_WITH_SUPPORT = 1002,
   }
-  const SUPPORTED_ALGORITHMS = {
+  const SUPPORTED_ALGORITHMS_DSC = {
     'RSA with SHA256': true,
+    'RSA with SHA1': true,
     'RSA-PSS with SHA256': true,
   };
+
+  // algorithms will be add later
+  const SUPPORTED_ALGORITHMS_CSCA = {};
 
   const [allCountriesData, setAllCountriesData] = useState({});
   const [allIssuesCountry, setAllIssuesCountry] = useState({});
@@ -76,9 +80,16 @@ export default function MapChart() {
         if (cscaCountryData?.length > 0) {
           countryObj['cscaExist'] = true;
           countryObj['cscaRecords'] = [...cscaCountryData];
+          const signatureCountryAlgs = {};
           for (const cscaEachAlg of cscaCountryData) {
             count += cscaEachAlg?.amount;
+            if (cscaEachAlg.signature_algorithm === 'rsapss') {
+              cscaEachAlg.signature_algorithm = 'rsa-pss';
+            }
+            const signatureStr = `${cscaEachAlg.signature_algorithm.toUpperCase()} with ${cscaEachAlg.hash_algorithm.toUpperCase()}`;
+            signatureCountryAlgs[signatureStr] = true;
           }
+          countryObj['cscaAlgs'] = Object.keys(signatureCountryAlgs);
         }
         countryObj['amount'] = count;
 
@@ -173,7 +184,18 @@ export default function MapChart() {
       // verified the dsc records are exists in supported algorithms or not
       if (countryData?.dscAlgs?.length) {
         for (const alg of countryData.dscAlgs) {
-          if (SUPPORTED_ALGORITHMS[alg]) {
+          if (SUPPORTED_ALGORITHMS_DSC[alg]) {
+            countryRes[countryName].issueType =
+              issuePassTypes.ISSUE_WITH_SUPPORT;
+            countryRes[countryName].defaultColor = '#548233';
+          }
+        }
+      }
+
+      // verified the csca records are exists in supported algorithms or not
+      if (countryData?.cscaAlgs?.length) {
+        for (const alg of countryData.cscaAlgs) {
+          if (SUPPORTED_ALGORITHMS_CSCA[alg]) {
             countryRes[countryName].issueType =
               issuePassTypes.ISSUE_WITH_SUPPORT;
             countryRes[countryName].defaultColor = '#548233';
@@ -191,7 +213,7 @@ export default function MapChart() {
     // apply custom styles to map page
     document.body.classList.add('globalMap');
     // Clean up: Remove classes from body
-    window.scrollTo({top: 0, left: 0});
+    window.scrollTo({ top: 0, left: 0 });
     return () => {
       document.body.classList.remove('globalMap');
     };
@@ -244,7 +266,7 @@ export default function MapChart() {
                     <p key={dsc} className="flex items-center text-nowrap">
                       {dsc}
                       <span className="algorithmFlag">
-                        {SUPPORTED_ALGORITHMS[dsc] ? '✅' : '🚧'}
+                        {SUPPORTED_ALGORITHMS_DSC[dsc] ? '✅' : '🚧'}
                       </span>
                     </p>
                   );
@@ -270,7 +292,9 @@ export default function MapChart() {
                           &nbsp;-&nbsp;
                           {`${csca?.amount} issued with ${signatureStr}, exponent ${csca?.curve_exponent}, ${csca?.bit_length} bits`}
                           <span className="algorithmFlag">
-                            {SUPPORTED_ALGORITHMS[signatureStr] ? '✅' : '🚧'}
+                            {SUPPORTED_ALGORITHMS_CSCA[signatureStr]
+                              ? '✅'
+                              : '🚧'}
                           </span>
                         </p>
                       );
@@ -298,7 +322,9 @@ export default function MapChart() {
                           &nbsp;-&nbsp;
                           {`${dsc?.amount} issued with ${signatureStr}, exponent ${dsc?.curve_exponent}, ${dsc?.bit_length} bits`}
                           <span className="algorithmFlag">
-                            {SUPPORTED_ALGORITHMS[signatureStr] ? '✅' : '🚧'}
+                            {SUPPORTED_ALGORITHMS_DSC[signatureStr]
+                              ? '✅'
+                              : '🚧'}
                           </span>
                         </p>
                       );
@@ -451,25 +477,19 @@ export default function MapChart() {
           <h2 className={`homeTitle`}>Proof of Passport country coverage</h2>
           <div className="legend-info-item flex items-center">
             <p
-              className={`w-8 h-4 bg-[#548233] ${
-                isMobile ? 'ms-2' : 'me-2'
-              }`}
+              className={`w-8 h-4 bg-[#548233] ${isMobile ? 'ms-2' : 'me-2'}`}
             ></p>{' '}
             Supported countries
           </div>
           <div className="legend-info-item flex items-center">
             <p
-              className={`w-8 h-4 bg-[#70ac48] ${
-                isMobile ? 'ms-2' : 'me-2'
-              }`}
+              className={`w-8 h-4 bg-[#70ac48] ${isMobile ? 'ms-2' : 'me-2'}`}
             ></p>{' '}
             Work in progress
           </div>
           <div className="legend-info-item flex items-center">
             <p
-              className={`w-8 h-4 bg-[#b0bfa7] ${
-                isMobile ? 'ms-2' : 'me-2'
-              }`}
+              className={`w-8 h-4 bg-[#b0bfa7] ${isMobile ? 'ms-2' : 'me-2'}`}
             ></p>{' '}
             Not issuing e-passport
           </div>
