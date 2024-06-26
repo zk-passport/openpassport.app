@@ -34,7 +34,7 @@ export const MENU_ITEMS: MenuItem[] = [
     href: "/#how-it-works",
   },
   {
-    label: "User cases",
+    label: "Use cases",
     href: "/#use-cases",
   },
   {
@@ -44,6 +44,10 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     label: "Blog",
     href: "/blog",
+  },
+  {
+    label: "Map",
+    href: "/map",
   },
   {
     label: "Docs",
