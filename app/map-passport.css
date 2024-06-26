@@ -22,8 +22,7 @@ body.globalMap {
 }
 
 .globalMap .mapSection {
-    width: 90%;
-    margin-right: auto;
+    width: 100%;
 }
 
 .globalMap .mapRow {
@@ -36,8 +35,11 @@ body.globalMap {
 }
 
 .globalMap footer {
-    /* background: #dedede; */
     margin-top: auto;
+}
+
+.globalMap .customHeader {
+    display: none;
 }
 
 .globalMap footer .py-4 {
@@ -46,6 +48,36 @@ body.globalMap {
 
 .globalMap .legend-info .legend-info-item {
     font-size: 14px;
+}
+
+.globalMap .highlightInfo p {
+    text-indent: 16px;
+}
+
+.globalMap .highlightInfo .algorithmTitle {
+    text-indent: 0;
+}
+
+.globalMap .highlightInfo .issuedCount {
+    margin-top: 8px;
+    text-indent: 0;
+}
+
+.globalMap .highlightInfo .algorithmTitle {
+    margin-top: 8px;
+}
+
+.globalMap .algorithmFlag {
+    margin-left: -4px;
+}
+
+.globalMap .devToggleBtn {
+    margin-right: 0;
+}
+
+.globalMap .devToggleBtn span {
+    font-family: unset;
+    font-size: unset;
 }
 
 @media screen and (max-width: 1024px) {
@@ -66,28 +98,55 @@ body.globalMap {
         margin-top: 0;
     }
 
-    .globalMap .highlightInfo p, .globalMap .workInProgress p {
+    .globalMap .highlightInfo p,
+    .globalMap .workInProgress p {
         font-size: 10px;
     }
 }
 
 @media screen and (max-width: 767px) {
     .globalMap .main {
-        height: calc(100vh - 86px);
-        display: flex;
-        flex-direction: column;
         padding-bottom: 0;
     }
-    .globalMap .countryDetailsRow{
-        flex: auto;
+
+    .globalMap .homeTitle {
+        max-width: unset;
+        text-align: right;
     }
-    .globalMap .legend-info{
-        padding-top: 10px;
-        margin-top: auto;
+
+    .globalMap .legend-info {
+        padding-top: 16px;
+    }
+
+    .globalMap .legend-info .legend-info-item {
+        justify-content: right;
+        flex-direction: row-reverse;
+    }
+
+    .globalMap .highlightInfo,
+    .globalMap .workInProgress {
+        color: #1f1f1f;
+    }
+
+    .globalMap .highlightInfo p {
+        text-indent: 8px;
+    }
+
+    .globalMap .highlightInfo .algorithmTitle {
+        text-indent: 0;
+    }
+
+    .globalMap .normalMode .issued-dscs p {
+        font-size: 12px;
+    }
+
+    .globalMap .countryDetailsRow {
+        margin-top: 8px;
     }
 }
+
 @media screen and (min-width: 640px) {
-    .globalMap #countryDetails{
+    .globalMap #countryDetails {
         border: 0;
     }
 }

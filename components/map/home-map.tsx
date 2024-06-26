@@ -9,8 +9,8 @@ import {
   Graticule,
   Sphere,
 } from 'react-simple-maps';
-import { createRoot } from 'react-dom/client';
 import ReactCountryFlag from 'react-country-flag';
+import useSettings from '@/hooks/useSettings';
 
 const geoUrl = 'data/countries-110m.json';
 
@@ -27,8 +27,8 @@ export default function MapChart() {
 
   const [allCountriesData, setAllCountriesData] = useState({});
   const [allIssuesCountry, setAllIssuesCountry] = useState({});
-  const size = useWindowSize();
-  const [isMobileView, setIsMobileView] = useState(false);
+  const { isMobile } = useSettings();
+  const [countryName, setCountryName] = useState('');
   const [devMode, setDevMode] = useState(false);
 
   const formatJsonData = (
@@ -164,13 +164,7 @@ export default function MapChart() {
         countryCode: country,
       };
 
-      if (supportedCountriesObj[country]) {
-        countryRes[countryName].defaultColor = '#70ac48';
-        countryRes[countryName].issueType =
-          issuePassTypes.ISSUE_WITHOUT_SUPPORT;
-      }
-
-      if (countryData?.cscaRecords?.length) {
+      if (supportedCountriesObj[country] || countryData?.cscaRecords?.length) {
         countryRes[countryName].defaultColor = '#70ac48';
         countryRes[countryName].issueType =
           issuePassTypes.ISSUE_WITHOUT_SUPPORT;
@@ -188,8 +182,6 @@ export default function MapChart() {
       }
     }
 
-    console.log('countryRes :>> ', countryRes);
-
     setAllIssuesCountry(countryRes);
   };
 
@@ -199,17 +191,16 @@ export default function MapChart() {
     // apply custom styles to map page
     document.body.classList.add('globalMap');
     // Clean up: Remove classes from body
+    window.scrollTo({top: 0, left: 0});
     return () => {
       document.body.classList.remove('globalMap');
     };
   }, []);
 
-  useEffect(() => {
-    const isMobile = !!size.width && size.width < 767;
-    setIsMobileView(isMobile);
-  }, [size]);
-
   const highLightInfo = (countryName: string) => {
+    if (!countryName) {
+      return;
+    }
     let info: React.JSX.Element;
     const countryData = allCountriesData[countryName];
     if (countryData) {
@@ -229,10 +220,10 @@ export default function MapChart() {
               />{' '}
             </b>
           </h3>
-          <br />
+
           <div className="issued-dscs">
             {countryData?.amount && (
-              <p>
+              <p className="issuedCount">
                 ~ &nbsp;
                 {new Intl.NumberFormat().format(
                   countryData?.amount
@@ -242,16 +233,18 @@ export default function MapChart() {
                 passports issued
               </p>
             )}
-            <br />
+
             {/* tooltip data in normal mode */}
-            {countryData?.dscExist && !devMode && <p>Signature algorithms:</p>}
+            {countryData?.dscExist && !devMode && (
+              <p className="algorithmTitle">Signature algorithms:</p>
+            )}
             {countryData?.dscExist && !devMode
               ? countryData?.dscAlgs.map((dsc) => {
                   return (
                     <p key={dsc} className="flex items-center text-nowrap">
-                      &emsp;&emsp;&emsp;{dsc}
-                      <span>
-                        &nbsp;{SUPPORTED_ALGORITHMS[dsc] ? '✅' : '🚧'}
+                      {dsc}
+                      <span className="algorithmFlag">
+                        {SUPPORTED_ALGORITHMS[dsc] ? '✅' : '🚧'}
                       </span>
                     </p>
                   );
@@ -261,7 +254,7 @@ export default function MapChart() {
             {/* tooltip data in dev mode */}
             {countryData?.cscaExist && devMode && (
               <div>
-                <p>Top-level Certificates (CSCA)</p>
+                <p className="algorithmTitle">Top-level Certificates (CSCA)</p>
                 {countryData?.cscaExist && devMode
                   ? countryData?.cscaRecords.map((csca) => {
                       if (csca.signature_algorithm === 'rsapss') {
@@ -274,10 +267,9 @@ export default function MapChart() {
                           key={Math.random()}
                           className="flex items-center text-nowrap"
                         >
-                          &emsp;&emsp;&emsp;&nbsp;-&nbsp;
+                          &nbsp;-&nbsp;
                           {`${csca?.amount} issued with ${signatureStr}, exponent ${csca?.curve_exponent}, ${csca?.bit_length} bits`}
-                          <span>
-                            &nbsp;
+                          <span className="algorithmFlag">
                             {SUPPORTED_ALGORITHMS[signatureStr] ? '✅' : '🚧'}
                           </span>
                         </p>
@@ -288,7 +280,9 @@ export default function MapChart() {
             )}
             {countryData?.dscAlgs && devMode && (
               <div>
-                <p>Intermediate Certificates (DSC)</p>
+                <p className="algorithmTitle">
+                  Intermediate Certificates (DSC)
+                </p>
                 {countryData?.dscRecords?.length > 0 && devMode
                   ? countryData?.dscRecords.map((dsc) => {
                       if (dsc.signature_algorithm === 'rsapss') {
@@ -301,10 +295,9 @@ export default function MapChart() {
                           key={Math.random()}
                           className="flex items-center text-nowrap"
                         >
-                          &emsp;&emsp;&emsp;&nbsp;-&nbsp;
+                          &nbsp;-&nbsp;
                           {`${dsc?.amount} issued with ${signatureStr}, exponent ${dsc?.curve_exponent}, ${dsc?.bit_length} bits`}
-                          <span>
-                            &nbsp;
+                          <span className="algorithmFlag">
                             {SUPPORTED_ALGORITHMS[signatureStr] ? '✅' : '🚧'}
                           </span>
                         </p>
@@ -317,7 +310,6 @@ export default function MapChart() {
         </div>
       );
     } else {
-      // const countryCode = getKeyByValue(all)
       info = (
         <div className="workInProgress">
           <h3 className="flex items-center">
@@ -335,12 +327,12 @@ export default function MapChart() {
             &nbsp;
             {allIssuesCountry[`${countryName}`] ? '🚧' : null}
           </h3>
-          {allIssuesCountry[`${countryName}`] && isMobileView ? (
+          {allIssuesCountry[`${countryName}`] && isMobile ? (
             <>
               <p>Work in progress</p>
             </>
           ) : (
-            isMobileView && (
+            isMobile && (
               <>
                 <p>Not issuing e-passport</p>
               </>
@@ -350,29 +342,17 @@ export default function MapChart() {
       );
     }
 
-    if (isMobileView && countryName != '') {
-      const mobInfoEl = document.getElementById('countryDetails');
-      if (mobInfoEl) {
-        const root = createRoot(mobInfoEl);
-        root.render(info);
-      }
-    }
-
     return info;
   };
 
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find((key) => object[key] === value);
-  }
-
   return (
-    <>
+    <div>
       <div className={`mapRow`}>
         <div className={`mapSection`}>
           <div data-tip="" className="globalMap">
             <ComposableMap
-              projectionConfig={{ center: isMobileView ? [10, 0] : [25, 10] }}
-              width={isMobileView ? 750 : 880}
+              projectionConfig={{ center: [14, 6] }}
+              width={isMobile ? 750 : 880}
               height={500}
             >
               <Graticule stroke="#999" strokeWidth={0.2} />
@@ -395,8 +375,8 @@ export default function MapChart() {
                       leaveTouchDelay={6000}
                       classes={{ tooltip: 'country-tooltip' }}
                       title={highLightInfo(geo.properties.name)}
-                      disableTouchListener={isMobileView}
-                      disableHoverListener={isMobileView}
+                      disableTouchListener={isMobile}
+                      disableHoverListener={isMobile}
                       placement={'right'}
                       arrow
                       key={geo.rsmKey}
@@ -407,16 +387,18 @@ export default function MapChart() {
                         key={geo.rsmKey}
                         geography={geo}
                         onClick={() => {
-                          if (!isMobileView) {
+                          if (!isMobile) {
                             return;
                           }
-                          if (isMobileView) {
-                            highLightInfo(geo.properties.name);
+                          if (isMobile) {
+                            // highLightInfo(geo.properties.name);
+                            setCountryName(geo.properties.name);
                           }
                         }}
                         onMouseEnter={() => {
-                          if (isMobileView) {
-                            highLightInfo(geo.properties.name);
+                          if (isMobile) {
+                            setCountryName(geo.properties.name);
+                            // highLightInfo(geo.properties.name);
                           }
                         }}
                         style={{
@@ -446,38 +428,59 @@ export default function MapChart() {
           </div>
         </div>
       </div>
-      <Grid container spacing={2} className="sm:mt-3 mt-0 countryDetailsRow">
+      <Grid
+        container
+        spacing={2}
+        className={`sm:mt-3 mt-0 countryDetailsRow ${
+          devMode ? 'devMode' : 'normalMode'
+        }`}
+      >
         <Grid
           sm={6}
           xs={12}
           id="countryDetails"
           className="md:hidden text-gray-900 sm:border-0"
         >
-          &nbsp;
+          {highLightInfo(countryName)}
         </Grid>
         <Grid
           sm={6}
           xs={12}
-          className="legend-info lg:right-3 text-black relative bottom-2 lg:bottom-7 lg:absolute"
+          className="legend-info lg:left-6 text-black relative bottom-2 lg:bottom-12 lg:absolute"
         >
           <h2 className={`homeTitle`}>Proof of Passport country coverage</h2>
           <div className="legend-info-item flex items-center">
-            <p className="w-8 h-4 bg-[#548233] me-2"></p> Supported countries
+            <p
+              className={`w-8 h-4 bg-[#548233] ${
+                isMobile ? 'ms-2' : 'me-2'
+              }`}
+            ></p>{' '}
+            Supported countries
           </div>
           <div className="legend-info-item flex items-center">
-            <p className="w-8 h-4 bg-[#70ac48] me-2"></p> Work in progress
+            <p
+              className={`w-8 h-4 bg-[#70ac48] ${
+                isMobile ? 'ms-2' : 'me-2'
+              }`}
+            ></p>{' '}
+            Work in progress
           </div>
           <div className="legend-info-item flex items-center">
-            <p className="w-8 h-4 bg-[#b0bfa7] me-2"></p> Not issuing e-passport
+            <p
+              className={`w-8 h-4 bg-[#b0bfa7] ${
+                isMobile ? 'ms-2' : 'me-2'
+              }`}
+            ></p>{' '}
+            Not issuing e-passport
           </div>
           <div className="legend-info-item flex items-center">
             <FormControlLabel
+              className="devToggleBtn"
               control={
                 <Switch
                   color="success"
                   checked={devMode}
                   onChange={() => {
-                    console.log('toggled');
                     devMode ? setDevMode(false) : setDevMode(true);
                   }}
                   name="devMode"
@@ -488,41 +491,6 @@ export default function MapChart() {
           </div>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
-}
-
-// Hook for getting window size
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  const [windowSize, setWindowSize] = useState<{
-    width: number | undefined;
-    height: number | undefined;
-  }>({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    // Only execute on the client-side
-    if (typeof window !== 'undefined') {
-      // Add event listener
-      window.addEventListener('resize', handleResize);
-
-      // Call handler right away so state gets updated with initial window size
-      handleResize();
-
-      // Remove event listener on cleanup
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
 }

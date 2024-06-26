@@ -212,7 +212,7 @@ function DesktopNav() {
 
 const AppHeader = () => {
   return (
-    <div className="top-0 sticky z-50 bg-white">
+    <div className="top-0 sticky z-50 bg-white customHeader">
       <AppContainer
         size="md"
         className="flex items-center justify-between py-[10px]"
