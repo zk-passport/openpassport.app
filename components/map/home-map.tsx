@@ -15,22 +15,31 @@ import useSettings from '@/hooks/useSettings';
 const geoUrl = 'data/countries-110m.json';
 
 export default function MapChart() {
+
+  type ObjectBool = {
+    [key: string]: boolean;
+  }
+
+  type ObjectStr = {
+    [key: string]: string;
+  }
+  
   enum issuePassTypes {
     DO_NOT_ISSUE = 1000,
     ISSUE_WITHOUT_SUPPORT = 1001,
     ISSUE_WITH_SUPPORT = 1002,
   }
-  const SUPPORTED_ALGORITHMS_DSC = {
+  const SUPPORTED_ALGORITHMS_DSC: ObjectBool = {
     'RSA with SHA256': true,
     'RSA with SHA1': true,
     'RSA-PSS with SHA256': true,
   };
 
   // algorithms will be add later
-  const SUPPORTED_ALGORITHMS_CSCA = {};
+  const SUPPORTED_ALGORITHMS_CSCA: ObjectBool = {};
 
-  const [allCountriesData, setAllCountriesData] = useState({});
-  const [allIssuesCountry, setAllIssuesCountry] = useState({});
+  const [allCountriesData, setAllCountriesData] = useState<any>({});
+  const [allIssuesCountry, setAllIssuesCountry] = useState<any>({});
   const { isMobile } = useSettings();
   const [countryName, setCountryName] = useState('');
   const [devMode, setDevMode] = useState(false);
@@ -38,12 +47,12 @@ export default function MapChart() {
   const formatJsonData = (
     dscInput: any = {},
     cscaInput: any = {},
-    countryNames: any = {}
+    countryNames: ObjectStr = {}
   ): any => {
     delete dscInput?.default;
     delete cscaInput?.default;
 
-    const countryData = {};
+    const countryData: any = {};
 
     for (const countryCode of Object.keys(countryNames)) {
       const name = countryNames[countryCode];
@@ -53,8 +62,7 @@ export default function MapChart() {
       const dscCountryData = dscInput[countryCode];
       const cscaCountryData = cscaInput[countryCode];
       if (dscCountryData?.length || cscaCountryData?.length) {
-        // countryData[name] = {};
-        const countryObj = {};
+        const countryObj: any = {};
 
         countryObj['name'] = name;
         countryObj['countryCode'] = countryCode;
@@ -65,7 +73,7 @@ export default function MapChart() {
         if (dscCountryData?.length > 0) {
           countryObj['dscExist'] = true;
           countryObj['dscRecords'] = [...dscCountryData];
-          const signatureCountryAlgs = {};
+          const signatureCountryAlgs: ObjectBool = {};
           for (const dscEachAlg of dscCountryData) {
             count += dscEachAlg?.amount;
             if (dscEachAlg.signature_algorithm === 'rsapss') {
@@ -80,7 +88,7 @@ export default function MapChart() {
         if (cscaCountryData?.length > 0) {
           countryObj['cscaExist'] = true;
           countryObj['cscaRecords'] = [...cscaCountryData];
-          const signatureCountryAlgs = {};
+          const signatureCountryAlgs: ObjectBool = {};
           for (const cscaEachAlg of cscaCountryData) {
             count += cscaEachAlg?.amount;
             if (cscaEachAlg.signature_algorithm === 'rsapss') {
@@ -114,7 +122,7 @@ export default function MapChart() {
       );
       const cscaData = await cscaFetchData.json();
 
-      const countryNames = await import(
+      const countryNames: any = await import(
         './../../public/data/all-countries.json'
       );
 
@@ -149,21 +157,21 @@ export default function MapChart() {
   };
 
   const setIssuesSupportsVisuals = (
-    countryCertsData,
-    ePassCountries,
-    countryNames
+    countryCertsData: any,
+    ePassCountries: string[],
+    countryNames: { [x: string]: any; }
   ) => {
     if (!countryCertsData || !ePassCountries) {
       return;
     }
 
     // construct obj to find the e-passport supported countries
-    const supportedCountriesObj = {};
+    const supportedCountriesObj: any = {};
     ePassCountries.forEach((countryCode: string) => {
       supportedCountriesObj[countryCode] = true;
     });
 
-    const countryRes = {};
+    const countryRes: any = {};
     for (const country of Object.keys(countryNames)) {
       const countryName = countryNames[country];
       const countryData = countryCertsData[countryName];
@@ -261,7 +269,7 @@ export default function MapChart() {
               <p className="algorithmTitle">Signature algorithms:</p>
             )}
             {countryData?.dscExist && !devMode
-              ? countryData?.dscAlgs.map((dsc) => {
+              ? countryData?.dscAlgs.map((dsc: string) => {
                   return (
                     <p key={dsc} className="flex items-center text-nowrap">
                       {dsc}
@@ -278,7 +286,7 @@ export default function MapChart() {
               <div>
                 <p className="algorithmTitle">Top-level Certificates (CSCA)</p>
                 {countryData?.cscaExist && devMode
-                  ? countryData?.cscaRecords.map((csca) => {
+                  ? countryData?.cscaRecords.map((csca: { signature_algorithm: string; hash_algorithm: string; amount: any; curve_exponent: any; bit_length: any; }) => {
                       if (csca.signature_algorithm === 'rsapss') {
                         csca.signature_algorithm = 'rsa-pss';
                       }
@@ -308,7 +316,7 @@ export default function MapChart() {
                   Intermediate Certificates (DSC)
                 </p>
                 {countryData?.dscRecords?.length > 0 && devMode
-                  ? countryData?.dscRecords.map((dsc) => {
+                  ? countryData?.dscRecords.map((dsc: { signature_algorithm: string; hash_algorithm: string; amount: any; curve_exponent: any; bit_length: any; }) => {
                       if (dsc.signature_algorithm === 'rsapss') {
                         dsc.signature_algorithm = 'rsa-pss';
                       }
