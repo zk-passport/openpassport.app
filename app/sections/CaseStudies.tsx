@@ -15,22 +15,22 @@ const CaseStudies = () => {
       id="case-studies"
       className="flex flex-col gap-12 py-20 md:gap-24 md:py-40"
     >
-      <AppContainer className="grid gap-8 md:grid-cols-8 md:gap-16">
-        <div className="flex flex-col gap-12 md:col-span-3">
+      <AppContainer className="grid gap-8 lg:grid-cols-8 lg:gap-16">
+        <div className="flex flex-col gap-12 lg:col-span-3">
           <Image
             src="/illustrations/proof-of-passport.jpg"
             width={560}
             height={320}
             alt="case-studies"
-            className="aspect-video"
+            className="aspect-video w-full"
           />
-          <span className="md:max-w-[340px] font-alliance text-sm leading-5 text-brand-black pl-6 border-l border-[#D9D9D9]">
+          <span className="lg:max-w-[340px] font-alliance text-sm leading-5 text-brand-black pl-6 border-l border-[#D9D9D9]">
             Proof of Passport lets users scan the NFC chip in their
-            government-issued passport and prove the validity of their
-            ID anonymously.
+            government-issued passport and prove the validity of their ID
+            anonymously.
           </span>
         </div>
-        <div className="md:col-span-5">
+        <div className="lg:col-span-5">
           {bulletPoints.map(({ title, description, url }, index) => {
             return (
               <div className="flex flex-col gap-3" key={index}>
@@ -70,8 +70,8 @@ const CaseStudies = () => {
             </AppLink>
           </div>
         </div>
-        <div className="grid gap-6 md:grid-cols-8 md:gap-16">
-          <div className="md:col-span-5">
+        <div className="grid gap-6 lg:grid-cols-8 lg:gap-16">
+          <div className="lg:col-span-5">
             {caseStudies.map(
               ({ title, description, href, inEvidence }, index) => {
                 if (inEvidence) return null;
@@ -86,7 +86,7 @@ const CaseStudies = () => {
               }
             )}
           </div>
-          <div className="md:col-span-3">
+          <div className="lg:col-span-3">
             {caseStudies.map(
               ({ title, description, image, href, inEvidence }, index) => {
                 if (!inEvidence) return null;

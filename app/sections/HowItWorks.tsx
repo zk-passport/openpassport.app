@@ -1,15 +1,8 @@
 "use client";
 import { AppContainer } from "@/components/AppContainer";
+import { HowItWorkCard } from "@/components/cards/HowItWorkCard";
 import Image from "next/image";
-import { HtmlHTMLAttributes, useState } from "react";
-
-interface HowItWorkCardProps
-  extends Pick<HtmlHTMLAttributes<HTMLDivElement>, "className" | "onClick"> {
-  title: string;
-  description: string;
-  isActive?: boolean;
-  stepIndex: number; // number of the step
-}
+import { useState } from "react";
 
 const HOW_IT_WORKS: { label: string; description: string }[] = [
   {
@@ -27,65 +20,29 @@ const HOW_IT_WORKS: { label: string; description: string }[] = [
   },
 ];
 
-const HowItWorkCard = ({
-  title,
-  description,
-  isActive,
-  className = "",
-  stepIndex,
-  ...props
-}: HowItWorkCardProps) => {
-  return (
-    <div
-      {...props}
-      className={`relative group cursor-pointer flex flex-col gap-2 py-6 px-8 duration-200 before:duration-300 before:bg-black before:absolute before:will-change-transform before:left-0 before:origin-bottom before:w-full before:h-full before:content-[''] before:bottom-0 before:scale-y-0 hover:before:scale-y-100  ${className}`}
-      style={{
-        background: isActive
-          ? "#FFFFFF"
-          : "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(153, 153, 153, 0.00) 100%)",
-      }}
-    >
-      <div className="flex gap-3 items-center z-[2]">
-        <div
-          className={`rounded-full  text-[8px] group-hover:!bg-white group-hover:!text-black font-bold w-[18px] h-[18px] flex items-center text-center justify-center" ${
-            isActive ? "text-white bg-black" : "text-[#DCD5D5] bg-white/25"
-          }`}
-        >
-          <div className="mx-auto">{stepIndex}</div>
-        </div>
-        <span
-          className={`text-base tracking-[-0.48px] font-alliance z-[2] group-hover:!text-white ${
-            isActive ? "text-black " : "text-white"
-          }`}
-        >
-          {title}
-        </span>
-      </div>
-      <span
-        className={`text-sm leading-5 font-alliance z-[2] group-hover:!text-white/80 ${
-          isActive ? "text-black/80" : "text-white/60"
-        }`}
-      >
-        {description}
-      </span>
-    </div>
-  );
+const HowItWorkIllustrationMapping: Record<number, string> = {
+  1: "/illustrations/how-it-works-1.webp",
+  2: "/illustrations/how-it-works-2.webp",
+  3: "/illustrations/how-it-works-3.webp",
 };
 
 const HowItWorks = () => {
   const [activeStep, setActiveStep] = useState(1);
+
+  const currentIllustration = HowItWorkIllustrationMapping[activeStep];
+
   return (
     <section
       id="how-it-works"
       className="bg-section-gradient-black pt-14 lg:pt-16"
     >
-      <AppContainer className="h-full-screen flex flex-col relative gap-24 lg:gap-0">
+      <AppContainer className="h-full-screen flex flex-col relative overflow-hidden">
         <div className="my-auto h-full flex flex-col gap-16 lg:gap-36">
           <h3 className=" max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-normal tracking-[-0.22px] text-white/70 md:text-[32px]">
             <strong>Introduction Proof of Passport,</strong> a digital identity
             powered by zero-knowledge technology.
           </h3>
-          <div className="w-full max-w-[720px] grid grid-cols-1 gap-8 lg:gap-12 lg:grid-cols-2">
+          <div className="w-full grid grid-cols-1 gap-8 lg:max-w-[600px] lg:grid-cols-2 xl:max-w-[720px] xl:gap-12">
             {HOW_IT_WORKS.map(({ label, description }, index) => {
               const isActive = activeStep === index + 1;
               return (
@@ -103,11 +60,12 @@ const HowItWorks = () => {
           </div>
         </div>
         <Image
-          src="/images/iphone.png"
+          src={currentIllustration}
           alt="Proof of Passport"
-          className="w-full max-w-[315px] mx-auto lg:max-w-[385px] lg:absolute lg:right-0 lg:bottom-0"
+          className="relative w-full max-w-[420px] -mt-24 bottom-[-200px] mx-auto lg:mt-0 lg:absolute lg:right-0 lg:bottom-[-70px]"
           width={385}
           height={778}
+          priority
         />
       </AppContainer>
     </section>

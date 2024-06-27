@@ -29,7 +29,7 @@ export const UseCases = () => {
         <h2 className="text-brand-black tracking-[-0.77px] text-2xl leading-6l md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
           Explore use cases
         </h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-6">
           {useCases.map(({ image, title, items, inEvidence }, index) => {
             return (
               <motion.div
@@ -42,14 +42,14 @@ export const UseCases = () => {
                   delay: index * 0.2,
                 }}
                 className={`col-span-1 flex h-full w-full  ${
-                  inEvidence ? "md:col-span-3" : "md:col-span-2"
+                  inEvidence ? "lg:col-span-3" : "lg:col-span-2"
                 }`}
               >
                 <Card.Base
                   className={`grid grid-rows-[210px_1fr] w-full ${
                     inEvidence
-                      ? "md:grid-rows-[180px_1fr]"
-                      : "md:grid-rows-[190px_1fr]"
+                      ? "lg:grid-rows-[180px_1fr]"
+                      : "lg:grid-rows-[190px_1fr]"
                   }`}
                 >
                   <div className={`relative ${!image ? "bg-black/20" : ""}`}>

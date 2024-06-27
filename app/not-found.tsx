@@ -13,6 +13,7 @@ export default function NotFound() {
           width={200}
           className="w-32"
           alt="404 image"
+          priority
         />
         <h1 className="font-alliance leading-7 tracking-[-0.96px] text-[32px]">
           404
