@@ -22,7 +22,7 @@ const ButtonComponent = classed(ButtonBase, {
   variants: {
     variant: {
       primary:
-        "bg-black-gradient text-white border border-black-gradient hover:bg-black",
+        "bg-black-gradient text-white border border-black hover:bg-black",
       secondary:
         "bg-white border text-light-black border-[#0f0f0f]/20 hover:border-[#0f0f0f]/10",
       transparent:

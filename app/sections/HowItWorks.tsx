@@ -38,16 +38,16 @@ const HowItWorks = () => {
     >
       <AppContainer className="h-full-screen flex flex-col relative overflow-hidden">
         <div className="my-auto h-full flex flex-col gap-16 lg:gap-36">
-          <h3 className=" max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-normal tracking-[-0.22px] text-white/70 md:text-[32px]">
+          <h3 className="max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-normal tracking-[-0.96px] text-white/70 md:tracking-[-1.44px] md:text-[32px]">
             <strong>Introduction Proof of Passport,</strong> a digital identity
             powered by zero-knowledge technology.
           </h3>
-          <div className="w-full grid grid-cols-1 gap-8 lg:max-w-[600px] lg:grid-cols-2 xl:max-w-[720px] xl:gap-12">
+          <div className="w-full grid grid-cols-1 gap-6 lg:max-w-[600px] lg:grid-cols-2 xl:max-w-[720px]">
             {HOW_IT_WORKS.map(({ label, description }, index) => {
               const isActive = activeStep === index + 1;
               return (
                 <HowItWorkCard
-                  className={index !== 0 ? "lg:col-start-2" : ""}
+                  className="lg:col-span-2"
                   stepIndex={index + 1}
                   key={index}
                   title={label}

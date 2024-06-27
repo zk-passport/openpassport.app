@@ -43,14 +43,14 @@ const CaseStudies = () => {
                   </span>
                 </div>
                 <AppLink
-                  className="flex items-center gap-1 border-t border-b border-dashed py-3 border-light-black/25 duration-200 hover:border-light-black"
+                  className="relative group flex items-center gap-1 border-t border-b border-dashed py-3 border-light-black/25 duration-200 hover:border-light-black before:duration-300 before:bg-black before:absolute before:will-change-transform before:left-0 before:origin-bottom before:w-full before:h-full before:content-[''] before:bottom-0 before:scale-y-0 hover:before:scale-y-100 hover:border-transparent"
                   href={url.href}
                   external
                 >
-                  <span className="text-light-black text-base font-alliance">
+                  <span className="relative text-light-black text-base font-alliance group-hover:text-white duration-300">
                     {url.label}
                   </span>
-                  <Icons.ExternalLink className="text-light-black" />
+                  <Icons.ExternalLink className="relative text-light-black group-hover:text-white duration-300" />
                 </AppLink>
               </div>
             );

@@ -27,7 +27,7 @@ export const UseCases = () => {
     <section ref={ref} id="use-cases" className="pt-28 pb-10 md:pt-32 md:pb-12">
       <AppContainer className=" flex flex-col gap-8">
         <h2 className="text-brand-black tracking-[-0.77px] text-2xl leading-6l md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
-          Explore use cases
+          Explore <span className="opacity-50">use cases</span>
         </h2>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-6">
           {useCases.map(({ image, title, items, inEvidence }, index) => {
@@ -46,7 +46,7 @@ export const UseCases = () => {
                 }`}
               >
                 <Card.Base
-                  className={`grid grid-rows-[210px_1fr] w-full ${
+                  className={`grid grid-rows-[210px_1fr] w-full duration-300 cursor-pointer hover:shadow-sm hover:scale-105  ${
                     inEvidence
                       ? "lg:grid-rows-[180px_1fr]"
                       : "lg:grid-rows-[190px_1fr]"

@@ -1,12 +1,28 @@
+"use client";
+
 import { LINKS } from "@/common/settings";
 import { AppContainer } from "@/components/AppContainer";
 import { AppLink } from "@/components/AppLink";
 import { Button } from "@/components/elements/Button";
 import { Icons } from "@/components/elements/Icons";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 
 const CodeIntegration = () => {
+  const controls = useAnimation();
+
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true,
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start({ opacity: 1, y: 0 });
+    }
+  }, [isInView, controls]);
+
   return (
     <section
       id="develop"
@@ -16,7 +32,8 @@ const CodeIntegration = () => {
         <div className="flex flex-col gap-12 mx-auto w-full max-w-[480px]">
           <div className="flex flex-col gap-6">
             <h3 className=" font-alliance text-white font-normal text-center text-2xl md:text-5xl md:leading-[46px] md:tracking-[-1.44px]">
-              Integrate in two lines of code
+              Integrate in <strong className="opacity-50">two lines</strong> of
+              code
             </h3>
             <span className="text-center font-alliance text-white text-sm leading-5">
               Open a PR in 5 mins and integrate Proof of Passport into your app.
@@ -29,15 +46,22 @@ const CodeIntegration = () => {
             </Button>
           </AppLink>
         </div>
-        <Image
-          src="/illustrations/code-sample.svg"
-          alt="Code Integration"
-          width={800}
-          height={400}
-          layout="responsive"
-          objectFit="cover"
-          className="mx-auto max-w-[640px]"
-        />
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 100 }}
+          animate={controls}
+          transition={{ duration: 0.9, ease: "easeIn" }}
+        >
+          <Image
+            src="/illustrations/code-sample.svg"
+            alt="Code Integration"
+            width={800}
+            height={400}
+            layout="responsive"
+            objectFit="cover"
+            className="mx-auto max-w-[640px]"
+          />
+        </motion.div>
       </AppContainer>
     </section>
   );

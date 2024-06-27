@@ -103,7 +103,7 @@ function MobileNav() {
                           href={href}
                           onClick={() => setMobileNavOpen(false)}
                           external={external}
-                          className="flex items-center py-3 font-alliance font-base gap-0.5 p-2 border-b border-dashed border-white/40"
+                          className="flex items-center py-3 font-alliance tracking-[-0.22px] font-base gap-0.5 p-2 border-b border-dashed border-white/40"
                         >
                           {label}
                           {external && (
@@ -174,7 +174,7 @@ function DesktopNav() {
               <LinkItem key={index}>
                 <div className={`flex items-center gap-[6px]`}>
                   <AppLink
-                    className={`duration-200 hover:text-black ${
+                    className={`duration-200 tracking-[-0.22px] hover:text-black ${
                       isActive ? "text-black border-b border-b-black" : ""
                     }`}
                     href={href}
@@ -212,7 +212,7 @@ function DesktopNav() {
 
 const AppHeader = () => {
   return (
-    <div className="top-0 sticky z-50 bg-white customHeader">
+    <header className="top-0 sticky z-50 bg-white customHeader">
       <AppContainer
         size="md"
         className="flex items-center justify-between py-[10px]"
@@ -236,7 +236,7 @@ const AppHeader = () => {
         <DesktopNav />
         <MobileNav />
       </AppContainer>
-    </div>
+    </header>
   );
 };
 
