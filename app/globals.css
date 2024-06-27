@@ -59,3 +59,6 @@ section[id] {
   -webkit-text-fill-color: transparent;
 }
 
+.very-strong {
+  -webkit-text-stroke: 0.1px currentColor;
+}

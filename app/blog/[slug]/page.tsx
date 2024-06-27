@@ -9,10 +9,10 @@ export async function generateMetadata({ params }: any) {
   const post = getArticleById(params.slug);
 
   return {
-    title: post?.title ? `${post?.title} - Cursive` : "Cursive",
+    title: post?.title ? `${post?.title} - Proof of Passport` : "Proof of Passport",
     description:
       post?.tldr ??
-      "A cryptography and design lab focused on applications of signed data.",
+      "Prove your humanity while staying anonymous.",
   };
 }
 
@@ -27,7 +27,7 @@ export default function BlogArticle({ params }: any) {
 
   if (!post) return null;
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col md:mx-72">
       <div className="flex items-start justify-center background-gradient z-0 pt-10 pb-8 md:pb-10">
         <section className={`relative my-6 w-full z-0`}>
           <AppContainer>
@@ -40,9 +40,12 @@ export default function BlogArticle({ params }: any) {
                   <h1 className="text-brand-black tracking-[-0.77px] text-2xl leading-6 md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
                     {post?.title ?? "Loading..."}
                   </h1>
-                  <span className="border-l border-[#2E2E2F] [&>strong]:text-light-black py-0.5 pl-6 text-light-black/60 text-sm font-normal leading-5">
-                    {post?.tldr ?? "Loading..."}
-                  </span>
+                  {post?.tldr
+                    ? <span className="border-l border-[#2E2E2F] [&>strong]:text-light-black py-0.5 pl-6 text-light-black/60 text-sm font-normal leading-5">
+                        {post.tldr}
+                      </span>
+                    : null
+                  }
                 </div>
               </div>
             </div>

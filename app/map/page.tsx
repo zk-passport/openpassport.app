@@ -8,13 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function GlobalMap() {
-  let infoEls;
-
   return (
     <>
       <main className={`main -mt-3 relative`}>
-            <MapChart />
-        
+        <MapChart />
       </main>
     </>
   );

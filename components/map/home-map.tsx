@@ -288,10 +288,8 @@ export default function MapChart() {
               ? countryData?.dscAlgs.map((dsc: string) => {
                   return (
                     <p key={dsc} className="flex items-center text-nowrap">
-                      {dsc}
-                      <span className="algorithmFlag">
-                        {SUPPORTED_ALGORITHMS_DSC[dsc] ? '✅' : '🚧'}
-                      </span>
+                      &nbsp;-&nbsp;{dsc}
+                        {SUPPORTED_ALGORITHMS_DSC[dsc] ? '  ✅' : '  🚧'}
                     </p>
                   );
                 })
@@ -322,11 +320,9 @@ export default function MapChart() {
                         >
                           &nbsp;-&nbsp;
                           {`${csca?.amount} issued with ${signatureStr}, ${exponentStr}, ${csca?.bit_length} bits`}
-                          <span className="algorithmFlag">
                             {SUPPORTED_ALGORITHMS_CSCA[signatureStr]
-                              ? '✅'
-                              : '🚧'}
-                          </span>
+                              ? '  ✅'
+                              : '  🚧'}
                         </p>
                       );
                     })
@@ -358,11 +354,9 @@ export default function MapChart() {
                         >
                           &nbsp;-&nbsp;
                           {`${dsc?.amount} issued with ${signatureStr}, exponent ${dsc?.curve_exponent}, ${dsc?.bit_length} bits`}
-                          <span className="algorithmFlag">
                             {SUPPORTED_ALGORITHMS_DSC[signatureStr]
-                              ? '✅'
-                              : '🚧'}
-                          </span>
+                              ? '  ✅'
+                              : '  🚧'}
                         </p>
                       );
                     })

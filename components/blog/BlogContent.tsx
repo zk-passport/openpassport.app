@@ -66,7 +66,7 @@ export function BlogContent({ post }: BlogContentProps) {
                 </th>
               ),
               td: ({ children }) => (
-                <td className="align-middle text-center text-black font-normal dark:text-white p-2">
+                <td className="align-middle text-center text-black font-normal p-2">
                   {children}
                 </td>
               ),
@@ -81,42 +81,42 @@ export function BlogContent({ post }: BlogContentProps) {
                 );
               },
               h1: ({ children }) => (
-                <h1 className="text-3xl md:text-4xl font-black text-black dark:text-white">
+                <h1 className="text-3xl md:text-4xl font-black text-black">
                   {children}
                 </h1>
               ),
               h2: ({ children }) => (
-                <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white">
+                <h2 className="text-2xl md:text-3xl font-bold text-black">
                   {children}
                 </h2>
               ),
               h3: ({ children }) => (
-                <h3 className="text-2xl md:text-2xl font-bold text-black dark:text-white">
+                <h3 className="text-2xl md:text-2xl font-bold text-black">
                   {children}
                 </h3>
               ),
               h4: ({ children }) => (
-                <h4 className="text-lg md:text-lg font-bold text-black dark:text-white">
+                <h4 className="text-lg md:text-lg font-bold text-black">
                   {children}
                 </h4>
               ),
               code: ({ children }) => (
-                <code className="bg-gray-200 dark:bg-gray-800 text-black dark:text-white p-1">
+                <code className="bg-gray-200 dark:bg-gray-800 text-black p-1">
                   {children}
                 </code>
               ),
               p: ({ children }) => (
-                <p className="text-black dark:text-white">{children}</p>
+                <p className="text-black">{children}</p>
               ),
               strong: ({ children }) => (
-                <strong className="font-bold text-black dark:text-white">
+                <strong className="font-bold very-strong text-black">
                   {children}
                 </strong>
               ),
               a: ({ href, children }) => (
                 <a
                   href={href}
-                  className="text-black dark:text-white underline"
+                  className="text-black underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -124,11 +124,11 @@ export function BlogContent({ post }: BlogContentProps) {
                 </a>
               ),
               li: ({ children }) => (
-                <li className="text-black dark:text-white">{children}</li>
+                <li className="text-black">{children}</li>
               ),
             },
           }}
-          className="!w-full !max-w-full prose flex flex-col gap-10"
+          className="!w-full !max-w-full prose flex flex-col gap-6"
         >
           {post?.content ?? ""}
         </Markdown>

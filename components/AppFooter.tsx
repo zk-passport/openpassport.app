@@ -24,6 +24,10 @@ const FOOTER_LINKS: MenuItem[] = [
     href: LINKS.BOUNTIES,
     external: true,
   },
+  {
+    label: "Map",
+    href: LINKS.MAP,
+  },
 ];
 
 const AppFooter = () => {

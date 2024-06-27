@@ -23,6 +23,7 @@ export const LINKS: Record<string, string> = {
   DOCUMENTATION: "https://docs.proofofpassport.com/",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   BLOG: "/blog",
+  MAP: "/map",
   BOUNTIES: "https://github.com/zk-passport/proof-of-passport/issues",
   READ_MORE: "https://proof-of-passport.gitbook.io",
   INTRODUCTION_TO_ZK: "https://docs.proofofpassport.com/",
@@ -34,7 +35,7 @@ export const MENU_ITEMS: MenuItem[] = [
     href: "/#how-it-works",
   },
   {
-    label: "User cases",
+    label: "Use cases",
     href: "/#use-cases",
   },
   {
@@ -43,7 +44,11 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     label: "Blog",
-    href: "/blog",
+    href: LINKS.BLOG,
+  },
+  {
+    label: "Map",
+    href: LINKS.MAP,
   },
   {
     label: "Docs",

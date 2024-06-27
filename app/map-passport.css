@@ -66,10 +66,6 @@ body.globalMap {
     margin-top: 8px;
 }
 
-.globalMap .algorithmFlag {
-    margin-left: -4px;
-}
-
 .globalMap .devToggleBtn {
     margin-right: 0;
 }

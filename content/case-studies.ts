@@ -8,29 +8,25 @@ interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    href: "#",
-    title: "Arbitrum Airdrop",
+    href: "/blog/introducing-pop",
+    title: "Introducing Proof of Passport",
     description:
-      "During their airdrop, the Arbitrum Foundation lost an estimated $253M to airdrop farmers. That's 21.8% of the supply.",
+      "Proof of Passport lets applications check their user's identity while preserving their privacy.",
   },
   {
-    href: "#",
-    title: "Random Article Nav",
+    href: "/blog/introducing-pop",
+    title: "Introducing Proof of Passport",
     description:
-      "During their airdrop, the Arbitrum Foundation lost an estimated $253M to airdrop farmers. That's 21.8% of the supply.",
-  },
-  {
-    href: "#",
-    title: "Name of Artilce",
-    description:
-      "During their airdrop, the Arbitrum Foundation lost an estimated $253M to airdrop farmers. That's 21.8% of the supply.",
-  },
-  {
-    href: "#",
-    title: "Name of Artilce",
-    description:
-      "During their airdrop, the Arbitrum Foundation lost an estimated $253M to airdrop farmers. That's 21.8% of the supply.",
+      "Proof of Passport lets applications check their user's identity while preserving their privacy.",
     inEvidence: true,
-    image: "/illustrations/airdrop-use-case.jpg",
+    image: "/open-graph.jpg",
   },
+  // {
+  //   href: "/blog/arbitrum",
+  //   title: "Arbitrum Airdrop",
+  //   description:
+  //     "During their airdrop, the Arbitrum Foundation lost an estimated $253M to airdrop farmers. That's 21.8% of the supply.",
+  //   inEvidence: true,
+  //   image: "/illustrations/airdrop-use-case.jpg",
+  // },
 ];

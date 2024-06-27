@@ -27,7 +27,7 @@ const BlogCard = ({ title, tldr, image, url }: BlogCardProps) => {
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-1">
-          <h5 className="text-light-black text-[13px] font-alliance font-medium leading-3 group-hover:underline duration-200">
+          <h5 className="text-light-black text-[15px] font-alliance font-medium leading-3 group-hover:underline duration-200">
             {title}
           </h5>
           <Icons.ExternalLink />
