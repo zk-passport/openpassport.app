@@ -28,6 +28,12 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
       },
+      // optimized image for whatsapp
+      {
+        url: "/open-graph.jpg",
+        width: 400,
+        height: 400,
+      },
     ],
   },
 };
