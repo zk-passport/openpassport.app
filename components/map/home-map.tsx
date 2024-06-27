@@ -353,7 +353,7 @@ export default function MapChart() {
                           className="flex items-center text-nowrap"
                         >
                           &nbsp;-&nbsp;
-                          {`${dsc?.amount} issued with ${signatureStr}, exponent ${dsc?.curve_exponent}, ${dsc?.bit_length} bits`}
+                          {`${dsc?.amount} issued with ${signatureStr}, ${exponentStr}, ${dsc?.bit_length} bits`}
                             {SUPPORTED_ALGORITHMS_DSC[signatureStr]
                               ? '  ✅'
                               : '  🚧'}
