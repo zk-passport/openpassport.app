@@ -15,15 +15,18 @@ import useSettings from '@/hooks/useSettings';
 const geoUrl = 'data/countries-110m.json';
 
 export default function MapChart() {
-
   type ObjectBool = {
     [key: string]: boolean;
-  }
+  };
 
   type ObjectStr = {
     [key: string]: string;
-  }
-  
+  };
+
+  type ObjectNum = {
+    [key: string]: number;
+  };
+
   enum issuePassTypes {
     DO_NOT_ISSUE = 1000,
     ISSUE_WITHOUT_SUPPORT = 1001,
@@ -37,6 +40,17 @@ export default function MapChart() {
 
   // algorithms will be add later
   const SUPPORTED_ALGORITHMS_CSCA: ObjectBool = {};
+
+  // accurate data on the number of passports issued on the internet in 100k
+  const ACCURATE_ISSUED_PASSPORTS: ObjectNum = {
+    Canada: 270,
+    China: 2120,
+    France: 340,
+    Germany: 340,
+    Japan: 210,
+    'United Kingdom': 510,
+    'United States of America': 1670,
+  };
 
   const [allCountriesData, setAllCountriesData] = useState<any>({});
   const [allIssuesCountry, setAllIssuesCountry] = useState<any>({});
@@ -90,7 +104,7 @@ export default function MapChart() {
           countryObj['cscaRecords'] = [...cscaCountryData];
           const signatureCountryAlgs: ObjectBool = {};
           for (const cscaEachAlg of cscaCountryData) {
-            count += cscaEachAlg?.amount;
+            // count += cscaEachAlg?.amount;
             if (cscaEachAlg.signature_algorithm === 'rsapss') {
               cscaEachAlg.signature_algorithm = 'rsa-pss';
             }
@@ -159,7 +173,7 @@ export default function MapChart() {
   const setIssuesSupportsVisuals = (
     countryCertsData: any,
     ePassCountries: string[],
-    countryNames: { [x: string]: any; }
+    countryNames: { [x: string]: any }
   ) => {
     if (!countryCertsData || !ePassCountries) {
       return;
@@ -234,6 +248,8 @@ export default function MapChart() {
     let info: React.JSX.Element;
     const countryData = allCountriesData[countryName];
     if (countryData) {
+      const accurateCountryCount =
+        ACCURATE_ISSUED_PASSPORTS[countryName] || countryData?.amount;
       info = (
         <div className="highlightInfo">
           <h3 className="flex items-center">
@@ -252,17 +268,17 @@ export default function MapChart() {
           </h3>
 
           <div className="issued-dscs">
-            {countryData?.amount && (
+            {accurateCountryCount ? (
               <p className="issuedCount">
                 ~ &nbsp;
                 {new Intl.NumberFormat().format(
-                  countryData?.amount
-                    ? countryData?.amount * 100_000
-                    : countryData?.amount
+                  accurateCountryCount
+                    ? accurateCountryCount * 100_000
+                    : accurateCountryCount
                 )}{' '}
                 passports issued
               </p>
-            )}
+            ): null}
 
             {/* tooltip data in normal mode */}
             {countryData?.dscExist && !devMode && (
@@ -286,7 +302,14 @@ export default function MapChart() {
               <div>
                 <p className="algorithmTitle">Top-level Certificates (CSCA)</p>
                 {countryData?.cscaExist && devMode
-                  ? countryData?.cscaRecords.map((csca: { signature_algorithm: string; hash_algorithm: string; amount: any; curve_exponent: any; bit_length: any; }) => {
+                  ? countryData?.cscaRecords.map((csca: any) => {
+                      let exponentStr = '';
+                      if (isNaN(csca?.curve_exponent)) {
+                        exponentStr = `curve ${csca?.curve_exponent}`;
+                      } else {
+                        exponentStr = `exponent ${csca?.curve_exponent}`;
+                      }
+
                       if (csca.signature_algorithm === 'rsapss') {
                         csca.signature_algorithm = 'rsa-pss';
                       }
@@ -298,7 +321,7 @@ export default function MapChart() {
                           className="flex items-center text-nowrap"
                         >
                           &nbsp;-&nbsp;
-                          {`${csca?.amount} issued with ${signatureStr}, exponent ${csca?.curve_exponent}, ${csca?.bit_length} bits`}
+                          {`${csca?.amount} issued with ${signatureStr}, ${exponentStr}, ${csca?.bit_length} bits`}
                           <span className="algorithmFlag">
                             {SUPPORTED_ALGORITHMS_CSCA[signatureStr]
                               ? '✅'
@@ -316,7 +339,13 @@ export default function MapChart() {
                   Intermediate Certificates (DSC)
                 </p>
                 {countryData?.dscRecords?.length > 0 && devMode
-                  ? countryData?.dscRecords.map((dsc: { signature_algorithm: string; hash_algorithm: string; amount: any; curve_exponent: any; bit_length: any; }) => {
+                  ? countryData?.dscRecords.map((dsc: any) => {
+                      let exponentStr = '';
+                      if (isNaN(dsc?.curve_exponent)) {
+                        exponentStr = `curve ${dsc?.curve_exponent}`;
+                      } else {
+                        exponentStr = `exponent ${dsc?.curve_exponent}`;
+                      }
                       if (dsc.signature_algorithm === 'rsapss') {
                         dsc.signature_algorithm = 'rsa-pss';
                       }
