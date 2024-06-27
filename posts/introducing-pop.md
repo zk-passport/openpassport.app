@@ -5,7 +5,7 @@ image: "/open-graph.jpg"
 date: "2024-25-07"
 ---
 
-Trust underpins civilization. It allows us to coordinate and shoot for more ambitious goals than any individuals can ever reach alone.
+Trust underpins civilization. It allows us to coordinate and shoot for more ambitious goals than any individual can ever reach alone.
 
 The internet extended the surface area of possible trust by multiplying opportunities for connection. But in doing so, it dissolved the web of trust we were used to. It opened the way for sophisticated actors to run millions of bots passing for humans. They are now able to lead public opinion on social medias and capture voting power of protocols trying to decentralize their governance.
 

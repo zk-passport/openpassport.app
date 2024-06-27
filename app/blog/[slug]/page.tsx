@@ -27,7 +27,7 @@ export default function BlogArticle({ params }: any) {
 
   if (!post) return null;
   return (
-    <div className="flex flex-col md:mx-72">
+    <div className="flex flex-col xl:mx-72 lg:mx-48 md:mx-24">
       <div className="flex items-start justify-center background-gradient z-0 pt-10 pb-8 md:pb-10">
         <section className={`relative my-6 w-full z-0`}>
           <AppContainer>

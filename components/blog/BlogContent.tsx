@@ -6,6 +6,7 @@ import { AppContainer } from "../AppContainer";
 import { AppLink } from "../AppLink";
 import { Button } from "../elements/Button";
 import { BlogCard } from "../cards/BlogCard";
+import { LINKS } from "@/common/settings";
 
 interface BlogContentProps {
   post: Article;
@@ -142,7 +143,7 @@ export function BlogContent({ post }: BlogContentProps) {
             )}
 
             <AppLink
-              href="/blog"
+              href={LINKS.BLOG}
               className="text-black font-bold font-alliance text-base ml-auto leading-6"
             >
               <Button> View all</Button>
@@ -150,7 +151,7 @@ export function BlogContent({ post }: BlogContentProps) {
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {moreArticles.map(({ id, title, image, tldr = "" }: Article) => {
-              const url = `/blog/${id}`;
+              const url = `/${id}`;
 
               return (
                 <BlogCard

@@ -217,7 +217,7 @@ const AppHeader = () => {
         size="md"
         className="flex items-center justify-between py-[10px]"
       >
-        <AppLink href="/">
+        <AppLink href="https://www.proofofpassport.com/">
           <Image
             className="hidden md:block"
             src="/images/logo.svg"

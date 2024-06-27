@@ -22,25 +22,25 @@ export const LINKS: Record<string, string> = {
   APP_STORE: "https://testflight.apple.com/join/WfZnZWfn",
   DOCUMENTATION: "https://docs.proofofpassport.com/",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
-  BLOG: "/blog",
-  MAP: "/map",
+  BLOG: "https://blog.proofofpassport.com/",
+  MAP: "https://map.proofofpassport.com/",
   BOUNTIES: "https://github.com/zk-passport/proof-of-passport/issues",
-  READ_MORE: "https://proof-of-passport.gitbook.io",
+  READ_MORE: "https://blog.proofofpassport.com/",
   INTRODUCTION_TO_ZK: "https://docs.proofofpassport.com/",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
   {
     label: "How it works",
-    href: "/#how-it-works",
+    href: "https://www.proofofpassport.com/#how-it-works",
   },
   {
     label: "Use cases",
-    href: "/#use-cases",
+    href: "https://www.proofofpassport.com/#use-cases",
   },
   {
     label: "Develop",
-    href: "/#develop",
+    href: "https://www.proofofpassport.com/#develop",
   },
   {
     label: "Blog",
