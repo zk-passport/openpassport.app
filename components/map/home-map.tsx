@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { FormControlLabel, Grid, Switch, Tooltip, Zoom } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { FormControlLabel, Grid, Switch, Tooltip, Zoom } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
   Graticule,
   Sphere,
-} from 'react-simple-maps';
-import ReactCountryFlag from 'react-country-flag';
-import useSettings from '@/hooks/useSettings';
+} from "react-simple-maps";
+import ReactCountryFlag from "react-country-flag";
+import useSettings from "@/hooks/useSettings";
 
-const geoUrl = 'data/countries-110m.json';
+const geoUrl = "data/countries-110m.json";
 
 export default function MapChart() {
   type ObjectBool = {
@@ -33,9 +33,9 @@ export default function MapChart() {
     ISSUE_WITH_SUPPORT = 1002,
   }
   const SUPPORTED_ALGORITHMS_DSC: ObjectBool = {
-    'RSA with SHA256': true,
-    'RSA with SHA1': true,
-    'RSA-PSS with SHA256': true,
+    "RSA with SHA256": true,
+    "RSA with SHA1": true,
+    "RSA-PSS with SHA256": true,
   };
 
   // algorithms will be add later
@@ -48,14 +48,14 @@ export default function MapChart() {
     France: 340,
     Germany: 340,
     Japan: 210,
-    'United Kingdom': 510,
-    'United States of America': 1670,
+    "United Kingdom": 510,
+    "United States of America": 1670,
   };
 
   const [allCountriesData, setAllCountriesData] = useState<any>({});
   const [allIssuesCountry, setAllIssuesCountry] = useState<any>({});
   const { isMobile } = useSettings();
-  const [countryName, setCountryName] = useState('');
+  const [countryName, setCountryName] = useState("");
   const [devMode, setDevMode] = useState(false);
 
   const formatJsonData = (
@@ -78,42 +78,42 @@ export default function MapChart() {
       if (dscCountryData?.length || cscaCountryData?.length) {
         const countryObj: any = {};
 
-        countryObj['name'] = name;
-        countryObj['countryCode'] = countryCode;
-        countryObj['dscExist'] = false;
-        countryObj['cscaExist'] = false;
+        countryObj["name"] = name;
+        countryObj["countryCode"] = countryCode;
+        countryObj["dscExist"] = false;
+        countryObj["cscaExist"] = false;
 
         let count = 0;
         if (dscCountryData?.length > 0) {
-          countryObj['dscExist'] = true;
-          countryObj['dscRecords'] = [...dscCountryData];
+          countryObj["dscExist"] = true;
+          countryObj["dscRecords"] = [...dscCountryData];
           const signatureCountryAlgs: ObjectBool = {};
           for (const dscEachAlg of dscCountryData) {
             count += dscEachAlg?.amount;
-            if (dscEachAlg.signature_algorithm === 'rsapss') {
-              dscEachAlg.signature_algorithm = 'rsa-pss';
+            if (dscEachAlg.signature_algorithm === "rsapss") {
+              dscEachAlg.signature_algorithm = "rsa-pss";
             }
             const signatureStr = `${dscEachAlg.signature_algorithm.toUpperCase()} with ${dscEachAlg.hash_algorithm.toUpperCase()}`;
             signatureCountryAlgs[signatureStr] = true;
           }
-          countryObj['dscAlgs'] = Object.keys(signatureCountryAlgs);
+          countryObj["dscAlgs"] = Object.keys(signatureCountryAlgs);
         }
 
         if (cscaCountryData?.length > 0) {
-          countryObj['cscaExist'] = true;
-          countryObj['cscaRecords'] = [...cscaCountryData];
+          countryObj["cscaExist"] = true;
+          countryObj["cscaRecords"] = [...cscaCountryData];
           const signatureCountryAlgs: ObjectBool = {};
           for (const cscaEachAlg of cscaCountryData) {
             // count += cscaEachAlg?.amount;
-            if (cscaEachAlg.signature_algorithm === 'rsapss') {
-              cscaEachAlg.signature_algorithm = 'rsa-pss';
+            if (cscaEachAlg.signature_algorithm === "rsapss") {
+              cscaEachAlg.signature_algorithm = "rsa-pss";
             }
             const signatureStr = `${cscaEachAlg.signature_algorithm.toUpperCase()} with ${cscaEachAlg.hash_algorithm.toUpperCase()}`;
             signatureCountryAlgs[signatureStr] = true;
           }
-          countryObj['cscaAlgs'] = Object.keys(signatureCountryAlgs);
+          countryObj["cscaAlgs"] = Object.keys(signatureCountryAlgs);
         }
-        countryObj['amount'] = count;
+        countryObj["amount"] = count;
 
         countryData[name] = countryObj;
       }
@@ -126,18 +126,18 @@ export default function MapChart() {
     try {
       // Intermediate Certificates (DSC) issued by each country
       const dscFetchData = await fetch(
-        'https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/dsc_formatted.json'
+        "https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/dsc_formatted.json"
       );
       const dscData = await dscFetchData.json();
 
       // Top-level Certificates (CSCA) issued by each country
       const cscaFetchData = await fetch(
-        'https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/csca_formatted.json'
+        "https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/csca_formatted.json"
       );
       const cscaData = await cscaFetchData.json();
 
       const countryNames: any = await import(
-        './../../public/data/all-countries.json'
+        "./../../public/data/all-countries.json"
       );
 
       if (!dscData || !cscaData) {
@@ -149,12 +149,12 @@ export default function MapChart() {
         { ...cscaData },
         countryNames
       );
-      console.log('allCountriesData :>> ', allCountriesData);
+      console.log("allCountriesData :>> ", allCountriesData);
       setAllCountriesData(allCountriesData);
 
       // e-passport supported countries
       let ePassSupportCountries: any = await import(
-        './../../public/data/supported-countries.json'
+        "./../../public/data/supported-countries.json"
       );
       if (ePassSupportCountries?.default?.length) {
         ePassSupportCountries = ePassSupportCountries.default;
@@ -166,7 +166,7 @@ export default function MapChart() {
         countryNames
       );
     } catch (err) {
-      console.log('err :>> ', err);
+      console.log("err :>> ", err);
     }
   };
 
@@ -193,12 +193,12 @@ export default function MapChart() {
       countryRes[countryName] = {
         name: countryName,
         issueType: issuePassTypes.DO_NOT_ISSUE,
-        defaultColor: '#b0bfa7',
+        defaultColor: "#b0bfa7",
         countryCode: country,
       };
 
       if (supportedCountriesObj[country] || countryData?.cscaRecords?.length) {
-        countryRes[countryName].defaultColor = '#70ac48';
+        countryRes[countryName].defaultColor = "#70ac48";
         countryRes[countryName].issueType =
           issuePassTypes.ISSUE_WITHOUT_SUPPORT;
       }
@@ -209,7 +209,7 @@ export default function MapChart() {
           if (SUPPORTED_ALGORITHMS_DSC[alg]) {
             countryRes[countryName].issueType =
               issuePassTypes.ISSUE_WITH_SUPPORT;
-            countryRes[countryName].defaultColor = '#548233';
+            countryRes[countryName].defaultColor = "#548233";
           }
         }
       }
@@ -220,7 +220,7 @@ export default function MapChart() {
           if (SUPPORTED_ALGORITHMS_CSCA[alg]) {
             countryRes[countryName].issueType =
               issuePassTypes.ISSUE_WITH_SUPPORT;
-            countryRes[countryName].defaultColor = '#548233';
+            countryRes[countryName].defaultColor = "#548233";
           }
         }
       }
@@ -233,11 +233,11 @@ export default function MapChart() {
     fetchJsonInfo();
 
     // apply custom styles to map page
-    document.body.classList.add('globalMap');
+    document.body.classList.add("globalMap");
     // Clean up: Remove classes from body
     window.scrollTo({ top: 0, left: 0 });
     return () => {
-      document.body.classList.remove('globalMap');
+      document.body.classList.remove("globalMap");
     };
   }, []);
 
@@ -254,16 +254,16 @@ export default function MapChart() {
         <div className="highlightInfo">
           <h3 className="flex items-center">
             <b>
-              {countryName || ''}{' '}
+              {countryName || ""}{" "}
               <ReactCountryFlag
                 countryCode={countryData.countryCode}
                 svg
                 style={{
-                  width: '2em',
-                  height: '1em',
+                  width: "2em",
+                  height: "1em",
                 }}
                 title={countryData.name}
-              />{' '}
+              />{" "}
             </b>
           </h3>
 
@@ -275,10 +275,10 @@ export default function MapChart() {
                   accurateCountryCount
                     ? accurateCountryCount * 100_000
                     : accurateCountryCount
-                )}{' '}
+                )}{" "}
                 passports issued
               </p>
-            ): null}
+            ) : null}
 
             {/* tooltip data in normal mode */}
             {countryData?.dscExist && !devMode && (
@@ -289,7 +289,7 @@ export default function MapChart() {
                   return (
                     <p key={dsc} className="flex items-center text-nowrap">
                       &nbsp;-&nbsp;{dsc}
-                        {SUPPORTED_ALGORITHMS_DSC[dsc] ? '  ✅' : '  🚧'}
+                      {SUPPORTED_ALGORITHMS_DSC[dsc] ? "  ✅" : "  🚧"}
                     </p>
                   );
                 })
@@ -301,15 +301,15 @@ export default function MapChart() {
                 <p className="algorithmTitle">Top-level Certificates (CSCA)</p>
                 {countryData?.cscaExist && devMode
                   ? countryData?.cscaRecords.map((csca: any) => {
-                      let exponentStr = '';
+                      let exponentStr = "";
                       if (isNaN(csca?.curve_exponent)) {
                         exponentStr = `curve ${csca?.curve_exponent}`;
                       } else {
                         exponentStr = `exponent ${csca?.curve_exponent}`;
                       }
 
-                      if (csca.signature_algorithm === 'rsapss') {
-                        csca.signature_algorithm = 'rsa-pss';
+                      if (csca.signature_algorithm === "rsapss") {
+                        csca.signature_algorithm = "rsa-pss";
                       }
                       const signatureStr = `${csca.signature_algorithm.toUpperCase()} with ${csca.hash_algorithm.toUpperCase()}`;
 
@@ -320,9 +320,9 @@ export default function MapChart() {
                         >
                           &nbsp;-&nbsp;
                           {`${csca?.amount} issued with ${signatureStr}, ${exponentStr}, ${csca?.bit_length} bits`}
-                            {SUPPORTED_ALGORITHMS_CSCA[signatureStr]
-                              ? '  ✅'
-                              : '  🚧'}
+                          {SUPPORTED_ALGORITHMS_CSCA[signatureStr]
+                            ? "  ✅"
+                            : "  🚧"}
                         </p>
                       );
                     })
@@ -336,14 +336,14 @@ export default function MapChart() {
                 </p>
                 {countryData?.dscRecords?.length > 0 && devMode
                   ? countryData?.dscRecords.map((dsc: any) => {
-                      let exponentStr = '';
+                      let exponentStr = "";
                       if (isNaN(dsc?.curve_exponent)) {
                         exponentStr = `curve ${dsc?.curve_exponent}`;
                       } else {
                         exponentStr = `exponent ${dsc?.curve_exponent}`;
                       }
-                      if (dsc.signature_algorithm === 'rsapss') {
-                        dsc.signature_algorithm = 'rsa-pss';
+                      if (dsc.signature_algorithm === "rsapss") {
+                        dsc.signature_algorithm = "rsa-pss";
                       }
                       const signatureStr = `${dsc.signature_algorithm.toUpperCase()} with ${dsc.hash_algorithm.toUpperCase()}`;
 
@@ -354,9 +354,9 @@ export default function MapChart() {
                         >
                           &nbsp;-&nbsp;
                           {`${dsc?.amount} issued with ${signatureStr}, ${exponentStr}, ${dsc?.bit_length} bits`}
-                            {SUPPORTED_ALGORITHMS_DSC[signatureStr]
-                              ? '  ✅'
-                              : '  🚧'}
+                          {SUPPORTED_ALGORITHMS_DSC[signatureStr]
+                            ? "  ✅"
+                            : "  🚧"}
                         </p>
                       );
                     })
@@ -370,19 +370,19 @@ export default function MapChart() {
       info = (
         <div className="workInProgress">
           <h3 className="flex items-center">
-            <b>{countryName || ''}</b>
+            <b>{countryName || ""}</b>
             &nbsp;
             <ReactCountryFlag
               countryCode={allIssuesCountry[countryName]?.countryCode}
               svg
               style={{
-                width: '2em',
-                height: '1em',
+                width: "2em",
+                height: "1em",
               }}
               title={countryName}
-            />{' '}
+            />{" "}
             &nbsp;
-            {allIssuesCountry[`${countryName}`] ? '🚧' : null}
+            {allIssuesCountry[`${countryName}`] ? "🚧" : null}
           </h3>
           {allIssuesCountry[`${countryName}`] && isMobile ? (
             <>
@@ -416,8 +416,8 @@ export default function MapChart() {
               <Sphere
                 stroke="#fff"
                 strokeWidth={0.1}
-                id={'sphereline'}
-                fill={'#ffffff00'}
+                id={"sphereline"}
+                fill={"#ffffff00"}
               />
               <Geographies
                 geography={geoUrl}
@@ -430,11 +430,11 @@ export default function MapChart() {
                     <Tooltip
                       enterTouchDelay={0}
                       leaveTouchDelay={6000}
-                      classes={{ tooltip: 'country-tooltip' }}
+                      classes={{ tooltip: "country-tooltip" }}
                       title={highLightInfo(geo.properties.name)}
                       disableTouchListener={isMobile}
                       disableHoverListener={isMobile}
-                      placement={'right'}
+                      placement={"right"}
                       arrow
                       key={geo.rsmKey}
                       TransitionComponent={Zoom}
@@ -443,6 +443,7 @@ export default function MapChart() {
                       <Geography
                         key={geo.rsmKey}
                         geography={geo}
+                        className=" font-alliance"
                         onClick={() => {
                           if (!isMobile) {
                             return;
@@ -463,17 +464,17 @@ export default function MapChart() {
                             fill: allIssuesCountry[`${geo.properties.name}`]
                               ? allIssuesCountry[`${geo.properties.name}`]
                                   .defaultColor
-                              : '#b0bfa7',
+                              : "#b0bfa7",
                           },
                           hover: {
                             fill: allIssuesCountry[`${geo.properties.name}`]
-                              ? '#4d7332'
-                              : '#b0bfa7',
+                              ? "#4d7332"
+                              : "#b0bfa7",
                           },
                           pressed: {
                             fill: allIssuesCountry[`${geo.properties.name}`]
-                              ? '#507f3a'
-                              : '#b0bfa7',
+                              ? "#507f3a"
+                              : "#b0bfa7",
                           },
                         }}
                       />
@@ -489,7 +490,7 @@ export default function MapChart() {
         container
         spacing={2}
         className={`sm:mt-3 mt-0 countryDetailsRow ${
-          devMode ? 'devMode' : 'normalMode'
+          devMode ? "devMode" : "normalMode"
         }`}
       >
         <Grid
@@ -508,20 +509,20 @@ export default function MapChart() {
           <h2 className={`homeTitle`}>Proof of Passport country coverage</h2>
           <div className="legend-info-item flex items-center">
             <p
-              className={`w-8 h-4 bg-[#548233] ${isMobile ? 'ms-2' : 'me-2'}`}
-            ></p>{' '}
+              className={`w-8 h-4 bg-[#548233] ${isMobile ? "ms-2" : "me-2"}`}
+            ></p>{" "}
             Supported countries
           </div>
           <div className="legend-info-item flex items-center">
             <p
-              className={`w-8 h-4 bg-[#70ac48] ${isMobile ? 'ms-2' : 'me-2'}`}
-            ></p>{' '}
+              className={`w-8 h-4 bg-[#70ac48] ${isMobile ? "ms-2" : "me-2"}`}
+            ></p>{" "}
             Work in progress
           </div>
           <div className="legend-info-item flex items-center">
             <p
-              className={`w-8 h-4 bg-[#b0bfa7] ${isMobile ? 'ms-2' : 'me-2'}`}
-            ></p>{' '}
+              className={`w-8 h-4 bg-[#b0bfa7] ${isMobile ? "ms-2" : "me-2"}`}
+            ></p>{" "}
             Not issuing e-passport
           </div>
           <div className="legend-info-item flex items-center">

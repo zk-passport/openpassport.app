@@ -2,6 +2,10 @@ body.globalMap {
     background: #f1f1f1;
 }
 
+body.globalMap .highlightInfo {
+    font-family: var(--font-alliance) !important;
+}
+
 .globalMap path {
     cursor: pointer;
     outline: 0;
@@ -29,17 +33,10 @@ body.globalMap {
     margin-top: -3.5rem;
 }
 
-.globalMap header {
-    display: none;
-}
-
 .globalMap footer {
     margin-top: auto;
 }
 
-.globalMap .customHeader {
-    display: none;
-}
 
 .globalMap footer .py-4 {
     padding: 0.5rem 0;

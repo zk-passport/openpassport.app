@@ -25,7 +25,7 @@ const TestFlightBanner = () => {
           external
         >
           <Icons.Online className="animate-pulse" />
-          <span className="font-alliance text-sm leading-5 text-white/60 [&>strong]:text-white">
+          <span className="font-alliance text-sm leading-5 text-white/60 [&>strong]:text-white duration-300 border-b border-b-transparent hover:border-b-white/60">
             Join our <strong>{`Testflight >`}</strong> iOS Beta is{" "}
             <strong>Live!</strong>
           </span>

@@ -36,7 +36,7 @@ const HowItWorks = () => {
       id="how-it-works"
       className="bg-section-gradient-black pt-14 lg:pt-16"
     >
-      <AppContainer className="h-full-screen flex flex-col relative overflow-hidden">
+      <AppContainer className="flex flex-col relative overflow-hidden lg:min-h-[780px] xl:min-h-[900px]">
         <div className="my-auto h-full flex flex-col gap-16 lg:gap-36">
           <h3 className="max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-normal tracking-[-0.96px] text-white/70 md:tracking-[-1.44px] md:text-[32px]">
             <strong>Introduction Proof of Passport,</strong> a digital identity
