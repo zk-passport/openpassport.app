@@ -104,7 +104,6 @@ export default function MapChart() {
           countryObj["cscaRecords"] = [...cscaCountryData];
           const signatureCountryAlgs: ObjectBool = {};
           for (const cscaEachAlg of cscaCountryData) {
-            // count += cscaEachAlg?.amount;
             if (cscaEachAlg.signature_algorithm === "rsapss") {
               cscaEachAlg.signature_algorithm = "rsa-pss";
             }
@@ -281,9 +280,19 @@ export default function MapChart() {
             ) : null}
 
             {/* tooltip data in normal mode */}
-            {countryData?.dscExist && !devMode && (
+            {(countryData?.dscExist || countryData?.cscaExist) && !devMode && (
               <p className="algorithmTitle">Signature algorithms:</p>
             )}
+            {countryData?.cscaExist && !devMode
+              ? countryData?.cscaAlgs.map((csca: string) => {
+                  return (
+                    <p key={csca} className="flex items-center text-nowrap">
+                      &nbsp;-&nbsp;{csca}
+                      {SUPPORTED_ALGORITHMS_CSCA[csca] ? "  ✅" : "  🚧"}
+                    </p>
+                  );
+                })
+              : null}
             {countryData?.dscExist && !devMode
               ? countryData?.dscAlgs.map((dsc: string) => {
                   return (
