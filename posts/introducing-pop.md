@@ -29,7 +29,7 @@ Our work is based on three premises.
 
 Today, we're releasing Proof of Passport. Our app and circuits let users scan the NFC chip in their electronic passport with any NFC-enabled phone and prove the correctness of the government attestation in a zk-SNARK. This allows anybody to prove their nationality, age or simply humanity while only disclosing the exact information they want public.
 
-We are also releasing implementations for the verification of the 3 most common signature algorithms used by countries to issue passports. Together, they allow support for around 50% of the world's electronic passports. Along with that, we're open sourcing our [registry](https://github.com/zk-passport/proof-of-passport/tree/dev/registry) and [global map](https://proofofpassport-com.vercel.app/map) showing the usage of signature algorithms by country.
+We are also releasing implementations for the verification of the 3 most common signature algorithms used by countries to issue passports. Together, they allow support for around 50% of the world's electronic passports. Along with that, we're open sourcing our [registry](https://github.com/zk-passport/proof-of-passport/tree/dev/registry) and [global map](https://map.proofofpassport.com/) showing the usage of signature algorithms by country.
 
 All our code is open-source and MIT licensed.
 
