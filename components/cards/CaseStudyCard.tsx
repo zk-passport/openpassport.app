@@ -28,7 +28,7 @@ const CaseStudyCard = ({
     >
       {image && inEvidence && (
         <Image
-          className="min-h-[390px] md:min-h-[200px] aspect-video bg-center w-full object-cover rounded-[32px] overflow-hidden"
+          className="aspect-video bg-center w-full object-cover rounded-[32px] overflow-hidden"
           src={image}
           height={560}
           width={320}
