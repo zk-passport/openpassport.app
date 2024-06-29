@@ -14,7 +14,6 @@ export const UseCases = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
     once: true,
-    margin: "-300px",
   });
 
   useEffect(() => {
@@ -24,12 +23,12 @@ export const UseCases = () => {
   }, [isInView, controls]);
 
   return (
-    <section ref={ref} id="use-cases" className="pt-28 pb-10 md:pt-32 md:pb-12">
+    <section id="use-cases" className="pt-28 pb-10 md:pt-32 md:pb-12">
       <AppContainer className=" flex flex-col gap-8">
         <h2 className="text-brand-black tracking-[-0.77px] text-2xl leading-6l md:tracking-[-1.44px] md:text-5xl md:leading-[46px]">
           Explore <span className="opacity-50">use cases</span>
         </h2>
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-6">
+        <div ref={ref} className="grid grid-cols-1 gap-6 lg:grid-cols-6">
           {useCases.map(({ image, title, items, inEvidence }, index) => {
             return (
               <motion.div
