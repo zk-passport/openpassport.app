@@ -15,11 +15,11 @@ In the coming years, AI is going to make any simple humanity check irrelevant. *
 
 ### Tools for provable expressivity
 
-If we want to restore trust online, we need new tools. They should allow us to prove information about ourselves reliably, but without having to disclose what we want to keep private. If this is not done, permissioned systems regulated by large actors will take the lead and require everyone to give up ownership of their data. If the dream of a free and chaotic cryptoanarchist internet doesn't make sense anymore with bots and agents, a closed and centralized system is no better.
+If we want to restore trust online, we need new tools. They should allow us to prove information about ourselves reliably, without having to disclose what we want to keep private. If this is not done, permissioned systems regulated by large actors will take the lead and require everyone to give up ownership of their data. If the dream of a free and chaotic cryptoanarchist internet doesn't make sense anymore with bots and agents, a closed and centralized system is no better.
 
 Our work is based on three premises.
 
-**People do care about privacy, though only for what matters:** Most users don't care about privacy for social media or messaging because they don't feel like their data is sensitive enough. Financial transaction and personal identification information feel more urgent and so are a better way of bootstrapping a better system.
+**People do care about privacy, though only for what matters:** Most users don't care about privacy for social media or messaging because they don't feel like their data is sensitive enough. Financial transaction and personal identification information feel more urgent and can help bootstrap a better system.
 
 **Relying on deployed infrastructure rather than starting a new network:** Too many projects are trying to tackle proof of humanity by deploying their own infrastructure or creating new webs of trust, and end up failing to generate network effects. We should strive to piggyback on existing networks for as long as necessary.
 
