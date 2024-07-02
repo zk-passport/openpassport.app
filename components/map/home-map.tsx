@@ -11,6 +11,7 @@ import {
 } from "react-simple-maps";
 import ReactCountryFlag from "react-country-flag";
 import useSettings from "@/hooks/useSettings";
+import {supportIndicator} from './supported-algorithm-verifier';
 
 const geoUrl = "data/countries-110m.json";
 
@@ -26,7 +27,7 @@ export default function MapChart() {
   type ObjectNum = {
     [key: string]: number;
   };
-
+  
   enum issuePassTypes {
     DO_NOT_ISSUE = 1000,
     ISSUE_WITHOUT_SUPPORT = 1001,
@@ -58,6 +59,7 @@ export default function MapChart() {
   const [countryName, setCountryName] = useState("");
   const [devMode, setDevMode] = useState(false);
 
+  
   const formatJsonData = (
     dscInput: any = {},
     cscaInput: any = {},
@@ -82,36 +84,35 @@ export default function MapChart() {
         countryObj["countryCode"] = countryCode;
         countryObj["dscExist"] = false;
         countryObj["cscaExist"] = false;
+        countryObj["allAlgs"] = [];
 
         let count = 0;
+        const signatureCountryAlgs: ObjectBool = {};
         if (dscCountryData?.length > 0) {
           countryObj["dscExist"] = true;
           countryObj["dscRecords"] = [...dscCountryData];
-          const signatureCountryAlgs: ObjectBool = {};
           for (const dscEachAlg of dscCountryData) {
             count += dscEachAlg?.amount;
-            if (dscEachAlg.signature_algorithm === "rsapss") {
-              dscEachAlg.signature_algorithm = "rsa-pss";
-            }
+            // if (dscEachAlg.signature_algorithm === "rsapss") {
+            //   dscEachAlg.signature_algorithm = "rsa-pss";
+            // }
             const signatureStr = `${dscEachAlg.signature_algorithm.toUpperCase()} with ${dscEachAlg.hash_algorithm.toUpperCase()}`;
             signatureCountryAlgs[signatureStr] = true;
           }
-          countryObj["dscAlgs"] = Object.keys(signatureCountryAlgs);
         }
 
         if (cscaCountryData?.length > 0) {
           countryObj["cscaExist"] = true;
           countryObj["cscaRecords"] = [...cscaCountryData];
-          const signatureCountryAlgs: ObjectBool = {};
           for (const cscaEachAlg of cscaCountryData) {
-            if (cscaEachAlg.signature_algorithm === "rsapss") {
-              cscaEachAlg.signature_algorithm = "rsa-pss";
-            }
+            // if (cscaEachAlg.signature_algorithm === "rsapss") {
+            //   cscaEachAlg.signature_algorithm = "rsa-pss";
+            // }
             const signatureStr = `${cscaEachAlg.signature_algorithm.toUpperCase()} with ${cscaEachAlg.hash_algorithm.toUpperCase()}`;
             signatureCountryAlgs[signatureStr] = true;
           }
-          countryObj["cscaAlgs"] = Object.keys(signatureCountryAlgs);
         }
+        countryObj["allAlgs"] = Object.keys(signatureCountryAlgs);
         countryObj["amount"] = count;
 
         countryData[name] = countryObj;
@@ -203,9 +204,18 @@ export default function MapChart() {
       }
 
       // verified the dsc records are exists in supported algorithms or not
-      if (countryData?.dscAlgs?.length) {
-        for (const alg of countryData.dscAlgs) {
-          if (SUPPORTED_ALGORITHMS_DSC[alg]) {
+      // if (countryData?.dscAlgs?.length) {
+      //   for (const alg of countryData.dscAlgs) {
+      //     if (SUPPORTED_ALGORITHMS_DSC[alg]) {
+      //       countryRes[countryName].issueType =
+      //         issuePassTypes.ISSUE_WITH_SUPPORT;
+      //       countryRes[countryName].defaultColor = "#548233";
+      //     }
+      //   }
+      // }
+      if (countryData?.dscRecords?.length) {
+        for (const alg of countryData.dscRecords) {
+          if (supportIndicator(alg, 'dsc')) {
             countryRes[countryName].issueType =
               issuePassTypes.ISSUE_WITH_SUPPORT;
             countryRes[countryName].defaultColor = "#548233";
@@ -214,15 +224,24 @@ export default function MapChart() {
       }
 
       // verified the csca records are exists in supported algorithms or not
-      if (countryData?.cscaAlgs?.length) {
-        for (const alg of countryData.cscaAlgs) {
-          if (SUPPORTED_ALGORITHMS_CSCA[alg]) {
+      if (countryData?.cscaRecords?.length) {
+        for (const alg of countryData.cscaRecords) {
+          if (supportIndicator(alg, 'csca')) {
             countryRes[countryName].issueType =
               issuePassTypes.ISSUE_WITH_SUPPORT;
             countryRes[countryName].defaultColor = "#548233";
           }
         }
       }
+      // if (countryData?.cscaAlgs?.length) {
+      //   for (const alg of countryData.cscaAlgs) {
+      //     if (SUPPORTED_ALGORITHMS_CSCA[alg]) {
+      //       countryRes[countryName].issueType =
+      //         issuePassTypes.ISSUE_WITH_SUPPORT;
+      //       countryRes[countryName].defaultColor = "#548233";
+      //     }
+      //   }
+      // }
     }
 
     setAllIssuesCountry(countryRes);
@@ -283,22 +302,12 @@ export default function MapChart() {
             {(countryData?.dscExist || countryData?.cscaExist) && !devMode && (
               <p className="algorithmTitle">Signature algorithms:</p>
             )}
-            {countryData?.cscaExist && !devMode
-              ? countryData?.cscaAlgs.map((csca: string) => {
+            {(countryData?.dscExist || countryData?.cscaExist) && !devMode
+              ? countryData?.allAlgs.map((alg: string) => {
                   return (
-                    <p key={csca} className="flex items-center text-nowrap">
-                      &nbsp;-&nbsp;{csca}
-                      {SUPPORTED_ALGORITHMS_CSCA[csca] ? "  ✅" : "  🚧"}
-                    </p>
-                  );
-                })
-              : null}
-            {countryData?.dscExist && !devMode
-              ? countryData?.dscAlgs.map((dsc: string) => {
-                  return (
-                    <p key={dsc} className="flex items-center text-nowrap">
-                      &nbsp;-&nbsp;{dsc}
-                      {SUPPORTED_ALGORITHMS_DSC[dsc] ? "  ✅" : "  🚧"}
+                    <p key={alg} className="flex items-center text-nowrap">
+                      &nbsp;-&nbsp;{alg}
+                      {SUPPORTED_ALGORITHMS_CSCA[alg] ? "  ✅" : "  🚧"}
                     </p>
                   );
                 })
@@ -338,7 +347,7 @@ export default function MapChart() {
                   : null}
               </div>
             )}
-            {countryData?.dscAlgs && devMode && (
+            {countryData?.dscExist && devMode && (
               <div>
                 <p className="algorithmTitle">
                   Intermediate Certificates (DSC)
