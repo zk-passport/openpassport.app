@@ -12,6 +12,7 @@ type CertDetail = {
 const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
 
   if (type === 'dsc') {
+    // dsc supported algs added here
     const supportedListDsc: any = {
       rsa: {
         sha1: {
@@ -62,6 +63,7 @@ const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
   }
 
   if (type = 'csca') {
+    // csca supported algs added here
     const supportedListCsca: any = {
       rsa: {
         sha1: false,
