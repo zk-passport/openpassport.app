@@ -11,55 +11,6 @@ type CertDetail = {
  */
 const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
 
-/*  {
-    "name": "France",
-    "countryCode": "FR",
-    "dscExist": true,
-    "cscaExist": true,
-    "allAlgs": [],
-    "dscRecords": [
-        {
-            "signature_algorithm": "rsa",
-            "hash_algorithm": "sha256",
-            "curve_exponent": "65537",
-            "bit_length": 2048,
-            "amount": 2016
-        },
-        {
-            "signature_algorithm": "rsa",
-            "hash_algorithm": "sha1",
-            "curve_exponent": "65537",
-            "bit_length": 2048,
-            "amount": 32
-        }
-    ],
-    "dscAlgs": [
-        "RSA with SHA256",
-        "RSA with SHA1"
-    ],
-    "cscaRecords": [
-        {
-            "signature_algorithm": "rsa",
-            "hash_algorithm": "sha256",
-            "curve_exponent": "65537",
-            "bit_length": 4096,
-            "amount": 5
-        },
-        {
-            "signature_algorithm": "rsa",
-            "hash_algorithm": "sha1",
-            "curve_exponent": "65537",
-            "bit_length": 4096,
-            "amount": 1
-        }
-    ],
-    "cscaAlgs": [
-        "RSA with SHA256",
-        "RSA with SHA1"
-    ],
-    "amount": 2048
-} */
-  
   if (type === 'dsc') {
     const supportedListDsc: any = {
       rsa: {
@@ -116,7 +67,7 @@ const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
         sha1: false,
         sha256: {
           curves: ['3', '38129', '43459', '50633', '56611', '58097', '65537', '107903', '109729', '127485', 'NOT RSA'],
-          bits: [ '2048', '4096', '3072']
+          bits: [ 2048, 4096, 3072]
         },
         sha384: false,
         sha512: false,
