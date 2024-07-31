@@ -2,7 +2,7 @@
 
 import { QRCodeGenerator, countryCodes, ProofOfPassportWeb2Verifier } from '@proofofpassport/sdk';
 import React, { useEffect, useRef, useState } from 'react';
-import io from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 import { BounceLoader } from 'react-spinners';
 import { CircleCheck, XCircle } from 'lucide-react';
 import { Autocomplete, TextField } from '@mui/material';
@@ -18,11 +18,13 @@ const ProofSteps = {
 
 const countryOptions = Object.values(countryCodes);
 
+type ProofVerificationResult = { valid: boolean; error?: string };
+
 function Showcase() {
-    const qrcodeRef = useRef(null);
+    const qrcodeRef = useRef<HTMLDivElement>(null);
     const [proofStep, setProofStep] = useState(ProofSteps.WAITING_FOR_MOBILE);
-    const [socket, setSocket] = useState(null);
-    const [proofVerified, setProofVerified] = useState(null);
+    const [socket, setSocket] = useState<Socket | null>(null);
+    const [proofVerified, setProofVerified] = useState<ProofVerificationResult | null>(null);
     const [olderThan, setOlderThan] = useState('');
     const [nationality, setNationality] = useState('');
     const [appName, setAppName] = useState('Whatever airdrop 🪂');
@@ -33,7 +35,7 @@ function Showcase() {
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
 
-    const handleOlderThanFieldChange = (event) => {
+    const handleOlderThanFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
         // Check if value is a valid number and within the range
@@ -57,7 +59,7 @@ function Showcase() {
 
     useEffect(() => {
         const generateQR = async () => {
-            const disclosureOptions = {};
+            const disclosureOptions: Record<string, string> = {};
             if (olderThan !== '') {
                 disclosureOptions['older_than'] = olderThan;
             }
@@ -73,11 +75,11 @@ function Showcase() {
                 circuit: "disclose"
             };
 
-            const qrcode = await QRCodeGenerator.generateQRCode(appData);
+            const qrcodeElement = await QRCodeGenerator.generateQRCode(appData);
 
             if (qrcodeRef.current) {
                 qrcodeRef.current.innerHTML = '';
-                qrcodeRef.current.appendChild(qrcode._el);
+                qrcodeRef.current.appendChild(qrcodeElement as any);
             }
         };
 
@@ -126,16 +128,15 @@ function Showcase() {
                 try {
                     const local_proofVerified = await popWeb2Verifier.verify(data.proof);
                     console.log('proofVerified', local_proofVerified.toJson());
-                    setProofVerified(local_proofVerified.toJson());
+                    setProofVerified({ valid: true });
                     setProofStep(ProofSteps.PROOF_VERIFIED);
 
                     // Send proof_verified status back to the server
                     newSocket.emit('proof_verified', { sessionId, proofVerified: local_proofVerified.toJson() });
                 } catch (error) {
                     console.error('Error verifying proof:', error);
-                    setProofStep(ProofSteps.PROOF_VERIFIED);
-                    setProofVerified({ valid: false, error: error.message });
-                    newSocket.emit('proof_verified', { sessionId, proofVerified: { valid: false, error: error.message } });
+                    setProofVerified({ valid: false, error: (error as Error).message });
+                    newSocket.emit('proof_verified', { sessionId, proofVerified: { valid: false, error: (error as Error).message } });
                 }
             }
             console.log(data);
@@ -162,7 +163,7 @@ function Showcase() {
             case ProofSteps.PROOF_GENERATED:
                 return <BounceLoader loading={true} size={300} color='#94FBAB' />;
             case ProofSteps.PROOF_VERIFIED:
-                return JSON.parse(proofVerified).valid === true ? <CircleCheck size={300} color='#A9E190' /> : <XCircle size={300} color='#EF3E36' />;
+                return proofVerified?.valid === true ? <CircleCheck size={300} color='#A9E190' /> : <XCircle size={300} color='#EF3E36' />;
             default:
                 return null;
         }
