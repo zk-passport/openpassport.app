@@ -12,16 +12,21 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.20",
+    "@proofofpassport/sdk": "^1.5.7",
     "@tw-classed/react": "^1.7.0",
+    "axios": "^1.7.2",
     "framer-motion": "^11.2.10",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.417.0",
     "markdown-to-jsx": "^7.4.7",
     "mobile-detect": "^1.4.5",
     "next": "14.2.4",
     "react": "^18",
     "react-country-flag": "^3.1.0",
     "react-dom": "^18",
-    "react-simple-maps": "^3.0.0"
+    "react-simple-maps": "^3.0.0",
+    "react-spinners": "^0.14.1",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@types/node": "^20",
