@@ -25,7 +25,7 @@ const CaseStudies = () => {
             className="aspect-video w-full"
           />
           <span className="lg:max-w-[340px] font-alliance text-sm leading-5 text-brand-black pl-6 border-l border-[#D9D9D9]">
-            Proof of Passport lets users scan the NFC chip in their
+            OpenPassport lets users scan the NFC chip in their
             government-issued passport and prove the validity of their ID
             anonymously.
           </span>

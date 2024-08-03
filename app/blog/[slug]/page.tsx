@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: any) {
   const post = getArticleById(params.slug);
 
   return {
-    title: post?.title ? `${post?.title} - Proof of Passport` : "Proof of Passport",
+    title: post?.title ? `${post?.title} - OpenPassport` : "OpenPassport",
     description:
       post?.tldr ??
       "Prove your humanity while staying anonymous.",

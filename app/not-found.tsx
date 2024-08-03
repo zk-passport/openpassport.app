@@ -28,8 +28,8 @@ export default function NotFound() {
           </span>
         </div>
         <div>
-          <Link href="https://www.proofofpassport.com/">
-            <Button>Reterun to home</Button>
+          <Link href="https://www.openpassport.app/">
+            <Button>Return to home</Button>
           </Link>
         </div>
       </div>

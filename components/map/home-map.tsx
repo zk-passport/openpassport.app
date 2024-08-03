@@ -502,7 +502,7 @@ export default function MapChart() {
           xs={12}
           className="legend-info lg:left-6 text-black relative bottom-2 lg:bottom-12 lg:absolute"
         >
-          <h2 className={`homeTitle`}>Proof of Passport country coverage</h2>
+          <h2 className={`homeTitle`}>OpenPassport country coverage</h2>
           <div className="legend-info-item flex items-center">
             <p
               className={`w-8 h-4 bg-[#548233] ${isMobile ? 'ms-2' : 'me-2'}`}

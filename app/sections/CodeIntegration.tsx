@@ -36,7 +36,7 @@ const CodeIntegration = () => {
               code
             </h3>
             <span className="text-center font-alliance text-white text-sm leading-5">
-              Open a PR in 5 mins and integrate Proof of Passport into your app.
+              Open a PR in 5 mins and integrate OpenPassport into your app.
               Verify the proof in 2 lines of code.
             </span>
           </div>
