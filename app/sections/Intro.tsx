@@ -43,7 +43,7 @@ const Intro = () => {
           </h1>
           <div className="flex flex-col gap-8 md:gap-12">
             <span className="border-l border-[#2E2E2F] [&>strong]:text-light-black py-0.5 pl-6 text-light-black/60 text-sm font-normal leading-5">
-              Proof of Passport lets applications check their users are humans
+              OpenPassport lets applications check their users are humans
               with a <strong>few lines of code</strong>, while preserving their
               privacy.
             </span>

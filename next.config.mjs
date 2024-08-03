@@ -24,6 +24,26 @@ const nextConfig = {
           ],
           destination: '/blog/:path*',
         },
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'map.openpassport.app',
+            },
+          ],
+          destination: '/map/:path*',
+        },
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'blog.openpassport.app',
+            },
+          ],
+          destination: '/blog/:path*',
+        },
       ],
       afterFiles: [
           {

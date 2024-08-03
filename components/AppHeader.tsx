@@ -140,7 +140,7 @@ function MobileNav() {
                       MIT Licence. 2024.
                     </span>
                     <span className="font-alliance text-white/40 text-sm">
-                      © proofofpassport.com
+                      © openpassport.app
                     </span>
                   </div>
                 </div>
@@ -217,19 +217,21 @@ const AppHeader = () => {
         size="md"
         className="flex items-center justify-between py-[10px]"
       >
-        <AppLink href="https://www.proofofpassport.com/">
+        <AppLink href="https://www.openpassport.app/">
           <Image
             className="hidden md:block"
             src="/images/logo.svg"
-            width={207}
-            height={24}
+            // width={170}
+            // height={19}
+            width={130}
+            height={14}
             alt="logo"
           />
           <Image
             className="block md:hidden"
             src="/images/logo-mobile.svg"
-            width={57}
-            height={24}
+            width={36}
+            height={15}
             alt="logo"
           />
         </AppLink>
