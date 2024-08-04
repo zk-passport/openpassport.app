@@ -27,13 +27,15 @@ const CaseStudyCard = ({
       }`}
     >
       {image && inEvidence && (
-        <Image
-          className="aspect-video bg-center w-full object-cover rounded-[32px] overflow-hidden"
-          src={image}
-          height={560}
-          width={320}
-          alt={title}
-        />
+        <div className=" rounded-[32px] overflow-hidden">
+          <Image
+            className="aspect-video w-full bg-cover group-hover:scale-110 duration-200"
+            src={image}
+            height={560}
+            width={320}
+            alt={title}
+          />
+        </div>
       )}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-1">

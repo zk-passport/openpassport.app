@@ -64,12 +64,12 @@ const AppFooter = () => {
                 return (
                   <div
                     key={index}
-                    className="group py-3 border-b border-b-white/40 border-dashed"
+                    className="group py-3 border-b border-b-white/40 border-dashed cursor-pointer"
                   >
                     <div className="flex items-center gap-1">
-                      <AppLink href={href} external={external}>
-                        <div className="flex items-center gap-1">
-                          <span className="font-alliance text-base text-white">
+                      <AppLink href={href} external={external} className="">
+                        <div className="flex items-center gap-1 group-hover:pl-5 duration-300">
+                          <span className="font-alliance text-base text-white group-hover:text-white/90 duration-200">
                             {label}
                           </span>
                           {external && (
@@ -84,8 +84,13 @@ const AppFooter = () => {
             </div>
           </div>
         </div>
+<<<<<<< Updated upstream
         <span className="text-white text-gradient-white leading-none absolute left-0 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/5)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)] xl:text-[calc(100vw/11)]">
           OpenPassport
+=======
+        <span className="text-white text-gradient-white absolute left-0 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/5)] leading-[calc(100vw/8)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)] xl:text-[calc(100vw/11)]">
+          Proof of Passport
+>>>>>>> Stashed changes
         </span>
       </AppContainer>
     </footer>

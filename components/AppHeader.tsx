@@ -31,6 +31,12 @@ function MobileNav() {
     }
   }, [clientHeight, isMobileNavOpen]);
 
+  const menuAppearAnimation = {
+    initial: { opacity: 0.6, transform: "translateX(100%)" },
+    animate: { opacity: 1, transform: "translateX(0%)" },
+    transition: { duration: 0.3 },
+  };
+
   return (
     <div className="flex items-center lg:hidden">
       <button
@@ -43,7 +49,8 @@ function MobileNav() {
         <Icons.Burgher className="text-black" />
       </button>
       {isMobileNavOpen && (
-        <div
+        <motion.div
+          {...menuAppearAnimation}
           aria-hidden="true"
           aria-label="mobile nav overlay"
           onClick={() => setMobileNavOpen(false)}
@@ -53,18 +60,16 @@ function MobileNav() {
       <AnimatePresence>
         {isMobileNavOpen && (
           <motion.div
-            initial={{ opacity: 0.5 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="fixed gap-10 pt-4 px-4 sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white"
+            {...menuAppearAnimation}
+            className="fixed gap-10 pt-[10px] px-4 pr-[24px] sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white"
           >
-            <div className="flex justify-center ml-auto items-center border border-dashed border-white rounded-full h-[54px] w-[50px]">
+            <div className="flex justify-center ml-auto items-center border border-dashed border-white rounded-full h-[34px] w-[32px]">
               <button
                 type="button"
                 aria-label="close mobile nav"
                 onClick={() => setMobileNavOpen(false)}
               >
-                <Icons.CloseModal className="text-white" />
+                <Icons.CloseModal size={18} className="text-white" />
               </button>
             </div>
             <div className="flex flex-col h-full">

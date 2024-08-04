@@ -13,9 +13,9 @@ const CaseStudies = () => {
   return (
     <section
       id="case-studies"
-      className="flex flex-col gap-12 py-20 md:gap-24 md:py-40"
+      className="flex flex-col gap-16 py-20 md:gap-24 md:py-40"
     >
-      <AppContainer className="grid gap-8 lg:grid-cols-8 lg:gap-16">
+      <AppContainer className="grid gap-16 lg:grid-cols-8">
         <div className="flex flex-col gap-12 lg:col-span-3">
           <Image
             src="/illustrations/zk-chip.jpg"
@@ -47,7 +47,7 @@ const CaseStudies = () => {
                   href={url.href}
                   external
                 >
-                  <span className="relative text-light-black text-base font-alliance group-hover:text-white duration-300">
+                  <span className="relative text-light-black text-base font-alliance group-hover:text-white group-hover:pl-5 duration-300">
                     {url.label}
                   </span>
                   <Icons.ExternalLink className="relative text-light-black group-hover:text-white duration-300" />
@@ -59,7 +59,7 @@ const CaseStudies = () => {
       </AppContainer>
       <AppContainer className="flex flex-col gap-8 md:gap-24">
         <div className="flex flex-col gap-8 border-b border-dashed pb-8 border-b-light-black/25">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             <h4 className=" font-alliance text-[32px] text-[#020202] tracking-[-0.96px]">
               Case studies
             </h4>

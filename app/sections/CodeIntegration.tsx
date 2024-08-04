@@ -31,12 +31,17 @@ const CodeIntegration = () => {
       <AppContainer className="flex flex-col gap-16 md:gap-24">
         <div className="flex flex-col gap-12 mx-auto w-full max-w-[480px]">
           <div className="flex flex-col gap-6">
-            <h3 className=" font-alliance text-white font-normal text-center text-2xl md:text-5xl md:leading-[46px] md:tracking-[-1.44px]">
+            <h3 className=" font-alliance text-white font-normal text-center tracking-[-0.96px] text-2xl md:text-5xl md:leading-[46px] md:tracking-[-1.44px]">
               Integrate in <strong className="opacity-50">two lines</strong> of
               code
             </h3>
+<<<<<<< Updated upstream
             <span className="text-center font-alliance text-white text-sm leading-5">
               Open a PR in 5 mins and integrate OpenPassport into your app.
+=======
+            <span className="text-sm leading-5 font-alliance z-[2] text-center text-white/80">
+              Open a PR in 5 mins and integrate Proof of Passport into your app.
+>>>>>>> Stashed changes
               Verify the proof in 2 lines of code.
             </span>
           </div>
@@ -50,7 +55,7 @@ const CodeIntegration = () => {
           ref={ref}
           initial={{ opacity: 0, y: 100 }}
           animate={controls}
-          transition={{ duration: 0.9, ease: "easeIn" }}
+          transition={{ duration: 0.5, ease: "easeIn" }}
         >
           <Image
             src="/illustrations/code-sample.svg"
