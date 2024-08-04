@@ -7,14 +7,14 @@ export interface MenuItem {
 }
 
 export const SITE_CONFIG = {
-  ID: "proof-of-passport",
+  ID: "openpassport",
   NAME: "OpenPassport",
   DESCRIPTION: "Prove your humanity while staying anonymous",
 };
 
 export const LINKS: Record<string, string> = {
   //social
-  GITHUB: "https://github.com/zk-passport/proof-of-passport",
+  GITHUB: "https://github.com/zk-passport/openpassport",
   TWITTER: "https://twitter.com/proofofpassport",
   TELEGRAM: "https://t.me/proofofpassport",
   // app
@@ -24,7 +24,7 @@ export const LINKS: Record<string, string> = {
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   BLOG: "https://blog.openpassport.app/",
   MAP: "https://map.openpassport.app/",
-  BOUNTIES: "https://github.com/zk-passport/proof-of-passport/issues",
+  BOUNTIES: "https://github.com/zk-passport/openpassport/issues",
   READ_MORE: "https://blog.openpassport.app/",
   INTRODUCTION_TO_ZK: "https://docs.openpassport.app/",
 };

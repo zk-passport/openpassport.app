@@ -124,13 +124,13 @@ export default function MapChart() {
     try {
       // Intermediate Certificates (DSC) issued by each country
       const dscFetchData = await fetch(
-        'https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/dsc_formatted.json'
+        'https://raw.githubusercontent.com/zk-passport/openpassport/dev/registry/outputs/dsc_formatted.json'
       );
       const dscData = await dscFetchData.json();
 
       // Top-level Certificates (CSCA) issued by each country
       const cscaFetchData = await fetch(
-        'https://raw.githubusercontent.com/zk-passport/proof-of-passport/dev/registry/outputs/csca_formatted.json'
+        'https://raw.githubusercontent.com/zk-passport/openpassport/dev/registry/outputs/csca_formatted.json'
       );
       const cscaData = await cscaFetchData.json();
 

@@ -18,7 +18,7 @@ const CaseStudies = () => {
       <AppContainer className="grid gap-8 lg:grid-cols-8 lg:gap-16">
         <div className="flex flex-col gap-12 lg:col-span-3">
           <Image
-            src="/illustrations/proof-of-passport.jpg"
+            src="/illustrations/zk-chip.jpg"
             width={560}
             height={320}
             alt="case-studies"

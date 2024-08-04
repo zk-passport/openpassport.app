@@ -172,7 +172,7 @@ function Showcase() {
     return (
         <div className="App flex flex-col items-center my-16">
             <div className="p-8 flex flex-col items-center">
-                <h1 className="text-4xl font-bold mb-8 text-black">Proof of Passport playground</h1>
+                <h1 className="text-4xl font-bold mb-8 text-black">OpenPassport playground</h1>
 
                 <div className="mb-16">
                     {renderProofStatus()}
