@@ -41,7 +41,11 @@ const CodeIntegration = () => {
             </span>
           </div>
           <AppLink className="mx-auto" href={LINKS.DOCUMENTATION} external>
-            <Button variant="secondary" icon={<Icons.ExternalLink />}>
+            <Button
+              variant="secondary"
+              className="hover:bg-white/70"
+              icon={<Icons.ExternalLink />}
+            >
               View Docs
             </Button>
           </AppLink>

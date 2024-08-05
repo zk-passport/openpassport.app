@@ -39,17 +39,26 @@ const AppFooter = () => {
             <div className="grid grid-cols-1 gap-5 pb-6 items-center border-b border-white/25 md:pb-2 md:grid-cols-3 md:gap-0">
               <div className=" flex items-center gap-2">
                 <AppLink className="w-8" href={LINKS.GITHUB} external>
-                  <Icons.Github size={32} className="text-white" />
+                  <Icons.Github
+                    size={32}
+                    className="text-white hover:text-white/50 duration-200"
+                  />
                 </AppLink>
                 <AppLink
                   className="flex w-8 ml-2 items-center justify-center"
                   href={LINKS.TWITTER}
                   external
                 >
-                  <Icons.X size={22} className="text-white" />
+                  <Icons.X
+                    size={22}
+                    className="text-white hover:text-white/50 duration-200"
+                  />
                 </AppLink>
-                <AppLink className="w-8" href={LINKS.TELEGRAM} external>
-                  <Icons.Telegram size={48} className="text-white" />
+                <AppLink className="group   w-8" href={LINKS.TELEGRAM} external>
+                  <Icons.Telegram
+                    size={48}
+                    className="text-white hover:text-white/50 duration-200"
+                  />
                 </AppLink>
               </div>
               <span className="md:mx-auto font-alliance text-white/70 text-sm">
