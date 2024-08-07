@@ -35,10 +35,10 @@ export const useCases: UseCase[] = [
   },
   {
     image: "/illustrations/obfuscated-compliance.jpg",
-    title: "Obfuscated Compliance",
+    title: "Identity verification",
     items: [
-      "Verify users are from a specific country.",
-      "Check they are above a certain age.",
+      "Verify users are from a specific country or above a certain age.",
+      "Check they are not on sanctions lists.",
       "Let them keep all other details private.",
     ],
   },
