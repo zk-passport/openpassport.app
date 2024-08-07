@@ -75,7 +75,7 @@ function MobileNav() {
             <div className="flex flex-col h-full">
               <div className="flex w-full flex-col gap-5 text-base font-medium">
                 <div className="flex items-center gap-4">
-                  <AppLink href={LINKS.APP_DEMO} external>
+                  {/* <AppLink href={LINKS.APP_DEMO} external>
                     <Button
                       icon={<Icons.ExternalLink />}
                       variant="secondary"
@@ -83,11 +83,11 @@ function MobileNav() {
                     >
                       Try App
                     </Button>
-                  </AppLink>
-                  <AppLink href={LINKS.APP_DEMO} external>
+                  </AppLink> */}
+                  <AppLink href={LINKS.DOCUMENTATION} external>
                     <Button
                       icon={<Icons.ExternalLink />}
-                      variant="transparent"
+                      variant="secondary"
                       className="mx-auto text-[15px]"
                     >
                       Read Docs
@@ -198,12 +198,12 @@ function DesktopNav() {
       </ul>
 
       <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0">
-        <AppLink href={LINKS.APP_STORE} external>
+        {/* <AppLink href={LINKS.APP_STORE} external>
           <Button icon={<Icons.ExternalLink />}>App Store</Button>
-        </AppLink>
+        </AppLink> */}
         <AppLink href={LINKS.DOCUMENTATION} external>
           <Button
-            variant="secondary"
+            // variant="secondary"
             icon={<Icons.ExternalLink />}
             className="!border-none"
           >

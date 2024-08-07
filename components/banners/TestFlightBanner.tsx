@@ -14,6 +14,8 @@ const TestFlightBanner = () => {
     if (bannerRemoved === null) setShowBanner(true);
   }, []);
 
+  return null;
+
   if (!showBanner) return null;
 
   return (
