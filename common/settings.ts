@@ -15,8 +15,8 @@ export const SITE_CONFIG = {
 export const LINKS: Record<string, string> = {
   //social
   GITHUB: "https://github.com/zk-passport/openpassport",
-  TWITTER: "https://twitter.com/proofofpassport",
-  TELEGRAM: "https://t.me/proofofpassport",
+  TWITTER: "https://twitter.com/openpassportapp",
+  TELEGRAM: "https://t.me/openpassport",
   // app
   APP_DEMO: "https://testflight.apple.com/join/WfZnZWfn",
   APP_STORE: "https://testflight.apple.com/join/WfZnZWfn",
