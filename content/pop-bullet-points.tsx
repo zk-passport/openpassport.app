@@ -19,7 +19,7 @@ export const bulletPoints: BulletPointProps[] = [
       </>
     ),
     description:
-      "Proof of Passport uses zero-knowledge proofs to guarantee privacy. Proofs disclosing specific attributes are generated, and the full passport data never leaves the device. ",
+      "OpenPassport uses zero-knowledge proofs to guarantee privacy. Proofs disclosing specific attributes are generated, and the full passport data never leaves the device. ",
     url: {
       label: "Introduction",
       href: LINKS.INTRODUCTION_TO_ZK,
@@ -45,7 +45,7 @@ export const bulletPoints: BulletPointProps[] = [
       </>
     ),
     description:
-      "Proof of Passport is 100% open-source and contributor friendly. Its modular architecture allows for easily adding support for new ID documents and applications.",
+      "OpenPassport is 100% open-source and contributor friendly. Its modular architecture allows for easily adding support for new ID documents and applications.",
     url: {
       label: "Github",
       href: LINKS.GITHUB,

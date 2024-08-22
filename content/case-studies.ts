@@ -8,16 +8,16 @@ interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    href: "/blog/introducing-pop",
-    title: "Introducing Proof of Passport",
+    href: "/blog/introducing-op",
+    title: "Introducing OpenPassport",
     description:
-      "Proof of Passport lets applications check their user's identity while preserving their privacy.",
+      "OpenPassport lets applications check their user's identity while preserving their privacy.",
   },
   {
-    href: "/blog/introducing-pop",
-    title: "Introducing Proof of Passport",
+    href: "/blog/introducing-op",
+    title: "Introducing OpenPassport",
     description:
-      "Proof of Passport lets applications check their user's identity while preserving their privacy.",
+      "OpenPassport lets applications check their user's identity while preserving their privacy.",
     inEvidence: true,
     image: "/open-graph.jpg",
   },

@@ -4,7 +4,7 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "Coverage map",
-  description: "World map of proof of passport coverage",
+  description: "World map of OpenPassport coverage",
 };
 
 export default function GlobalMap() {

@@ -14,10 +14,12 @@ const TestFlightBanner = () => {
     if (bannerRemoved === null) setShowBanner(true);
   }, []);
 
+  return null;
+
   if (!showBanner) return null;
 
   return (
-    <Banner className="flex sticky left-0 right-0 z-[2] top-[52px] md:top-[66px] w-full customHeader">
+    <Banner className="flex sticky left-0 right-0 z-10 top-[52px] md:top-[66px] w-full customHeader">
       <div className="flex items-center gap-4 mx-auto">
         <AppLink
           href={LINKS.APP_STORE}
