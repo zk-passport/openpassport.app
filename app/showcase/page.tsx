@@ -1,6 +1,6 @@
 'use client';
 
-import { QRCodeGenerator, countryCodes, ProofOfPassportWeb2Verifier } from '@proofofpassport/sdk';
+import { QRCodeGenerator, countryCodes, OpenPassportWeb2Inputs, OpenPassportWeb2Verifier, OpenPassportProverInputs, OpenPassportProverVerifier } from '@proofofpassport/sdk';
 import React, { useEffect, useRef, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { BounceLoader } from 'react-spinners';
@@ -72,7 +72,7 @@ function Showcase() {
                 scope: scope,
                 userId: sessionId,
                 disclosureOptions,
-                circuit: "disclose"
+                circuit: "prove_rsa_65537_sha256"
             };
 
             const qrcodeElement = await QRCodeGenerator.generateQRCode(appData);
@@ -113,6 +113,7 @@ function Showcase() {
             }
 
             if (data.proof) {
+                console.log('proof', data.proof);
                 const requirements = [];
                 if (olderThan !== '') {
                     requirements.push(["older_than", olderThan]);
@@ -121,14 +122,19 @@ function Showcase() {
                     requirements.push(["nationality", nationality]);
                 }
 
-                const popWeb2Verifier = new ProofOfPassportWeb2Verifier({
+                const popWeb2Verifier = new OpenPassportWeb2Verifier({
+                    scope: scope,
+                    requirements
+                });
+                const popProverVerifier = new OpenPassportProverVerifier({
                     scope: scope,
                     requirements
                 });
                 try {
-                    const local_proofVerified = await popWeb2Verifier.verify(data.proof);
+                    // const local_proofVerified = await popWeb2Verifier.verify(data.proof);
+                    const local_proofVerified = await popProverVerifier.verify(data.proof);
                     console.log('proofVerified', local_proofVerified.toJson());
-                    setProofVerified({ valid: true });
+                    setProofVerified({ valid: local_proofVerified.valid });
                     setProofStep(ProofSteps.PROOF_VERIFIED);
 
                     // Send proof_verified status back to the server
@@ -163,7 +169,7 @@ function Showcase() {
             case ProofSteps.PROOF_GENERATED:
                 return <BounceLoader loading={true} size={300} color='#94FBAB' />;
             case ProofSteps.PROOF_VERIFIED:
-                return proofVerified?.valid === true ? <CircleCheck size={300} color='#A9E190' /> : <XCircle size={300} color='#EF3E36' />;
+                return proofVerified?.valid == true ? <CircleCheck size={300} color='#A9E190' /> : <XCircle size={300} color='#EF3E36' />;
             default:
                 return null;
         }
@@ -214,6 +220,7 @@ function Showcase() {
                         }}
                     />
                 </div>
+                <div>proofVerified?.valid: {proofVerified?.valid}</div>
 
                 <div>
                     <p>Proof Status: {proofStep}</p>
