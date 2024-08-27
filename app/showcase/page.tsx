@@ -1,6 +1,6 @@
 'use client';
 
-import { QRCodeGenerator, countryCodes, OpenPassportWeb2Inputs, OpenPassportWeb2Verifier, OpenPassportProverInputs, OpenPassportProverVerifier } from '@proofofpassport/sdk';
+import { QRCodeGenerator, countryCodes, OpenPassport1StepInputs, OpenPassport1StepVerifier, AppType } from '@proofofpassport/sdk';
 import React, { useEffect, useRef, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { BounceLoader } from 'react-spinners';
@@ -28,8 +28,9 @@ function Showcase() {
     const [olderThan, setOlderThan] = useState('');
     const [nationality, setNationality] = useState('');
     const [appName, setAppName] = useState('Whatever airdrop 🪂');
-    const sessionId = '1'; // In a real app, this should be dynamically generated
-    const scope = '1';
+    const sessionId = crypto.randomUUID();
+    const scope = '123';
+    const userID = '123';
 
     const [age, setAge] = useState('');
     const [error, setError] = useState(false);
@@ -67,15 +68,18 @@ function Showcase() {
                 disclosureOptions['nationality'] = nationality;
             }
 
-            const appData = {
+            const showCaseApp: AppType = {
                 name: appName,
                 scope: scope,
-                userId: sessionId,
-                disclosureOptions,
-                circuit: "prove_rsa_65537_sha256"
-            };
+                userId: userID,
+                sessionId: sessionId,
+                circuit: "prove",
+                arguments: {
+                    disclosureOptions,
+                }
+            }
 
-            const qrcodeElement = await QRCodeGenerator.generateQRCode(appData);
+            const qrcodeElement = await QRCodeGenerator.generateQRCode(showCaseApp);
 
             if (qrcodeRef.current) {
                 qrcodeRef.current.innerHTML = '';
@@ -122,17 +126,13 @@ function Showcase() {
                     requirements.push(["nationality", nationality]);
                 }
 
-                const popWeb2Verifier = new OpenPassportWeb2Verifier({
+                const openPassport1StepVerifier = new OpenPassport1StepVerifier({
                     scope: scope,
-                    requirements
-                });
-                const popProverVerifier = new OpenPassportProverVerifier({
-                    scope: scope,
-                    requirements
+                    requirements: requirements,
+                    dev_mode: true
                 });
                 try {
-                    // const local_proofVerified = await popWeb2Verifier.verify(data.proof);
-                    const local_proofVerified = await popProverVerifier.verify(data.proof);
+                    const local_proofVerified = await openPassport1StepVerifier.verify(data.proof);
                     console.log('proofVerified', local_proofVerified.toJson());
                     setProofVerified({ valid: local_proofVerified.valid });
                     setProofStep(ProofSteps.PROOF_VERIFIED);
