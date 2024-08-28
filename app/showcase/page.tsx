@@ -44,14 +44,21 @@ function Showcase() {
     const handleOlderThanFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         if (value === '' || /^[0-9]+$/.test(value)) {
-            const ageValue = Number(value);
-            if (ageValue < 10 || ageValue > 98) {
-                setError(true);
-                setHelperText('Age must be between 10 and 98');
-            } else {
+            if (value === '') {
+                // Empty input is valid
                 setError(false);
                 setHelperText('');
-                setOlderThan(value);
+                setOlderThan('');
+            } else {
+                const ageValue = Number(value);
+                if (ageValue < 10 || ageValue > 98) {
+                    setError(true);
+                    setHelperText('Age must be between 10 and 98');
+                } else {
+                    setError(false);
+                    setHelperText('');
+                    setOlderThan(value);
+                }
             }
         } else {
             setError(true);
