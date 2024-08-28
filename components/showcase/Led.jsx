@@ -1,8 +1,8 @@
 const LED = ({ size = 10, connectionStatus = 'disconnected' }) => {
     const getColor = () => {
         switch (connectionStatus) {
-            case 'web_connected': return '#3498d0';
-            case 'mobile_connected': return '#2ecc71';
+            case 'web_connected': return '#424AD8';
+            case 'mobile_connected': return '#31F040';
             default: return '#95a5a6';
         }
     };

@@ -61,12 +61,11 @@ function Showcase() {
     };
 
     const handleAnimationComplete = () => {
+        console.log('Animation completed');
         setShowAnimation(false);
         setProofStep(ProofSteps.WAITING_FOR_MOBILE);
-        setTimeout(() => {
-            const newSessionId = crypto.randomUUID();
-            setSessionId(newSessionId);
-        }, 3000);
+        const newSessionId = crypto.randomUUID();
+        setSessionId(newSessionId);
     };
 
     // Effects
@@ -106,7 +105,7 @@ function Showcase() {
                     break;
                 case 'mobile_disconnected':
                     setConnectionStatus('web_connected');
-                    setProofStep(ProofSteps.WAITING_FOR_MOBILE);
+                    // setProofStep(ProofSteps.WAITING_FOR_MOBILE);
                     break;
                 case 'proof_generation_started':
                     setProofStep(ProofSteps.PROOF_GENERATION_STARTED);
@@ -184,8 +183,10 @@ function Showcase() {
                                     <Lottie
                                         animationData={CHECK_ANIMATION}
                                         style={{ width: 200, height: 200 }}
-                                        loop={false}
+                                        // loop={false}
                                         onComplete={handleAnimationComplete}
+                                        onLoopComplete={handleAnimationComplete}
+                                    // onDestroy={handleAnimationComplete}
                                     />
                                 ) : (
                                     qrElement ? <div ref={qrcodeRef}></div> : null
@@ -195,8 +196,10 @@ function Showcase() {
                                     <Lottie
                                         animationData={X_ANIMATION}
                                         style={{ width: 200, height: 200 }}
-                                        loop={false}
+                                        // loop={false}
                                         onComplete={handleAnimationComplete}
+                                        onLoopComplete={handleAnimationComplete}
+                                    // onDestroy={handleAnimationComplete}
                                     />
                                 );
                             }
