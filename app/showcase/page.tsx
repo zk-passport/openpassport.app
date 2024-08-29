@@ -24,8 +24,8 @@ function Showcase() {
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
 
-    const scope = '123';
-    const userID = '123';
+    const scope = '@OpenPassportPlayground';
+    const userID = crypto.randomUUID();
 
     useEffect(() => {
         // Randomly select an app name when the component mounts
@@ -67,7 +67,7 @@ function Showcase() {
     return (
         <div className="App flex flex-col items-center my-16">
             <div className="p-8 flex flex-col items-center">
-                <h1 className="text-4xl font-bold mb-8 text-black">OpenPassport playground</h1>
+                <h1 className="text-4xl font-bold mb-24 text-black">OpenPassport playground</h1>
                 <div className="mb-16">
                     <OpenPassportQRcode
                         appName={appName}
