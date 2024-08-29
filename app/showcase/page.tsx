@@ -7,17 +7,31 @@ import { OpenPassportQRcode } from '@proofofpassport/sdk';
 
 const countryOptions = Object.values(countryCodes);
 
+const fakeAppNames = [
+    '🚀 Space Explorer',
+    '🧙‍♂️ Wizard\'s Wand',
+    '🍕 Pizza Party',
+    '🌈 Rainbow Chaser',
+    '👩‍🎨 Color Splash'
+];
+
 function Showcase() {
     // State declarations
     const [olderThan, setOlderThan] = useState('');
     const [nationality, setNationality] = useState('');
-    const [appName, setAppName] = useState('Whatever airdrop 🪂');
+    const [appName, setAppName] = useState('');
     const [age, setAge] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
 
     const scope = '123';
     const userID = '123';
+
+    useEffect(() => {
+        // Randomly select an app name when the component mounts
+        const randomIndex = Math.floor(Math.random() * fakeAppNames.length);
+        setAppName(fakeAppNames[randomIndex]);
+    }, []);
 
     // Handlers
     const handleOlderThanFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
