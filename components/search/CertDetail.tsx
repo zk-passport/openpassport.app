@@ -26,9 +26,9 @@ type CertificateDetailsProps = {
   onClose: () => void;
 };
 
-// Función para formatear el texto PEM
+// Format PEM
 const formatPem = (pem: string) => {
-  // Reemplaza el final del certificado para que quede en una línea separada
+// Replace the end of the certificate to be in a new line
   return pem.replace(/-----END CERTIFICATE-----/, '-----END CERTIFICATE-----\n');
 };
 
@@ -36,7 +36,7 @@ const CertificateDetails: React.FC<CertificateDetailsProps> = ({ certificate, on
   return (
     <div className="fixed inset-0 text-black bg-white z-40 p-4 md:relative md:max-w-screen-lg md:mt-0 overflow-y-auto">
       <div
-        className="text-black py-2 px-2 rounded-full mb-4 mt-10 md:mt-0 cursor-pointer hover:text-gray-800"
+        className="text-black py-2 rounded-full mb-4 mt-10 md:mt-0 cursor-pointer hover:text-gray-800"
         onClick={onClose}
       >
         <svg
@@ -59,7 +59,7 @@ const CertificateDetails: React.FC<CertificateDetailsProps> = ({ certificate, on
       <h3 className="text-lg font-semibold mt-4 md:text-xl">Public Key Details</h3>
       {certificate.publicKeyDetails?.modulus && (
         <>
-          <p className="mt-2 text-xs md:text-sm break-words"><b>Modulus:</b> {certificate.publicKeyDetails.modulus}</p>
+          <p className="mt-2 text-xs md:text-sm break-words"><b>Modulus:</b>&nbsp;{certificate.publicKeyDetails.modulus}</p>
           <p className="mt-1 text-xs md:text-sm break-words"><b>Exponent:</b> {certificate.publicKeyDetails.exponent}</p>
         </>
       )}

@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end('Method Not Allowed');
   }
 
-  const { search } = req.query;
+  const { search, type } = req.query;
   
   try {
     let whereClause = {};
@@ -39,7 +39,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       };
     }
 
-    const certificates = await prisma.certificatesjs.findMany({
+    let tableName;
+    if (type === 'dsc') {
+      tableName = 'dsc_masterlist';
+    } else if (type === 'csca') {
+      tableName = 'csca_masterlist';
+    } else {
+      return res.status(400).json({ error: 'Invalid type parameter. Use "dsc" or "csca".' });
+    }
+
+    const certificates = await (prisma as any)[tableName].findMany({
       where: whereClause,
     });
 
