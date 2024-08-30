@@ -31,7 +31,7 @@ function Showcase() {
     const [helperText, setHelperText] = useState('');
     const [callback, setCallback] = useState(`(appName, toast) => {
   toast(\`Congrats, you have been added to the group \${appName}\`);
-}`);
+} // triggered only if the proof is valid`);
 
     const scope = '@OpenPassportPlayground';
     const userID = crypto.randomUUID();
