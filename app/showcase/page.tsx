@@ -72,9 +72,14 @@ function Showcase() {
     const handleSuccessfulVerification = (verificationResult: OpenPassportVerifierReport) => {
         console.log('Proof verified successfully:', verificationResult);
         try {
-            // Execute the callback code
-            const callbackFunction = eval(`(${callback})`);
-            callbackFunction(appName, toast);
+            // Extract the function body without the comment
+            const functionBody = callback.replace(/\/\/.*$/, '').trim();
+            // Create a new function from the extracted body
+            const callbackFunction = new Function('appName', 'toast', `
+                return (${functionBody})
+            `);
+            // Execute the callback
+            callbackFunction()(appName, toast);
         } catch (error) {
             console.error('Error executing callback:', error);
             toast.error('Error executing callback');
