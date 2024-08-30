@@ -39,24 +39,33 @@ const AppFooter = () => {
             <div className="grid grid-cols-1 gap-5 pb-6 items-center border-b border-white/25 md:pb-2 md:grid-cols-3 md:gap-0">
               <div className=" flex items-center gap-2">
                 <AppLink className="w-8" href={LINKS.GITHUB} external>
-                  <Icons.Github size={32} className="text-white" />
+                  <Icons.Github
+                    size={32}
+                    className="text-white hover:text-white/50 duration-200"
+                  />
                 </AppLink>
                 <AppLink
                   className="flex w-8 ml-2 items-center justify-center"
                   href={LINKS.TWITTER}
                   external
                 >
-                  <Icons.X size={22} className="text-white" />
+                  <Icons.X
+                    size={22}
+                    className="text-white hover:text-white/50 duration-200"
+                  />
                 </AppLink>
-                <AppLink className="w-8" href={LINKS.TELEGRAM} external>
-                  <Icons.Telegram size={48} className="text-white" />
+                <AppLink className="group   w-8" href={LINKS.TELEGRAM} external>
+                  <Icons.Telegram
+                    size={48}
+                    className="text-white hover:text-white/50 duration-200"
+                  />
                 </AppLink>
               </div>
               <span className="md:mx-auto font-alliance text-white/70 text-sm">
                 MIT Licence. 2024.
               </span>
               <span className="md:ml-auto font-alliance text-white/70 text-sm">
-                © proofofpassport.com
+                © openpassport.app
               </span>
             </div>
             <div>
@@ -64,12 +73,12 @@ const AppFooter = () => {
                 return (
                   <div
                     key={index}
-                    className="group py-3 border-b border-b-white/40 border-dashed"
+                    className="group py-3 border-b border-b-white/40 border-dashed cursor-pointer"
                   >
                     <div className="flex items-center gap-1">
-                      <AppLink href={href} external={external}>
-                        <div className="flex items-center gap-1">
-                          <span className="font-alliance text-base text-white">
+                      <AppLink href={href} external={external} className="">
+                        <div className="flex items-center gap-1 group-hover:pl-5 duration-300">
+                          <span className="font-alliance text-base text-white group-hover:text-white/90 duration-200">
                             {label}
                           </span>
                           {external && (
@@ -84,8 +93,8 @@ const AppFooter = () => {
             </div>
           </div>
         </div>
-        <span className="text-white text-gradient-white leading-none absolute left-0 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/5)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)] xl:text-[calc(100vw/11)]">
-          Proof of Passport
+        <span className="text-white text-gradient-white leading-none absolute left-0 bottom-0 lg:bottom-[-3rem] text-[calc(100vw/7.5)] md:text-[calc(100vw/9)] lg:text-[calc(100vw/8.7)] xl:text-[calc(100vw/11)]">
+          OpenPassport
         </span>
       </AppContainer>
     </footer>

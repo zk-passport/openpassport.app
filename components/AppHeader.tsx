@@ -31,6 +31,12 @@ function MobileNav() {
     }
   }, [clientHeight, isMobileNavOpen]);
 
+  const menuAppearAnimation = {
+    initial: { opacity: 0.6, transform: "translateX(100%)" },
+    animate: { opacity: 1, transform: "translateX(0%)" },
+    transition: { duration: 0.3 },
+  };
+
   return (
     <div className="flex items-center lg:hidden">
       <button
@@ -43,7 +49,8 @@ function MobileNav() {
         <Icons.Burgher className="text-black" />
       </button>
       {isMobileNavOpen && (
-        <div
+        <motion.div
+          {...menuAppearAnimation}
           aria-hidden="true"
           aria-label="mobile nav overlay"
           onClick={() => setMobileNavOpen(false)}
@@ -53,24 +60,22 @@ function MobileNav() {
       <AnimatePresence>
         {isMobileNavOpen && (
           <motion.div
-            initial={{ opacity: 0.5 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="fixed gap-10 pt-4 px-4 sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white"
+            {...menuAppearAnimation}
+            className="fixed gap-10 pt-[10px] px-4 pr-[24px] sm:gap-6 sm:pt-6 overflow-hidden inset-y-0 right-0 z-10 flex w-full max-w-[440px] flex-col bg-baltic-sea-950 text-white"
           >
-            <div className="flex justify-center ml-auto items-center border border-dashed border-white rounded-full h-[54px] w-[50px]">
+            <div className="flex justify-center ml-auto items-center border border-dashed border-white rounded-full h-[34px] w-[32px]">
               <button
                 type="button"
                 aria-label="close mobile nav"
                 onClick={() => setMobileNavOpen(false)}
               >
-                <Icons.CloseModal className="text-white" />
+                <Icons.CloseModal size={18} className="text-white" />
               </button>
             </div>
             <div className="flex flex-col h-full">
               <div className="flex w-full flex-col gap-5 text-base font-medium">
                 <div className="flex items-center gap-4">
-                  <AppLink href={LINKS.APP_DEMO} external>
+                  {/* <AppLink href={LINKS.APP_DEMO} external>
                     <Button
                       icon={<Icons.ExternalLink />}
                       variant="secondary"
@@ -78,11 +83,11 @@ function MobileNav() {
                     >
                       Try App
                     </Button>
-                  </AppLink>
-                  <AppLink href={LINKS.APP_DEMO} external>
+                  </AppLink> */}
+                  <AppLink href={LINKS.DOCUMENTATION} external>
                     <Button
                       icon={<Icons.ExternalLink />}
-                      variant="transparent"
+                      variant="secondary"
                       className="mx-auto text-[15px]"
                     >
                       Read Docs
@@ -140,7 +145,7 @@ function MobileNav() {
                       MIT Licence. 2024.
                     </span>
                     <span className="font-alliance text-white/40 text-sm">
-                      © proofofpassport.com
+                      © openpassport.app
                     </span>
                   </div>
                 </div>
@@ -193,12 +198,12 @@ function DesktopNav() {
       </ul>
 
       <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0">
-        <AppLink href={LINKS.APP_STORE} external>
+        {/* <AppLink href={LINKS.APP_STORE} external>
           <Button icon={<Icons.ExternalLink />}>App Store</Button>
-        </AppLink>
+        </AppLink> */}
         <AppLink href={LINKS.DOCUMENTATION} external>
           <Button
-            variant="secondary"
+            // variant="secondary"
             icon={<Icons.ExternalLink />}
             className="!border-none"
           >
@@ -217,19 +222,21 @@ const AppHeader = () => {
         size="md"
         className="flex items-center justify-between py-[10px]"
       >
-        <AppLink href="https://www.proofofpassport.com/">
+        <AppLink href="https://www.openpassport.app/">
           <Image
             className="hidden md:block"
             src="/images/logo.svg"
-            width={207}
-            height={24}
+            // width={170}
+            // height={19}
+            width={130}
+            height={14}
             alt="logo"
           />
           <Image
             className="block md:hidden"
             src="/images/logo-mobile.svg"
-            width={57}
-            height={24}
+            width={36}
+            height={15}
             alt="logo"
           />
         </AppLink>

@@ -43,16 +43,16 @@ const Intro = () => {
           </h1>
           <div className="flex flex-col gap-8 md:gap-12">
             <span className="border-l border-[#2E2E2F] [&>strong]:text-light-black py-0.5 pl-6 text-light-black/60 text-sm font-normal leading-5">
-              Proof of Passport lets applications check their users are humans
-              with a <strong>few lines of code</strong>, while preserving their
+              OpenPassport lets applications check their users are humans with a{" "}
+              <strong>few lines of code</strong>, while preserving their
               privacy.
             </span>
             <div className="flex items-center gap-4">
-              <AppLink href={LINKS.APP_DEMO} external>
+              {/* <AppLink href={LINKS.APP_DEMO} external>
                 <Button icon={<Icons.ExternalLink />}>Try it out</Button>
-              </AppLink>
+              </AppLink> */}
               <AppLink href={LINKS.DOCUMENTATION} external>
-                <Button icon={<Icons.ExternalLink />} variant="secondary">
+                <Button icon={<Icons.ExternalLink />}>
                   Read Docs
                 </Button>
               </AppLink>
@@ -63,7 +63,7 @@ const Intro = () => {
       <div className="overflow-hidden w-full min-h-[430px] pt-10 md:mt-0 relative lg:w-1/2 md:max-w-1/2 lg:absolute lg:right-0 lg:bottom-0 lg:top-0 bg-cover">
         <Image
           src="/images/intro-pop.jpg"
-          alt="intro proof of password"
+          alt="intro openpassport"
           layout="fill"
           fill
           objectFit="cover"
