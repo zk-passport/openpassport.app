@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@lezer/highlight": "^1.2.1",
     "@mui/material": "^5.15.20",
-    "@proofofpassport/sdk": "^1.8.5",
+    "@openpassport/sdk": "^0.1.0",
     "@tw-classed/react": "^1.7.0",
     "@uiw/codemirror-theme-tokyo-night-day": "^4.23.0",
     "@uiw/codemirror-theme-white": "^4.23.0",

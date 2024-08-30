@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { countryCodes, OpenPassportVerifierReport } from '@proofofpassport/sdk';
+import { countryCodes, OpenPassportVerifierReport, OpenPassportQRcode } from '@openpassport/sdk';
 import { Autocomplete, TextField } from '@mui/material';
-import { OpenPassportQRcode } from '@proofofpassport/sdk';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CodeMirror from '@uiw/react-codemirror';
