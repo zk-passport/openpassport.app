@@ -10,16 +10,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end('Method Not Allowed');
   }
 
-  const { search, type } = req.query;
-  
+  const { type, sha, algorithm, exponent, search } = req.query;
+
   try {
-    let whereClause = {};
-    
+    let whereClause: any = { AND: [] };
+
+    // Handle keyword-based searches
+    if (sha) {
+      whereClause.AND.push({ hashAlgorithm: { contains: sha as string, mode: 'insensitive' } });
+    }
+    if (algorithm) {
+      whereClause.AND.push({ signatureAlgorithm: { contains: algorithm as string, mode: 'insensitive' } });
+    }
+    if (exponent) {
+      whereClause.AND.push({
+        publicKeyDetails: {
+          path: ['exponent'],
+          equals: exponent as string
+        }
+      });
+    }
+
+    // Handle free text search
     if (search) {
       const searchTerms = (search as string).split(/\s+/);
-      
-      whereClause = {
-        AND: searchTerms.map(term => {
+
+      const searchClause = {
+        OR: searchTerms.map(term => {
           const matchedCountryCodes = Object.entries(allCountries)
             .filter(([code, name]) => name.toLowerCase().includes(term.toLowerCase()))
             .map(([code]) => code.toLowerCase());
@@ -37,6 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           };
         }),
       };
+      whereClause.AND.push(searchClause);
     }
 
     let tableName;
@@ -49,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const certificates = await (prisma as any)[tableName].findMany({
-      where: whereClause,
+      where: whereClause.AND.length > 0 ? whereClause : {},
     });
 
     res.status(200).json(certificates);

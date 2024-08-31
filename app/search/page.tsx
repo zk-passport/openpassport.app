@@ -4,6 +4,7 @@ import { TextField, Autocomplete, ToggleButton, ToggleButtonGroup } from '@mui/m
 import CertificateCard from '../../components/search/CertCard';
 import CertificateDetails from '../../components/search/CertDetail';
 import CircularProgress from '@mui/material/CircularProgress';
+import Chip from '@mui/material/Chip';
 
 type CertificateData = {
   [key: string]: Certificate;
@@ -33,49 +34,66 @@ const CertificateSearch: React.FC = () => {
   const [certificates, setCertificates] = useState<CertificateData>({});
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [certificateType, setCertificateType] = useState<'dsc' | 'csca'>('dsc');
   const [certificateCount, setCertificateCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
-  const algorithmOptions = [
-    'RSA',
-    'RSA SHA-1',
-    'RSA SHA-256',
-    'RSA SHA-384',
-    'RSA SHA-512',
-    'RSA-PSS',
-    'ECDSA',
-    'ECDSA SHA-1',
-    'ECDSA SHA-224',
-    'ECDSA SHA-384',
-    'ECDSA SHA-512'
-  ];
 
-  const isAlgorithmSearch = (term: string) =>
-    ['rsa', 'ecdsa', 'sha', 'ecd', 'pss'].some(algo => term.toLowerCase().includes(algo));
+
+  const keywordCategories = {
+    sha: ['sha-256', 'sha1', 'sha512', 'sha384'],
+    exponent: ['3', '65536'],
+    algorithm: ['rsa', 'ecdsa'],
+  };
+
+  const allKeywords = Object.values(keywordCategories).flat();
+
+  const filterOptions = (options: string[], { inputValue }: { inputValue: string }) => {
+    const filterValue = inputValue.toLowerCase();
+    return allKeywords.filter(keyword =>
+      keyword.toLowerCase().includes(filterValue) && !selectedKeywords.includes(keyword)
+    );
+  };
+
+  const handleKeywordSelect = (keyword: string) => {
+    setSelectedKeywords([...selectedKeywords, keyword]);
+    setSearchTerm('');
+  };
+
+  const handleKeywordDelete = (keyword: string) => {
+    setSelectedKeywords(selectedKeywords.filter(k => k !== keyword));
+  };
 
   useEffect(() => {
     const fetchCertificates = async () => {
-      if (!searchTerm.trim()) {
-        // Don't search if the search term is empty or just whitespace
+      if (selectedKeywords.length === 0 && !searchTerm.trim()) {
         setCertificates({});
         setCertificateCount(0);
         return;
       }
 
-      if (isAlgorithmSearch(searchTerm) && !selectedOption) {
-        // Don't search if it's an algorithm search without a selection
-        return;
-      }
-
       setIsLoading(true);
       try {
-        const searchQuery = selectedOption || searchTerm;
-        const response = await fetch(`/api/certificates?type=${certificateType}&search=${encodeURIComponent(searchQuery)}`);
+        const queryParams = new URLSearchParams();
+        queryParams.append('type', certificateType);
+
+        // Add each keyword as a separate query parameter
+        selectedKeywords.forEach(keyword => {
+          const category = Object.entries(keywordCategories).find(([_, values]) => values.includes(keyword))?.[0];
+          if (category) {
+            queryParams.append(category, keyword);
+          }
+        });
+
+        // Add free text search term if present
+        if (searchTerm.trim()) {
+          queryParams.append('search', searchTerm.trim());
+        }
+
+        const response = await fetch(`/api/certificates?${queryParams.toString()}`);
         if (!response.ok) {
-          throw new Error('Error al cargar los datos');
+          throw new Error('Error loading data');
         }
         const data: Certificate[] = await response.json();
         const certificatesObj = data.reduce((acc: CertificateData, cert: Certificate) => {
@@ -83,11 +101,11 @@ const CertificateSearch: React.FC = () => {
           return acc;
         }, {});
         setCertificates(certificatesObj);
-        setCertificateCount(data.length); // Set the count of certificates
+        setCertificateCount(data.length);
       } catch (error) {
         console.error('Error:', error);
         setCertificates({});
-        setCertificateCount(0); // Reset count on error
+        setCertificateCount(0);
       } finally {
         setIsLoading(false);
       }
@@ -95,25 +113,7 @@ const CertificateSearch: React.FC = () => {
 
     const debounceTimer = setTimeout(fetchCertificates, 300);
     return () => clearTimeout(debounceTimer);
-  }, [searchTerm, selectedOption, certificateType]);
-
-  const filterOptions = (options: string[], { inputValue }: { inputValue: string }) => {
-    const filterValue = inputValue.toLowerCase();
-    return isAlgorithmSearch(filterValue)
-      ? options.filter(option => option.toLowerCase().includes(filterValue))
-      : [];
-  };
-
-  // Handle the search term debounce
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 400); // Delay of 200ms
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchTerm]);
+  }, [searchTerm, selectedKeywords, certificateType]);
 
   const handleAdornmentClick = () => {
     setSelectedCertificate(null);
@@ -130,15 +130,6 @@ const CertificateSearch: React.FC = () => {
       setCertificateType(newType);
     }
   };
-
-  const handleOptionChange = (
-    event: React.ChangeEvent<unknown>,
-    newValue: string | null,
-  ) => {
-    setSelectedOption(newValue);
-    setSearchTerm(newValue || '');
-  };
-
   return (
     <div className="p-6 bg-gray-50 min-h-screen flex flex-col md:flex-row">
       <div className="w-full md:w-1/4 p-4 z-0">
@@ -183,20 +174,32 @@ const CertificateSearch: React.FC = () => {
           </ToggleButtonGroup>
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-2">
+          {selectedKeywords.map((keyword) => (
+            <Chip
+              key={keyword}
+              label={keyword}
+              onDelete={() => handleKeywordDelete(keyword)}
+              color="primary"
+              variant="outlined"
+            />
+          ))}
+        </div>
+
         <Autocomplete
           freeSolo
           value={searchTerm}
           onChange={(event, newValue) => {
-            setSearchTerm(newValue || '');
-            setSelectedOption(newValue);
+            if (newValue && allKeywords.includes(newValue)) {
+              handleKeywordSelect(newValue);
+            } else {
+              setSearchTerm(newValue || '');
+            }
           }}
           onInputChange={(event, newInputValue) => {
             setSearchTerm(newInputValue);
-            if (!isAlgorithmSearch(newInputValue)) {
-              setSelectedOption(null);
-            }
           }}
-          options={algorithmOptions}
+          options={allKeywords}
           filterOptions={filterOptions}
           renderInput={(params) => (
             <TextField
