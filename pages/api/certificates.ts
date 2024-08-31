@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end('Method Not Allowed');
   }
 
-  const { type, sha, algorithm, exponent, search } = req.query;
+  const { type, sha, algorithm, exponent, search, limit = '101' } = req.query;
 
   try {
     let whereClause: any = { AND: [] };
@@ -68,6 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const certificates = await (prisma as any)[tableName].findMany({
       where: whereClause.AND.length > 0 ? whereClause : {},
+      take: parseInt(limit as string, 10),
     });
 
     res.status(200).json(certificates);

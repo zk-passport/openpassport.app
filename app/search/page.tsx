@@ -34,12 +34,11 @@ const CertificateSearch: React.FC = () => {
   const [certificates, setCertificates] = useState<CertificateData>({});
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [certificateType, setCertificateType] = useState<'dsc' | 'csca'>('dsc');
+  const [certificateType, setCertificateType] = useState<'csca' | 'dsc'>('csca');
   const [certificateCount, setCertificateCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-
-
+  const [hasMore, setHasMore] = useState(false);
 
   const keywordCategories = {
     sha: ['sha-256', 'sha1', 'sha512', 'sha384'],
@@ -50,6 +49,9 @@ const CertificateSearch: React.FC = () => {
   const allKeywords = Object.values(keywordCategories).flat();
 
   const filterOptions = (options: string[], { inputValue }: { inputValue: string }) => {
+    if (!inputValue || inputValue.length === 0) {
+      return []; // Return an empty array if no input
+    }
     const filterValue = inputValue.toLowerCase();
     return allKeywords.filter(keyword =>
       keyword.toLowerCase().includes(filterValue) && !selectedKeywords.includes(keyword)
@@ -70,6 +72,7 @@ const CertificateSearch: React.FC = () => {
       if (selectedKeywords.length === 0 && !searchTerm.trim()) {
         setCertificates({});
         setCertificateCount(0);
+        setHasMore(false);
         return;
       }
 
@@ -77,6 +80,7 @@ const CertificateSearch: React.FC = () => {
       try {
         const queryParams = new URLSearchParams();
         queryParams.append('type', certificateType);
+        queryParams.append('limit', '101'); // Request 101 to check if there are more than 100
 
         // Add each keyword as a separate query parameter
         selectedKeywords.forEach(keyword => {
@@ -96,16 +100,20 @@ const CertificateSearch: React.FC = () => {
           throw new Error('Error loading data');
         }
         const data: Certificate[] = await response.json();
-        const certificatesObj = data.reduce((acc: CertificateData, cert: Certificate) => {
+        const hasMoreResults = data.length > 100;
+        const limitedData = data.slice(0, 100);
+        const certificatesObj = limitedData.reduce((acc: CertificateData, cert: Certificate) => {
           acc[cert.id] = cert;
           return acc;
         }, {});
         setCertificates(certificatesObj);
-        setCertificateCount(data.length);
+        setCertificateCount(limitedData.length);
+        setHasMore(hasMoreResults);
       } catch (error) {
         console.error('Error:', error);
         setCertificates({});
         setCertificateCount(0);
+        setHasMore(false);
       } finally {
         setIsLoading(false);
       }
@@ -124,12 +132,22 @@ const CertificateSearch: React.FC = () => {
 
   const handleTypeChange = (
     event: React.MouseEvent<HTMLElement>,
-    newType: 'dsc' | 'csca' | null,
+    newType: 'csca' | 'dsc' | null,
   ) => {
     if (newType !== null) {
       setCertificateType(newType);
     }
   };
+
+  const handleInputChange = (event: React.ChangeEvent<{}>, newInputValue: string) => {
+    setSearchTerm(newInputValue);
+    // Check if the new input value exactly matches a keyword
+    if (allKeywords.includes(newInputValue) && !selectedKeywords.includes(newInputValue)) {
+      handleKeywordSelect(newInputValue);
+      setSearchTerm(''); // Clear the search term after adding the chip
+    }
+  };
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen flex flex-col md:flex-row">
       <div className="w-full md:w-1/4 p-4 z-0">
@@ -196,9 +214,7 @@ const CertificateSearch: React.FC = () => {
               setSearchTerm(newValue || '');
             }
           }}
-          onInputChange={(event, newInputValue) => {
-            setSearchTerm(newInputValue);
-          }}
+          onInputChange={handleInputChange}
           options={allKeywords}
           filterOptions={filterOptions}
           renderInput={(params) => (
@@ -241,7 +257,7 @@ const CertificateSearch: React.FC = () => {
               Searching... <CircularProgress size={20} className="ml-2" sx={{ color: 'black' }} />
             </span>
           ) : certificateCount > 0 ? (
-            `Found ${certificateCount} certificate${certificateCount !== 1 ? 's' : ''}`
+            `Found ${hasMore ? '100+' : certificateCount} certificate${certificateCount !== 1 ? 's' : ''}`
           ) : searchTerm ? (
             'No certificates found'
           ) : (
