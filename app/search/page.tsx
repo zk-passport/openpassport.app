@@ -53,8 +53,8 @@ const CertificateSearch: React.FC = () => {
     'ECDSA SHA-512'
   ];
 
-  const isAlgorithmSearch = (term: string) => 
-    ['rsa', 'ecdsa', 'sha', 'ecd','pss'].some(algo => term.toLowerCase().includes(algo));
+  const isAlgorithmSearch = (term: string) =>
+    ['rsa', 'ecdsa', 'sha', 'ecd', 'pss'].some(algo => term.toLowerCase().includes(algo));
 
   useEffect(() => {
     const fetchCertificates = async () => {
@@ -145,39 +145,44 @@ const CertificateSearch: React.FC = () => {
         <h2 className="text-brand-black tracking-[-0.77px] text-2xl leading-6l md:tracking-[-1.44px] md:text-3xl md:leading-[46px] mb-4">
           Search <span className="opacity-50">certificates</span>
         </h2>
-        <ToggleButtonGroup
-          value={certificateType}
-          exclusive
-          onChange={handleTypeChange}
-          aria-label="certificate type"
-          className="mb-4 rounded-full overflow-hidden"
-          sx={{
-            '& .MuiToggleButton-root': {
-              border: 'none',
-              borderRadius: '9999px',
-              transition: 'all 0.3s ease',
-              color: 'rgba(0, 0, 0, 0.6)', // Default text color
-              backgroundColor: 'rgba(0, 0, 0, 0.04)',
-              '&.Mui-selected': {
-                backgroundColor: 'black',
-                color: 'white',
+        <div className="ml-4">
+          <ToggleButtonGroup
+            value={certificateType}
+            exclusive
+            onChange={handleTypeChange}
+            aria-label="certificate type"
+            className="mb-4 rounded-full overflow-hidden"
+            sx={{
+              gap: '8px', // Add space between buttons
+              '& .MuiToggleButton-root': {
+                border: 'none',
+                borderRadius: '9999px',
+                transition: 'all 0.3s ease',
+                color: 'rgba(0, 0, 0, 0.6)', // Default text color
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                padding: '4px 16px', // Reduce vertical padding
+                '&.Mui-selected': {
+                  backgroundColor: 'black',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  },
+                },
                 '&:hover': {
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.04)',
                 },
               },
-              '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-              },
-            },
-          }}
-        >
-          <ToggleButton value="dsc" aria-label="DSC">
-            DSC
-          </ToggleButton>
-          <ToggleButton value="csca" aria-label="CSCA">
-            CSCA
-          </ToggleButton>
-        </ToggleButtonGroup>
+            }}
+          >
+            <ToggleButton value="dsc" aria-label="DSC">
+              DSC
+            </ToggleButton>
+            <ToggleButton value="csca" aria-label="CSCA">
+              CSCA
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
+
         <Autocomplete
           freeSolo
           value={searchTerm}
@@ -219,7 +224,7 @@ const CertificateSearch: React.FC = () => {
                 endAdornment: (
                   <React.Fragment>
                     <div onClick={handleAdornmentClick}>
-                    {params.InputProps.endAdornment}
+                      {params.InputProps.endAdornment}
                     </div>
                   </React.Fragment>
                 ),
