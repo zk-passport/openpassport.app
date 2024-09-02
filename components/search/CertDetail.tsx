@@ -69,11 +69,14 @@ const CertificateDetails: React.FC<CertificateDetailsProps> = ({ certificate, on
           {certificate.publicKeyDetails?.params && (
             <>
               <p className="mt-2 text-xs md:text-sm"><b>Parameters:</b></p>
-              <ul className="list-disc list-inside mt-1">
+              <div className="mt-2 grid grid-cols-[auto,1fr] gap-1 pl-3">
                 {Object.entries(certificate.publicKeyDetails.params).map(([key, value]) => (
-                  <li key={key} className="mt-1 text-xs md:text-sm break-words">{key}:&nbsp;{value}</li>
+                  <React.Fragment key={key}>
+                    <div className="text-xs md:text-sm font-semibold pr-2">{key}:</div>
+                    <div className="text-xs md:text-sm break-words overflow-hidden text-ellipsis">{value}</div>
+                  </React.Fragment>
                 ))}
-              </ul>
+              </div>
             </>
           )}
         </>
