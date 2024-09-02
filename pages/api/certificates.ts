@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       whereClause.AND.push({ hashAlgorithm: { contains: sha as string, mode: 'insensitive' } });
     }
     if (algorithm) {
-      whereClause.AND.push({ signatureAlgorithm: { contains: algorithm as string, mode: 'insensitive' } });
+      whereClause.AND.push({ signatureAlgorithm: { equals: algorithm as string, mode: 'insensitive' } }); // Changed to exact match
     }
     if (exponent) {
       whereClause.AND.push({
