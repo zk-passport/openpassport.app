@@ -100,7 +100,7 @@ const CertificateSearch: React.FC = () => {
       try {
         const queryParams = new URLSearchParams();
         queryParams.append('type', certificateType);
-        queryParams.append('limit', '101'); // Request 101 to check if there are more than 100
+        queryParams.append('limit', '11'); // Request 101 to check if there are more than 100
 
         selectedKeywords.forEach(keyword => {
           if (typeof keyword === 'string') {
@@ -123,8 +123,8 @@ const CertificateSearch: React.FC = () => {
           throw new Error('Error loading data');
         }
         const data: Certificate[] = await response.json();
-        const hasMoreResults = data.length > 100;
-        const limitedData = data.slice(0, 100);
+        const hasMoreResults = data.length > 10;
+        const limitedData = data.slice(0, 10);
         const certificatesObj = limitedData.reduce((acc: CertificateData, cert: Certificate) => {
           acc[cert.id] = cert;
           return acc;
@@ -234,7 +234,7 @@ const CertificateSearch: React.FC = () => {
               Searching... <CircularProgress size={20} className="ml-2" sx={{ color: 'black' }} />
             </span>
           ) : certificateCount > 0 ? (
-            `Found ${hasMore ? '100+' : certificateCount} certificate${certificateCount !== 1 ? 's' : ''}`
+            `Found ${hasMore ? '10+' : certificateCount} certificate${certificateCount !== 1 ? 's' : ''}`
           ) : searchTerm || selectedKeywords.length > 0 ? (
             'No certificates found'
           ) : (
