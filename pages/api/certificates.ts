@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end('Method Not Allowed');
   }
 
-  const { type, sha, algorithm, exponent, search, limit = '101' } = req.query;
+  const { type, sha, algorithm, exponent, search, curve, limit = '16' } = req.query;
 
   try {
     let whereClause: any = { AND: [] };
@@ -30,6 +30,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
       });
     }
+    if (curve)
+      whereClause.AND.push({
+        publicKeyDetails: {
+          path: ['curve'],
+          equals: curve as string
+        }
+      });
 
     // Handle free text search
     if (search) {
