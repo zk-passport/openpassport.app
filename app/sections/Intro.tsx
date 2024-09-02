@@ -48,11 +48,11 @@ const Intro = () => {
               privacy.
             </span>
             <div className="flex items-center gap-4">
-              {/* <AppLink href={LINKS.APP_DEMO} external>
+              <AppLink href={LINKS.APP_DEMO} external>
                 <Button icon={<Icons.ExternalLink />}>Try it out</Button>
-              </AppLink> */}
+              </AppLink>
               <AppLink href={LINKS.DOCUMENTATION} external>
-                <Button icon={<Icons.ExternalLink />}>
+                <Button icon={<Icons.ExternalLink />} variant="secondary">
                   Read Docs
                 </Button>
               </AppLink>
