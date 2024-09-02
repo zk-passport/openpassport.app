@@ -2,13 +2,18 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { countryCodes, OpenPassportVerifierReport, OpenPassportQRcode, OpenPassport1StepInputs } from '@openpassport/sdk';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import { tokyoNightDay } from '@uiw/codemirror-theme-tokyo-night-day';
 import { whiteLight } from '@uiw/codemirror-theme-white'
+import APPLE_LOGO from '../../public/images/apple.png';
+import ANDROID_LOGO from '../../public/images/android.png';
+import QRCode from 'easyqrcodejs';
+
+const appStoreUrl = "https://apps.apple.com/us/app/proof-of-passport/id6478563710";
+const playStoreUrl = "https://play.google.com/store/apps/details?id=com.proofofpassportapp";
 
 const countryOptions = Object.values(countryCodes);
 
@@ -31,9 +36,11 @@ function Showcase() {
     const [callback, setCallback] = useState(`(appName, toast) => {
   toast(\`Congrats, you have been added to the group \${appName}\`);
 } // triggered only if the proof is valid`);
-
+    const [qrCodeSize, setQrCodeSize] = useState(300);
+    const [toggle, setToggle] = useState('iOS');
     const scope = '@OpenPassportPlayground';
     const userID = crypto.randomUUID();
+    const qrcodeRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         // Randomly select an app name when the component mounts
@@ -69,14 +76,17 @@ function Showcase() {
     };
 
     const handleSuccessfulVerification = async (proof: OpenPassport1StepInputs, verificationResult: OpenPassportVerifierReport) => {
-        console.log('Proof verified successfully:', verificationResult);
         try {
-            // Call the backend API to verify the proof
+            // Pass the verification arguments to the backend
             const verifierArgs = {
                 scope: scope,
-                requirements: [["older_than", olderThan], ["nationality", nationality]],
-                dev_mode: true
+                requirements: [
+                    ...(olderThan !== '' ? [["older_than", olderThan]] : []),
+                    ...(nationality !== '' ? [["nationality", nationality]] : [])
+                ],
+                dev_mode: true,
             };
+            // API call to verify the proof in the backend too
             const response = await fetch('/api/verify', {
                 method: 'POST',
                 headers: {
@@ -85,28 +95,30 @@ function Showcase() {
                 body: JSON.stringify({ proof: proof, verifierArgs: verifierArgs }),
             });
 
-            if (!response.ok) {
+            if (response.status === 200) {
+                const data = await response.json();
+                console.log('Backend verification result:', data);
+
+                // Extract the function body without the comment
+                const functionBody = callback.replace(/\/\/.*$/, '').trim();
+                // Create a new function from the extracted body
+                const callbackFunction = new Function('appName', 'toast', `
+                    return (${functionBody})
+                `);
+                callbackFunction()(appName, toast);
+            } else {
                 throw new Error('Failed to verify proof');
             }
-
-            const data = await response.json();
-            console.log('Backend verification result:', data);
-
-            // Extract the function body without the comment
-            const functionBody = callback.replace(/\/\/.*$/, '').trim();
-            // Create a new function from the extracted body
-            const callbackFunction = new Function('appName', 'toast', `
-                return (${functionBody})
-            `);
-
-            callbackFunction()(appName, toast);
         } catch (error) {
             console.error('Error executing callback:', error);
             toast.error('Error executing callback');
         }
     };
-
-    const [qrCodeSize, setQrCodeSize] = useState(300);
+    const handleToggleChange = (event: React.MouseEvent<HTMLElement>, value: string) => {
+        if (value !== null) {
+            setToggle(value);
+        }
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -123,10 +135,44 @@ function Showcase() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        if (qrcodeRef.current) {
+            // Clear the existing QR code
+            qrcodeRef.current.innerHTML = '';
+
+            // Generate a new QR code
+            new QRCode(qrcodeRef.current, {
+                text: toggle === 'iOS' ? appStoreUrl : playStoreUrl,
+                width: 270,
+                height: 270,
+            });
+        }
+    }, [toggle, qrCodeSize]);
+
     return (
-        <div className="App flex flex-col items-center my-8 px-4 md:my-32  md:mb-48 mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-black text-center">OpenPassport playground</h1>
-            <div className="flex flex-col md:flex-row w-full max-w-6xl md:mt-12">
+        <div className="App flex flex-col items-center my-8 px-4 md:my-8 pb-16">
+            <h1 className="text-3xl md:text-4xl font-bold text-black text-center">OpenPassport playground</h1>
+            <div className="text-2xl md:text-3xl font-bold  text-black text-center  mt-6 md:mt-8">1. Get the app</div>
+            <div className="flex flex-col items-center mt-4">
+                <ToggleButtonGroup
+                    color="primary"
+                    value={toggle}
+                    exclusive
+                    onChange={handleToggleChange}
+                    aria-label="Platform"
+                    className="mb-4"
+                >
+                    <ToggleButton value="iOS">
+                        <img src={APPLE_LOGO.src} alt="Apple" style={{ width: '24px', height: '24px' }} />
+                    </ToggleButton>
+                    <ToggleButton value="android">
+                        <img src={ANDROID_LOGO.src} alt="Android" style={{ width: '24px', height: '24px' }} />
+                    </ToggleButton>
+                </ToggleButtonGroup>
+                <div ref={qrcodeRef} className="mt-1"></div>
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-black text-center mt-16">2. Open the app and scan the QR code</h1>
+            <div className="flex flex-col md:flex-row w-full max-w-6xl ">
                 <div className="w-full md:w-1/2 md:pr-4 flex items-center justify-center mb-8 md:mb-0 ">
                     <OpenPassportQRcode
                         appName={appName}
