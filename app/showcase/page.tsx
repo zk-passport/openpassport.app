@@ -68,16 +68,32 @@ function Showcase() {
         setAge(value);
     };
 
-    const handleSuccessfulVerification = (proof: OpenPassport1StepInputs, verificationResult: OpenPassportVerifierReport) => {
+    const handleSuccessfulVerification = async (proof: OpenPassport1StepInputs, verificationResult: OpenPassportVerifierReport) => {
         console.log('Proof verified successfully:', verificationResult);
         try {
+            // Call the backend API to verify the proof
+            const response = await fetch('/api/verifyProof', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ proof }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to verify proof');
+            }
+
+            const data = await response.json();
+            console.log('Backend verification result:', data);
+
             // Extract the function body without the comment
             const functionBody = callback.replace(/\/\/.*$/, '').trim();
             // Create a new function from the extracted body
             const callbackFunction = new Function('appName', 'toast', `
                 return (${functionBody})
             `);
-            // Execute the callback
+
             callbackFunction()(appName, toast);
         } catch (error) {
             console.error('Error executing callback:', error);
