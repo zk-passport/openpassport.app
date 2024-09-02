@@ -60,7 +60,7 @@ const CertificateDetails: React.FC<CertificateDetailsProps> = ({ certificate, on
       {certificate.publicKeyDetails?.modulus && (
         <>
           <p className="mt-2 text-xs md:text-sm break-words"><b>Modulus:</b>&nbsp;{certificate.publicKeyDetails.modulus}</p>
-          <p className="mt-1 text-xs md:text-sm break-words"><b>Exponent:</b> {certificate.publicKeyDetails.exponent}</p>
+          <p className="mt-1 text-xs md:text-sm break-words"><b>Exponent:</b>&nbsp;{certificate.publicKeyDetails.exponent}</p>
         </>
       )}
       {certificate.publicKeyDetails?.curve && (
@@ -71,7 +71,7 @@ const CertificateDetails: React.FC<CertificateDetailsProps> = ({ certificate, on
               <p className="mt-2 text-xs md:text-sm"><b>Parameters:</b></p>
               <ul className="list-disc list-inside mt-1">
                 {Object.entries(certificate.publicKeyDetails.params).map(([key, value]) => (
-                  <li key={key} className="mt-1 text-xs md:text-sm break-words">{key}: {value}</li>
+                  <li key={key} className="mt-1 text-xs md:text-sm break-words">{key}:&nbsp;{value}</li>
                 ))}
               </ul>
             </>
