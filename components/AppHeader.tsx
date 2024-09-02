@@ -196,8 +196,8 @@ function DesktopNav() {
       </ul>
 
       <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0">
-        <AppLink href={LINKS.APP_STORE} external>
-          <Button icon={<Icons.ExternalLink />}>App Store</Button>
+        <AppLink href={LINKS.APP_DEMO} external>
+          <Button icon={<Icons.ExternalLink />}>Try app</Button>
         </AppLink>
         <AppLink href={LINKS.DOCUMENTATION} external>
           <Button

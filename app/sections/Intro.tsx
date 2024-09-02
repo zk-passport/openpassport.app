@@ -49,7 +49,7 @@ const Intro = () => {
             </span>
             <div className="flex items-center gap-4">
               <AppLink href={LINKS.APP_DEMO} external>
-                <Button icon={<Icons.ExternalLink />}>Try it out</Button>
+                <Button icon={<Icons.ExternalLink />}>Try app</Button>
               </AppLink>
               <AppLink href={LINKS.DOCUMENTATION} external>
                 <Button icon={<Icons.ExternalLink />} variant="secondary">
