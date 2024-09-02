@@ -72,12 +72,17 @@ function Showcase() {
         console.log('Proof verified successfully:', verificationResult);
         try {
             // Call the backend API to verify the proof
+            const verifierArgs = {
+                scope: scope,
+                requirements: [["older_than", olderThan], ["nationality", nationality]],
+                dev_mode: true
+            };
             const response = await fetch('/api/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ proof }),
+                body: JSON.stringify({ proof: proof, verifierArgs: verifierArgs }),
             });
 
             if (!response.ok) {
