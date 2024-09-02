@@ -32,6 +32,7 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 section[id] {
@@ -40,6 +41,7 @@ section[id] {
 
 .h-full-screen {
   min-height: calc(100vh - 66px);
+
   @media screen and (min-height: 640px) {
     min-height: calc(100vh - 52px);
   }
@@ -61,4 +63,17 @@ section[id] {
 
 .very-strong {
   -webkit-text-stroke: 0.1px currentColor;
+}
+
+.code-editor-container {
+  transition: border-color 0.2s ease;
+}
+
+.code-editor-container:focus-within {
+  border-color: #4a90e2;
+  /* Or any color that fits your design */
+}
+
+.code-editor-container .cm-focused {
+  outline: none !important;
 }
