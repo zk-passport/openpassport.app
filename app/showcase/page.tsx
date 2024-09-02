@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { countryCodes, OpenPassportVerifierReport, OpenPassportQRcode } from '@openpassport/sdk';
+import { countryCodes, OpenPassportVerifierReport, OpenPassportQRcode, OpenPassport1StepInputs } from '@openpassport/sdk';
 import { Autocomplete, TextField } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -68,7 +68,7 @@ function Showcase() {
         setAge(value);
     };
 
-    const handleSuccessfulVerification = (verificationResult: OpenPassportVerifierReport) => {
+    const handleSuccessfulVerification = (proof: OpenPassport1StepInputs, verificationResult: OpenPassportVerifierReport) => {
         console.log('Proof verified successfully:', verificationResult);
         try {
             // Extract the function body without the comment
