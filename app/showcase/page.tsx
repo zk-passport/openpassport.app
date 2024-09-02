@@ -72,7 +72,7 @@ function Showcase() {
         console.log('Proof verified successfully:', verificationResult);
         try {
             // Call the backend API to verify the proof
-            const response = await fetch('/api/verifyProof', {
+            const response = await fetch('/api/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
