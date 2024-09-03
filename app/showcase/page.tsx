@@ -29,7 +29,7 @@ function Showcase() {
     // State declarations
     const [olderThan, setOlderThan] = useState('');
     const [nationality, setNationality] = useState('');
-    const [appName, setAppName] = useState('');
+    const [appName, setAppName] = useState(' ');
     const [age, setAge] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
@@ -150,7 +150,7 @@ function Showcase() {
     }, [toggle, qrCodeSize]);
 
     return (
-        <div className="App flex flex-col items-center my-8 px-4 md:my-8 pb-16">
+        <div className="App flex flex-col items-center my-8 px-4 md:my-8 pb-16" suppressHydrationWarning>
             <h1 className="text-3xl md:text-4xl font-bold text-black text-center">OpenPassport playground</h1>
             <div className="text-2xl md:text-3xl font-bold  text-black text-center  mt-6 md:mt-8">1. Get the app</div>
             <div className="flex flex-col items-center mt-4">
