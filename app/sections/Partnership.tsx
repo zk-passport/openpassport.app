@@ -22,25 +22,6 @@ const Partnership = () => {
               Foundation.
             </span>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
-            <AppLink href={LINKS.BOOK_DEMO} external>
-              <Button
-                className="w-full sm:w-auto"
-                icon={<Icons.ExternalLink />}
-              >
-                Book a Demo
-              </Button>
-            </AppLink>
-            <AppLink href={LINKS.BOOK_DEMO} external>
-              <Button
-                className="w-full sm:w-auto"
-                variant="secondary"
-                icon={<Icons.ExternalLink />}
-              >
-                Sponsor Us
-              </Button>
-            </AppLink>
-          </div>
         </div>
         <div className="flex items-center gap-12 mx-auto lg:mr-0 lg:ml-auto md:gap-16 lg:gap-24">
           <Image
