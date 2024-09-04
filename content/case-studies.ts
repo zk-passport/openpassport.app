@@ -8,6 +8,13 @@ interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    href: "/blog/playground",
+    title: "Announcing the OpenPassport Playground",
+    description:
+      "Try out the playground now!",
+    image: "/playground.jpg",
+  },
+  {
     href: "/blog/introducing-op",
     title: "Introducing OpenPassport",
     description:
@@ -19,7 +26,7 @@ export const caseStudies: CaseStudy[] = [
     description:
       "OpenPassport lets applications check their user's identity while preserving their privacy.",
     inEvidence: true,
-    image: "/open-graph.jpg",
+    image: "/introducing-op.jpg",
   },
   // {
   //   href: "/blog/arbitrum",
