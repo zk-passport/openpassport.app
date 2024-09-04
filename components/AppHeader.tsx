@@ -80,7 +80,7 @@ function MobileNav() {
                       icon={<Icons.ExternalLink />}
                       className="mx-auto text-[15px]"
                     >
-                      Try App
+                      Launch App
                     </Button>
                   </AppLink>
                   <AppLink href={LINKS.DOCUMENTATION} external>
@@ -197,7 +197,7 @@ function DesktopNav() {
 
       <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0">
         <AppLink href={LINKS.APP_DEMO} external>
-          <Button icon={<Icons.ExternalLink />}>Try app</Button>
+          <Button icon={<Icons.ExternalLink />}>Launch App</Button>
         </AppLink>
         <AppLink href={LINKS.DOCUMENTATION} external>
           <Button
