@@ -4,7 +4,6 @@ import { TextField, Autocomplete, ToggleButton, ToggleButtonGroup } from '@mui/m
 import CertificateCard from '../../components/search/CertCard';
 import CertificateDetails from '../../components/search/CertDetail';
 import CircularProgress from '@mui/material/CircularProgress';
-import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 
 type CertificateData = {
@@ -35,9 +34,9 @@ type KeywordOption = { category: string; keyword: string } | string;
 
 const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
-    borderRadius: '8px', // Increase the border radius
+    borderRadius: '8px',
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#212121', // Change the outline color when focused
+      borderColor: '#212121',
     },
   },
 }));
@@ -52,9 +51,31 @@ const CertificateSearch: React.FC = () => {
   const [selectedKeywords, setSelectedKeywords] = useState<KeywordOption[]>([]);
   const [hasMore, setHasMore] = useState(false);
 
+  const exponentCSCA = [
+    '3', '38129',
+    '43459', '50633',
+    '56611', '58097',
+    '65537', '107903',
+    '109729', '127485'
+  ]
+
+  const exponentDSC = [
+    '3', '33225', '33579', '33769', '34389',
+    '34779', '35033', '35221', '36291', '36515',
+    '37121', '37399', '38105', '41817', '42239',
+    '42743', '44459', '44591', '44681', '45279',
+    '45347', '47415', '48081', '49371', '49729',
+    '49861', '51925', '52355', '53037', '53741',
+    '53873', '54007', '55443', '58127', '58333',
+    '59575', '59793', '60353', '61181', '61735',
+    '61957', '62391', '62765', '62785', '63289',
+    '63701', '64113', '64721', '64999', '65123',
+    '65223', '65427', '65537'
+  ]
+
   const keywordCategories = {
     sha: ['sha256', 'sha1', 'sha512', 'sha384'],
-    exponent: ['3', '65537'],
+    exponent: certificateType === 'csca' ? exponentCSCA : exponentDSC,
     algorithm: ['rsa', 'ecdsa', 'rsa-pss'],
     curve: ['secp256r1', 'secp384r1', 'secp521r1', 'brainpoolP256r1', 'brainpoolP384r1', 'brainpoolP512r1'],
     bits: ['256', '384', '512', '1024', '2048', '4096', '6144'],
@@ -66,7 +87,7 @@ const CertificateSearch: React.FC = () => {
 
   const filterOptions = (options: KeywordOption[], { inputValue }: { inputValue: string }) => {
     if (!inputValue || inputValue.length === 0) {
-      return []; // Return an empty array if no input
+      return [];
     }
     const filterValue = inputValue.toLowerCase();
     return allKeywords.filter(({ keyword }) =>
@@ -112,14 +133,14 @@ const CertificateSearch: React.FC = () => {
           }
         });
 
-        // Add free text search term if present
         if (searchTerm.trim()) {
           queryParams.append('search', searchTerm.trim());
         }
 
         const response = await fetch(`/api/certificates?${queryParams.toString()}`);
         if (!response.ok) {
-          throw new Error('Error loading data');
+          const errorData = await response.json();
+          throw new Error(`Error loading data: ${errorData.error}, ${errorData.details}`);
         }
         const data: Certificate[] = await response.json();
         const hasMoreResults = data.length > 5;
@@ -132,7 +153,7 @@ const CertificateSearch: React.FC = () => {
         setCertificateCount(limitedData.length);
         setHasMore(hasMoreResults);
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Detailed fetch error:', error);
         setCertificates({});
         setCertificateCount(0);
         setHasMore(false);
