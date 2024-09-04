@@ -1,8 +1,8 @@
 ---
 authors: ["Florent"]
 title: "Introducing OpenPassport"
-image: "/open-graph.jpg"
-date: "2024-25-07"
+image: "/introducing-op.jpg"
+date: "2024-07-25"
 ---
 
 Trust underpins civilization. It allows us to coordinate and shoot for more ambitious goals than any individual can ever reach alone.
