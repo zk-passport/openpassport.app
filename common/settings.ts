@@ -19,7 +19,6 @@ export const LINKS: Record<string, string> = {
   TELEGRAM: "https://t.me/openpassport",
   // app
   APP_DEMO: "/playground",
-  APP_STORE: "https://testflight.apple.com/join/WfZnZWfn",
   DOCUMENTATION: "https://docs.openpassport.app/",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   BLOG: "https://blog.openpassport.app/",
