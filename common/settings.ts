@@ -15,7 +15,7 @@ export const SITE_CONFIG = {
 export const LINKS: Record<string, string> = {
   //social
   GITHUB: "https://github.com/zk-passport/openpassport",
-  TWITTER: "https://twitter.com/openpassportapp",
+  TWITTER: "https://x.com/openpassportapp",
   TELEGRAM: "https://t.me/openpassport",
   // app
   APP_DEMO: "/playground",
@@ -27,7 +27,7 @@ export const LINKS: Record<string, string> = {
   BOUNTIES: "https://github.com/zk-passport/openpassport/issues",
   READ_MORE: "https://blog.openpassport.app/",
   INTRODUCTION_TO_ZK: "https://docs.openpassport.app/",
-  ARCHIVE: "/search",
+  REGISTRY: "/search",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -40,10 +40,6 @@ export const MENU_ITEMS: MenuItem[] = [
     href: "https://www.openpassport.app/#use-cases",
   },
   {
-    label: "Develop",
-    href: "https://www.openpassport.app/#develop",
-  },
-  {
     label: "Blog",
     href: LINKS.BLOG,
   },
@@ -52,8 +48,8 @@ export const MENU_ITEMS: MenuItem[] = [
     href: LINKS.MAP,
   },
   {
-    label: "Archive",
-    href: LINKS.ARCHIVE,
+    label: "Registry",
+    href: LINKS.REGISTRY,
   },
   {
     label: "Docs",
