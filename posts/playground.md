@@ -5,9 +5,7 @@ image: "/playground.jpg"
 date: "2024-09-04"
 ---
 
-The OpenPassport playground is live at [openpassport.app/playground](https://www.openpassport.app/playground). You can create a mock application, generate a privacy-preserving proof with your passport and verify it.
-
-If the signature algorithm that was used to sign your passport is [currently not supported](https://map.openpassport.app/), you can still generate mock passport data from the app and try out the flow.
+The OpenPassport playground is live at [openpassport.app/playground](https://www.openpassport.app/playground). You can create a mock application, generate a privacy-preserving proof with your passport or mock data, and verify it.
 
 ### How it works
 
