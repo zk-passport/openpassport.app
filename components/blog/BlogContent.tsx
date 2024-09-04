@@ -125,7 +125,7 @@ export function BlogContent({ post }: BlogContentProps) {
                 </a>
               ),
               li: ({ children }) => (
-                <li className="text-black">{children}</li>
+                <li className="text-black">- {children}</li>
               ),
             },
           }}

@@ -12,7 +12,7 @@ export const useCases: UseCase[] = [
     inEvidence: true,
     items: [
       "Reward humans, not bots.",
-      "Protection from farmers' flash selling.",
+      "Protect yourself from farmers' flash selling.",
     ],
   },
   {

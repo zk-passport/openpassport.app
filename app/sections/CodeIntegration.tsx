@@ -36,8 +36,7 @@ const CodeIntegration = () => {
               code
             </h3>
             <span className="text-sm leading-5 font-alliance z-[2] text-center text-white/80">
-              Open a PR in 5 mins and integrate OpenPassport into your app.
-              Verify the proof in 2 lines of code.
+              Import the OpenPassport SDK into your app and verify proofs in 2 lines of code.
             </span>
           </div>
           <AppLink className="mx-auto" href={LINKS.DOCUMENTATION} external>
