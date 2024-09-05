@@ -23,7 +23,9 @@ The current state of the art to read the chip of passports is to use mobile apps
 
 ### The SDK
 
-The playground is a simple page that imports the OpenPassport SDK in the background. If you want to use OpenPassport, you can checkout the [docs](https://docs.openpassport.app/) now, and [contact us](https://t.me/FlorentTavernier) if you have any questions or need help using it.
+The playground is a simple page that imports the OpenPassport SDK in the background.
+
+If you want to use it, you can check out the [docs](https://docs.openpassport.app/) now, and [contact us](https://t.me/FlorentTavernier) if you have any questions or need help.
 
 ### What's next?
 
