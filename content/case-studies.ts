@@ -8,6 +8,13 @@ interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    href: "/blog/nap",
+    title: "Reflecting on the New Democratic Primary",
+    description:
+      "On shipping a new democratic primary in two weeks.",
+    image: "/nap.jpg",
+  },
+  {
     href: "/blog/playground",
     title: "Announcing the OpenPassport Playground",
     description:
