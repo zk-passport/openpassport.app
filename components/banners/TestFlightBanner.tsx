@@ -14,22 +14,18 @@ const TestFlightBanner = () => {
     if (bannerRemoved === null) setShowBanner(true);
   }, []);
 
-  return null;
-
   if (!showBanner) return null;
 
   return (
     <Banner className="flex sticky left-0 right-0 z-10 top-[52px] md:top-[66px] w-full customHeader">
       <div className="flex items-center gap-4 mx-auto">
         <AppLink
-          href={LINKS.APP_STORE}
+          href={LINKS.APP_DEMO}
           className="flex gap-4 items-center mx-auto"
-          external
         >
           <Icons.Online className="animate-pulse" />
           <span className="font-alliance text-sm leading-5 text-white/60 [&>strong]:text-white duration-300 border-b border-b-transparent hover:border-b-white/60">
-            Join our <strong>{`Testflight >`}</strong> iOS Beta is{" "}
-            <strong>Live!</strong>
+            Try out the <strong>{`Playground`}</strong> now!
           </span>
         </AppLink>
         <button

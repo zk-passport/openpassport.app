@@ -1,8 +1,8 @@
 ---
 authors: ["Florent"]
 title: "Introducing OpenPassport"
-image: "/open-graph.jpg"
-date: "2024-25-07"
+image: "/introducing-op.jpg"
+date: "2024-07-25"
 ---
 
 Trust underpins civilization. It allows us to coordinate and shoot for more ambitious goals than any individual can ever reach alone.
@@ -29,7 +29,7 @@ Our work is based on three premises.
 
 Today, we're releasing OpenPassport. Our app and circuits let users scan the NFC chip in their passport with any NFC-enabled phone and prove the correctness of the government attestation in a zk-SNARK. This allows anybody to prove their nationality, age or simply humanity while only disclosing the exact information they want public.
 
-We are also releasing implementations for the verification of the 3 most common signature algorithms used by countries to issue passports. Together, they allow support for around 50% of the world's passports. Along with that, we're open sourcing our [registry](https://github.com/zk-passport/openpassport/tree/dev/registry) and [global map](https://map.openpassport.app/) showing the usage of signature algorithms by country.
+We are also releasing implementations for the verification of the 3 most common signature algorithms used by countries to issue passports. Together, they allow support for around 50% of the world's passports. Along with that, we're open sourcing our [registry](https://openpassport.app/search) and [global map](https://map.openpassport.app/) showing the usage of signature algorithms by country.
 
 All our code is open-source and MIT licensed.
 

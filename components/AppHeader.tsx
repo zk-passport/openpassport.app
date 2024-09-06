@@ -75,15 +75,14 @@ function MobileNav() {
             <div className="flex flex-col h-full">
               <div className="flex w-full flex-col gap-5 text-base font-medium">
                 <div className="flex items-center gap-4">
-                  {/* <AppLink href={LINKS.APP_DEMO} external>
+                  <AppLink href={LINKS.APP_DEMO} external>
                     <Button
                       icon={<Icons.ExternalLink />}
-                      variant="secondary"
                       className="mx-auto text-[15px]"
                     >
-                      Try App
+                      Launch App
                     </Button>
-                  </AppLink> */}
+                  </AppLink>
                   <AppLink href={LINKS.DOCUMENTATION} external>
                     <Button
                       icon={<Icons.ExternalLink />}
@@ -179,9 +178,8 @@ function DesktopNav() {
               <LinkItem key={index}>
                 <div className={`flex items-center gap-[6px]`}>
                   <AppLink
-                    className={`duration-200 tracking-[-0.22px] hover:text-black ${
-                      isActive ? "text-black border-b border-b-black" : ""
-                    }`}
+                    className={`duration-200 tracking-[-0.22px] hover:text-black ${isActive ? "text-black border-b border-b-black" : ""
+                      }`}
                     href={href}
                     external={external}
                   >
@@ -198,12 +196,12 @@ function DesktopNav() {
       </ul>
 
       <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0">
-        {/* <AppLink href={LINKS.APP_STORE} external>
-          <Button icon={<Icons.ExternalLink />}>App Store</Button>
-        </AppLink> */}
+        <AppLink href={LINKS.APP_DEMO} external>
+          <Button icon={<Icons.ExternalLink />}>Launch App</Button>
+        </AppLink>
         <AppLink href={LINKS.DOCUMENTATION} external>
           <Button
-            // variant="secondary"
+            variant="secondary"
             icon={<Icons.ExternalLink />}
             className="!border-none"
           >

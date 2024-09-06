@@ -15,11 +15,10 @@ export const SITE_CONFIG = {
 export const LINKS: Record<string, string> = {
   //social
   GITHUB: "https://github.com/zk-passport/openpassport",
-  TWITTER: "https://twitter.com/openpassportapp",
+  TWITTER: "https://x.com/openpassportapp",
   TELEGRAM: "https://t.me/openpassport",
   // app
-  APP_DEMO: "https://testflight.apple.com/join/WfZnZWfn",
-  APP_STORE: "https://testflight.apple.com/join/WfZnZWfn",
+  APP_DEMO: "/playground",
   DOCUMENTATION: "https://docs.openpassport.app/",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   BLOG: "https://blog.openpassport.app/",
@@ -27,6 +26,8 @@ export const LINKS: Record<string, string> = {
   BOUNTIES: "https://github.com/zk-passport/openpassport/issues",
   READ_MORE: "https://blog.openpassport.app/",
   INTRODUCTION_TO_ZK: "https://docs.openpassport.app/",
+  REGISTRY: "/registry",
+  PLAYGROUND: "/playground",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -39,10 +40,6 @@ export const MENU_ITEMS: MenuItem[] = [
     href: "https://www.openpassport.app/#use-cases",
   },
   {
-    label: "Develop",
-    href: "https://www.openpassport.app/#develop",
-  },
-  {
     label: "Blog",
     href: LINKS.BLOG,
   },
@@ -50,6 +47,14 @@ export const MENU_ITEMS: MenuItem[] = [
     label: "Map",
     href: LINKS.MAP,
   },
+  {
+    label: "Playground",
+    href: LINKS.PLAYGROUND,
+  },
+  // {
+  //   label: "Registry",
+  //   href: LINKS.REGISTRY,
+  // },
   {
     label: "Docs",
     href: LINKS.DOCUMENTATION,

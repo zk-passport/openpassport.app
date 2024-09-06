@@ -39,7 +39,7 @@ const HowItWorks = () => {
       <AppContainer className="flex flex-col relative overflow-hidden lg:min-h-[780px] xl:min-h-[900px]">
         <div className="my-auto h-full flex flex-col gap-16 lg:gap-36">
           <h3 className="max-w-[526px] [&>strong]:text-white font-alliance font-normal text-2xl leading-6 tracking-[-0.96px] text-white/70 md:leading-[38px] md:tracking-[-0.22px] md:text-[32px]">
-            <strong>Introduction OpenPassport,</strong> a digital identity
+            <strong>Introducing OpenPassport,</strong> a digital identity
             powered by zero-knowledge technology.
           </h3>
           <div className="w-full grid grid-cols-1 gap-6 lg:max-w-[600px] lg:grid-cols-2 xl:max-w-[720px]">
