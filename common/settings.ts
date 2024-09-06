@@ -27,6 +27,7 @@ export const LINKS: Record<string, string> = {
   READ_MORE: "https://blog.openpassport.app/",
   INTRODUCTION_TO_ZK: "https://docs.openpassport.app/",
   REGISTRY: "/registry",
+  PLAYGROUND: "/playground",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -45,6 +46,10 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     label: "Map",
     href: LINKS.MAP,
+  },
+  {
+    label: "Playground",
+    href: LINKS.PLAYGROUND,
   },
   // {
   //   label: "Registry",
