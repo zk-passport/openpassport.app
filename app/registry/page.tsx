@@ -41,7 +41,7 @@ const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
   },
 }));
 
-const CertificateSearch: React.FC = () => {
+const Registry: React.FC = () => {
   const [certificates, setCertificates] = useState<CertificateData>({});
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -293,4 +293,4 @@ const CertificateSearch: React.FC = () => {
   );
 };
 
-export default CertificateSearch;
+export default Registry;

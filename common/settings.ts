@@ -26,7 +26,7 @@ export const LINKS: Record<string, string> = {
   BOUNTIES: "https://github.com/zk-passport/openpassport/issues",
   READ_MORE: "https://blog.openpassport.app/",
   INTRODUCTION_TO_ZK: "https://docs.openpassport.app/",
-  REGISTRY: "/search",
+  REGISTRY: "/registry",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -46,10 +46,10 @@ export const MENU_ITEMS: MenuItem[] = [
     label: "Map",
     href: LINKS.MAP,
   },
-  {
-    label: "Registry",
-    href: LINKS.REGISTRY,
-  },
+  // {
+  //   label: "Registry",
+  //   href: LINKS.REGISTRY,
+  // },
   {
     label: "Docs",
     href: LINKS.DOCUMENTATION,
