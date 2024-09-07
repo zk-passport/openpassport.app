@@ -11,6 +11,7 @@ import { whiteLight } from '@uiw/codemirror-theme-white'
 import APPLE_LOGO from '../../public/images/apple.png';
 import ANDROID_LOGO from '../../public/images/android.png';
 import QRCode from 'easyqrcodejs';
+import { v4 as uuidv4 } from 'uuid';
 
 const appStoreUrl = "https://apps.apple.com/us/app/proof-of-passport/id6478563710";
 const playStoreUrl = "https://play.google.com/store/apps/details?id=com.proofofpassportapp";
@@ -39,7 +40,7 @@ function Showcase() {
     const [qrCodeSize, setQrCodeSize] = useState(300);
     const [toggle, setToggle] = useState('iOS');
     const scope = '@OpenPassportPlayground';
-    const userID = crypto.randomUUID();
+    const userID = uuidv4()
     const qrcodeRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
