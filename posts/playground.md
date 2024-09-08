@@ -17,10 +17,6 @@ In the playground, we verify the bottom-level of the passport certificate chain 
 
 In the future, the playground will support the verification of the whole trust chain in zero-knowledge, revealing essentially nothing to the server.
 
-### The App Clip
-
-The current state of the art to read the chip of passports is to use mobile apps, because the lightweight NFC protocol supported by web browser does not cover passports. This is a major user-experience hurdle, as users are compelled to download a mobile app before being able to prove their identity. To solve this, we developed an App Clip. App Clips are light mobile apps introduced by Apple in 2017 that can be opened on iOS by simply scanning a QR code or opening a link. This makes the user experience on iOS very slick, especially for one time usage.
-
 ### The SDK
 
 The playground is a simple page that imports the OpenPassport SDK in the background.

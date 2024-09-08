@@ -3150,9 +3150,9 @@ next@14.2.4:
     "@next/swc-win32-ia32-msvc" "14.2.4"
     "@next/swc-win32-x64-msvc" "14.2.4"
 
-"node-forge@git+https://github.com/remicolin/forge.git":
+"node-forge@https://github.com/remicolin/forge":
   version "1.3.2-0"
-  resolved "git+https://github.com/remicolin/forge.git#17a11a632dd0e50343b3b8393245a2696f78afbb"
+  resolved "https://github.com/remicolin/forge#17a11a632dd0e50343b3b8393245a2696f78afbb"
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
