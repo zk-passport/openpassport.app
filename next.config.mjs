@@ -106,6 +106,18 @@ const nextConfig = {
               source: '/blog/open-graph.jpg',
               destination: '/open-graph.jpg',
           },
+          {
+              source: '/blog/introducing-op.jpg',
+              destination: '/introducing-op.jpg',
+          },
+          {
+              source: '/blog/nap.jpg',
+              destination: '/nap.jpg',
+          },
+          {
+              source: '/blog/playground.jpg',
+              destination: '/playground.jpg',
+          },
       ],
     };
   },
