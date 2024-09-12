@@ -37,4 +37,4 @@ This endpoint allows you to query certificates using multiple search parameters.
 
 #### Search for DSC certificates by type=dsc + sha=256 + algotithm=rsa + search=france
 ```bash
-curl -X GET "https://openpassport.app/api/certificates?type=dsc&sha=sha256&algorithm=rsa&search=france"
+curl -X GET "https://www.openpassport.app/api/certificates?type=dsc&sha=sha256&algorithm=rsa&search=france"
