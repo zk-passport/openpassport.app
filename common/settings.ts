@@ -48,8 +48,8 @@ export const MENU_ITEMS: MenuItem[] = [
     href: LINKS.MAP,
   },
   {
-    label: "Playground",
-    href: LINKS.PLAYGROUND,
+    label: "Registry",
+    href: LINKS.REGISTRY,
   },
   // {
   //   label: "Registry",
