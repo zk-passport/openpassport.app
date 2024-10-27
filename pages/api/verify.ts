@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { OpenPassportVerifierReport, OpenPassport1StepInputs, OpenPassport1StepVerifier } from '@openpassport/sdk';
+import { OpenPassportVerifier, OpenPassportAttestation } from '@openpassport/core';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
@@ -11,8 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         let isValid = false;
         try {
-            const openPassport1StepVerifier = new OpenPassport1StepVerifier(verifierArgs);
-            isValid = (await openPassport1StepVerifier.verify(proof as OpenPassport1StepInputs)).valid;
+            const openPassport1StepVerifier = new OpenPassportVerifier('prove_offchain', '@OpenPassportPlayground', true)
+            isValid = (await openPassport1StepVerifier.verify(proof as OpenPassportAttestation)).valid;
         } catch (error) {
             console.error('Error verifying proof:', error);
             return res.status(500).json({ message: 'Error verifying proof' });
