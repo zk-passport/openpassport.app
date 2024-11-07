@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { countryCodes, OpenPassportVerifierReport, OpenPassportQRcode, OpenPassport1StepInputs } from '@openpassport/sdk';
-import { Autocomplete, TextField, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { countryCodes, OpenPassportVerifierReport, OpenPassportAttestation, OpenPassportVerifier } from '@openpassport/core';
+import { OpenPassportQRcode } from '@openpassport/qrcode';
+import { Autocomplete, TextField, ToggleButton, ToggleButtonGroup, Checkbox, FormControlLabel, Switch } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CodeMirror from '@uiw/react-codemirror';
@@ -11,6 +12,7 @@ import { whiteLight } from '@uiw/codemirror-theme-white'
 import APPLE_LOGO from '../../public/images/apple.png';
 import ANDROID_LOGO from '../../public/images/android.png';
 import QRCode from 'easyqrcodejs';
+import { v4 as uuidv4 } from 'uuid';
 
 const appStoreUrl = "https://apps.apple.com/us/app/proof-of-passport/id6478563710";
 const playStoreUrl = "https://play.google.com/store/apps/details?id=com.proofofpassportapp";
@@ -38,9 +40,11 @@ function Showcase() {
 } // triggered only if the proof is valid`);
     const [qrCodeSize, setQrCodeSize] = useState(300);
     const [toggle, setToggle] = useState('iOS');
+    const [openPassportVerifier, setOpenPassportVerifier] = useState<OpenPassportVerifier>(new OpenPassportVerifier('prove_offchain', '@OpenPassportPlayground', true));
     const scope = '@OpenPassportPlayground';
-    const userID = crypto.randomUUID();
+    const userID = uuidv4()
     const qrcodeRef = useRef<HTMLDivElement>(null);
+    const [ofac, setOfac] = useState(false);
 
     useEffect(() => {
         // Randomly select an app name when the component mounts
@@ -75,7 +79,7 @@ function Showcase() {
         setAge(value);
     };
 
-    const handleSuccessfulVerification = async (proof: OpenPassport1StepInputs, verificationResult: OpenPassportVerifierReport) => {
+    const handleSuccessfulVerification = async (proof: OpenPassportAttestation) => {
         try {
             // Pass the verification arguments to the backend
             const verifierArgs = {
@@ -149,41 +153,34 @@ function Showcase() {
         }
     }, [toggle, qrCodeSize]);
 
+    useEffect(() => {
+        let verifier: OpenPassportVerifier = new OpenPassportVerifier('prove_offchain', scope, true);
+        if (age !== '') {
+            if (Number(age) >= 10) {
+                verifier.setMinimumAge(Number(age))
+            }
+        }
+        if (nationality !== '') {
+            verifier.setNationality(nationality as any)
+        }
+        if (ofac) {
+            verifier.enableOFACCheck()
+        }
+        setOpenPassportVerifier(verifier);
+
+    }, [age, nationality, ofac]);
+
     return (
-        <div className="App flex flex-col items-center my-8 px-4 md:my-8 pb-16" suppressHydrationWarning>
-            <h1 className="text-3xl md:text-4xl font-bold text-black text-center">OpenPassport playground</h1>
-            <div className="text-2xl md:text-3xl font-bold  text-black text-center  mt-6 md:mt-8">1. Get the app</div>
-            <div className="flex flex-col items-center mt-4">
-                <ToggleButtonGroup
-                    color="primary"
-                    value={toggle}
-                    exclusive
-                    onChange={handleToggleChange}
-                    aria-label="Platform"
-                    className="mb-4"
-                >
-                    <ToggleButton value="iOS">
-                        <img src={APPLE_LOGO.src} alt="Apple" style={{ width: '24px', height: '24px' }} />
-                    </ToggleButton>
-                    <ToggleButton value="android">
-                        <img src={ANDROID_LOGO.src} alt="Android" style={{ width: '24px', height: '24px' }} />
-                    </ToggleButton>
-                </ToggleButtonGroup>
-                <div ref={qrcodeRef} className="mt-1"></div>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-black text-center mt-16">2. Open the app and scan the QR code</h1>
-            <div className="flex flex-col md:flex-row w-full max-w-6xl ">
-                <div className="w-full md:w-1/2 md:pr-4 flex items-center justify-center mb-8 md:mb-0 ">
+        <div className="App flex flex-col items-center justify-center  px-4  h-screen" suppressHydrationWarning>
+            <h1 className="text-3xl md:text-4xl font-bold text-black text-center md:py-16 md:-mt-32">OpenPassport playground</h1>
+            <div className="flex flex-col md:flex-row w-full max-w-6xl">
+                <div className="w-full md:w-1/2 md:pr-4 flex items-center justify-center mb-8 md:mb-0">
                     <OpenPassportQRcode
                         appName={appName}
-                        scope={scope}
                         userId={userID}
-                        requirements={[
-                            ...(olderThan !== '' ? [["older_than", olderThan]] : []),
-                            ...(nationality !== '' ? [["nationality", nationality]] : [])
-                        ]}
+                        userIdType={'uuid'}
+                        openPassportVerifier={openPassportVerifier}
                         onSuccess={handleSuccessfulVerification}
-                        devMode={true}
                         size={qrCodeSize}
                     />
                 </div>
@@ -210,10 +207,21 @@ function Showcase() {
                             disablePortal
                             id="nationality-select"
                             options={countryOptions}
-                            sx={{ width: '100%' }}
+                            sx={{ width: '100%', marginBottom: '12px' }}
                             renderInput={(params) => <TextField {...params} label="Nationality" />}
                             value={nationality}
                             onChange={(event, newValue) => setNationality(newValue || '')}
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={ofac}
+                                    onChange={(event) => setOfac(event.target.checked)}
+                                    color="primary"
+                                />
+                            }
+                            label="Check passport is not in OFAC list"
+                            sx={{ color: '#666666' }}
                         />
                     </div>
                     <div>
