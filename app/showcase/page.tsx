@@ -173,26 +173,6 @@ function Showcase() {
     return (
         <div className="App flex flex-col items-center my-8 px-4 md:my-8 pb-16" suppressHydrationWarning>
             <h1 className="text-3xl md:text-4xl font-bold text-black text-center">OpenPassport playground</h1>
-            <div className="text-2xl md:text-3xl font-bold  text-black text-center  mt-6 md:mt-8">1. Get the app</div>
-            <div className="flex flex-col items-center mt-4">
-                <ToggleButtonGroup
-                    color="primary"
-                    value={toggle}
-                    exclusive
-                    onChange={handleToggleChange}
-                    aria-label="Platform"
-                    className="mb-4"
-                >
-                    <ToggleButton value="iOS">
-                        <img src={APPLE_LOGO.src} alt="Apple" style={{ width: '24px', height: '24px' }} />
-                    </ToggleButton>
-                    <ToggleButton value="android">
-                        <img src={ANDROID_LOGO.src} alt="Android" style={{ width: '24px', height: '24px' }} />
-                    </ToggleButton>
-                </ToggleButtonGroup>
-                <div ref={qrcodeRef} className="mt-1"></div>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-black text-center mt-16">2. Open the app and scan the QR code</h1>
             <div className="flex flex-col md:flex-row w-full max-w-6xl ">
                 <div className="w-full md:w-1/2 md:pr-4 flex items-center justify-center mb-8 md:mb-0 ">
                     <OpenPassportQRcode
