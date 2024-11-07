@@ -18,7 +18,7 @@ export const LINKS: Record<string, string> = {
   TWITTER: "https://x.com/openpassportapp",
   TELEGRAM: "https://t.me/openpassport",
   // app
-  APP_DEMO: "/playground",
+  APP_DEMO: "https://openpassport.app/playground",
   DOCUMENTATION: "https://docs.openpassport.app/",
   BOOK_DEMO: "https://calendly.com/florent-tavernier/30min",
   BLOG: "https://blog.openpassport.app/",
@@ -26,8 +26,8 @@ export const LINKS: Record<string, string> = {
   BOUNTIES: "https://github.com/zk-passport/openpassport/issues",
   READ_MORE: "https://blog.openpassport.app/",
   INTRODUCTION_TO_ZK: "https://docs.openpassport.app/",
-  REGISTRY: "/registry",
-  PLAYGROUND: "/playground",
+  REGISTRY: "https://openpassport.app/registry",
+  PLAYGROUND: "https://openpassport.app/playground",
 };
 
 export const MENU_ITEMS: MenuItem[] = [
