@@ -171,10 +171,10 @@ function Showcase() {
     }, [age, nationality, ofac]);
 
     return (
-        <div className="App flex flex-col items-center my-8 px-4 md:my-8 pb-16" suppressHydrationWarning>
-            <h1 className="text-3xl md:text-4xl font-bold text-black text-center">OpenPassport playground</h1>
-            <div className="flex flex-col md:flex-row w-full max-w-6xl ">
-                <div className="w-full md:w-1/2 md:pr-4 flex items-center justify-center mb-8 md:mb-0 ">
+        <div className="App flex flex-col items-center justify-center  px-4  h-screen" suppressHydrationWarning>
+            <h1 className="text-3xl md:text-4xl font-bold text-black text-center md:py-16 md:-mt-32">OpenPassport playground</h1>
+            <div className="flex flex-col md:flex-row w-full max-w-6xl">
+                <div className="w-full md:w-1/2 md:pr-4 flex items-center justify-center mb-8 md:mb-0">
                     <OpenPassportQRcode
                         appName={appName}
                         userId={userID}
