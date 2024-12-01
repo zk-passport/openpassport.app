@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end('Method Not Allowed');
   }
 
-  const { type, sha, algorithm, exponent, search, curve, limit = '16' } = req.query;
+  const { type, sha, algorithm, exponent, bits, search, curve, limit = '100' } = req.query;
 
   try {
     let whereClause: any = { AND: [] };
@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       whereClause.AND.push({ hashAlgorithm: { contains: sha as string, mode: 'insensitive' } });
     }
     if (algorithm) {
-      whereClause.AND.push({ signatureAlgorithm: { equals: algorithm as string, mode: 'insensitive' } }); // Changed to exact match
+      whereClause.AND.push({ signatureAlgorithm: { equals: algorithm as string, mode: 'insensitive' } });
     }
     if (exponent) {
       whereClause.AND.push({
@@ -37,6 +37,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           equals: curve as string
         }
       });
+
+    if (bits)
+      whereClause.AND.push({
+        publicKeyDetails: {
+          path: ['bits'],
+          equals: bits as string
+        }
+      });
+
 
     // Handle free text search
     if (search) {
