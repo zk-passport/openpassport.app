@@ -124,14 +124,14 @@ export default function MapChart() {
     try {
       // Intermediate Certificates (DSC) issued by each country
       const dscFetchData = await fetch(
-        'https://raw.githubusercontent.com/openpassport-org/openpassport/90f6091295079b7d2427f2b642c28414a86e8c51/registry/outputs/map_dsc.json'
+        'https://raw.githubusercontent.com/openpassport-org/openpassport/14c42a5ae0f849d1aa7be7afc1745f7e70952ab5/registry/outputs/map_dsc.json'
 
       );
       const dscData = await dscFetchData.json();
 
       // Top-level Certificates (CSCA) issued by each country
       const cscaFetchData = await fetch(
-        'https://raw.githubusercontent.com/openpassport-org/openpassport/90f6091295079b7d2427f2b642c28414a86e8c51/registry/outputs/map_csca.json'
+        'https://raw.githubusercontent.com/openpassport-org/openpassport/14c42a5ae0f849d1aa7be7afc1745f7e70952ab5/registry/outputs/map_csca.json'
       );
       const cscaData = await cscaFetchData.json();
 
