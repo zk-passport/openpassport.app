@@ -30,7 +30,7 @@ const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
             '65537',
             // '3', '33225', '33579', '33769', '34389', '34779', '35033', '35221', '36291', '36515', '37121', '37399', '38105', '41817', '42239', '42743', '44459', '44591', '44681', '45279', '45347', '47415', '48081', '49371', '49729', '49861', '51925', '52355', '53037', '53741', '53873', '54007', '55443', '58127', '58333', '59575', '59793', '60353', '61181', '61735', '61957', '62391', '62765', '62785', '63289', '63701', '64113', '64721', '64999', '65123', '65223', '65427', 'NOT RSA'
           ],
-          bits: [ 
+          bits: [
             2048
             // 256, 1024, 3072, 4096
           ],
@@ -55,7 +55,7 @@ const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
       },
       ecdsa: false,
     }
-    
+
     let signatureSupport = false;
     let hashSupport = false;
     let curveSupport = false;
@@ -84,18 +84,39 @@ const supportIndicator = (countryCert: CertDetail, type: string = 'dsc') => {
     // csca supported algs added here
     const supportedListCsca: any = {
       rsa: {
-        sha1: false,
+        sha1: {
+          curves: [
+            '65537',
+            // '3', '38129', '43459', '50633', '56611', '58097', '107903', '109729', '127485', 'NOT RSA'
+          ],
+          bits: [2048, 3072, 4096]
+        },
         sha256: {
           curves: [
             '65537',
             // '3', '38129', '43459', '50633', '56611', '58097', '107903', '109729', '127485', 'NOT RSA'
           ],
-          bits: [ 2048, 3072, 4096 ]
+          bits: [2048, 3072, 4096]
         },
         sha384: false,
         sha512: false,
       },
-      rsapss: false,
+      rsapss: {
+        sha1: null,
+        sha256: {
+          curves: [
+            // '3',
+            '65537'
+          ],
+          bits: [
+            2048,
+            3072,
+            4096
+          ]
+        },
+        sha384: false,
+        sha512: false,
+      },
       ecdsa: false,
     }
 
