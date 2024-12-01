@@ -11,8 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         let isValid = false;
         try {
-            const openPassport1StepVerifier = new OpenPassportVerifier('prove_offchain', '@OpenPassportPlayground', true)
-            isValid = (await openPassport1StepVerifier.verify(proof as OpenPassportAttestation)).valid;
+            const openPassportVerifier = new OpenPassportVerifier('prove_offchain', 'myExampleApp')
+            isValid = (await openPassportVerifier.verify(proof as OpenPassportAttestation)).valid;
         } catch (error) {
             console.error('Error verifying proof:', error);
             return res.status(500).json({ message: 'Error verifying proof' });
