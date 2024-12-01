@@ -124,13 +124,14 @@ export default function MapChart() {
     try {
       // Intermediate Certificates (DSC) issued by each country
       const dscFetchData = await fetch(
-        'https://raw.githubusercontent.com/zk-passport/openpassport/40a7ddf7fba1c8b60f2a31953f207fe649a6556f/registry/outputs/dsc_formatted.json'
+        'https://raw.githubusercontent.com/openpassport-org/openpassport/90f6091295079b7d2427f2b642c28414a86e8c51/registry/outputs/map_dsc.json'
+
       );
       const dscData = await dscFetchData.json();
 
       // Top-level Certificates (CSCA) issued by each country
       const cscaFetchData = await fetch(
-        'https://raw.githubusercontent.com/zk-passport/openpassport/40a7ddf7fba1c8b60f2a31953f207fe649a6556f/registry/outputs/csca_formatted.json'
+        'https://raw.githubusercontent.com/openpassport-org/openpassport/90f6091295079b7d2427f2b642c28414a86e8c51/registry/outputs/map_csca.json'
       );
       const cscaData = await cscaFetchData.json();
 
@@ -284,13 +285,13 @@ export default function MapChart() {
             )}
             {(countryData?.dscExist || countryData?.cscaExist) && !devMode
               ? countryData?.allAlgs.map((alg: string) => {
-                  return (
-                    <p key={alg} className="flex items-center text-nowrap">
-                      &nbsp;-&nbsp;{alg[0].replace('RSAPSS', 'RSA-PSS')}
-                      {alg[1] ? '  ✅' : '  🚧'}
-                    </p>
-                  );
-                })
+                return (
+                  <p key={alg} className="flex items-center text-nowrap">
+                    &nbsp;-&nbsp;{alg[0].replace('RSAPSS', 'RSA-PSS')}
+                    {alg[1] ? '  ✅' : '  🚧'}
+                  </p>
+                );
+              })
               : null}
 
             {/* tooltip data in dev mode */}
@@ -299,31 +300,31 @@ export default function MapChart() {
                 <p className="algorithmTitle">Top-level Certificates (CSCA)</p>
                 {countryData?.cscaExist && devMode
                   ? countryData?.cscaRecords.map((csca: any) => {
-                      let exponentStr = '';
-                      if (isNaN(csca?.curve_exponent)) {
-                        exponentStr = `curve ${csca?.curve_exponent}`;
-                      } else {
-                        exponentStr = `exponent ${csca?.curve_exponent}`;
-                      }
+                    let exponentStr = '';
+                    if (isNaN(csca?.curve_exponent)) {
+                      exponentStr = `curve ${csca?.curve_exponent}`;
+                    } else {
+                      exponentStr = `exponent ${csca?.curve_exponent}`;
+                    }
 
-                      if (csca.signature_algorithm === 'rsapss') {
-                        csca.signature_algorithm = 'rsa-pss';
-                      }
-                      const signatureStr = `${csca.signature_algorithm.toUpperCase()} with ${csca.hash_algorithm.toUpperCase()}`;
+                    if (csca.signature_algorithm === 'rsapss') {
+                      csca.signature_algorithm = 'rsa-pss';
+                    }
+                    const signatureStr = `${csca.signature_algorithm.toUpperCase()} with ${csca.hash_algorithm.toUpperCase()}`;
 
-                      return (
-                        <p
-                          key={Math.random()}
-                          className="flex items-center text-nowrap"
-                        >
-                          &nbsp;-&nbsp;
-                          {`${csca?.amount} issued with ${signatureStr}, ${exponentStr}, ${csca?.bit_length} bits`}
-                          {csca.is_supported
-                            ? '  ✅'
-                            : '  🚧'}
-                        </p>
-                      );
-                    })
+                    return (
+                      <p
+                        key={Math.random()}
+                        className="flex items-center text-nowrap"
+                      >
+                        &nbsp;-&nbsp;
+                        {`${csca?.amount} issued with ${signatureStr}, ${exponentStr}, ${csca?.bit_length} bits`}
+                        {csca.is_supported
+                          ? '  ✅'
+                          : '  🚧'}
+                      </p>
+                    );
+                  })
                   : null}
               </div>
             )}
@@ -334,30 +335,30 @@ export default function MapChart() {
                 </p>
                 {countryData?.dscRecords?.length > 0 && devMode
                   ? countryData?.dscRecords.map((dsc: any) => {
-                      let exponentStr = '';
-                      if (isNaN(dsc?.curve_exponent)) {
-                        exponentStr = `curve ${dsc?.curve_exponent}`;
-                      } else {
-                        exponentStr = `exponent ${dsc?.curve_exponent}`;
-                      }
-                      if (dsc.signature_algorithm === 'rsapss') {
-                        dsc.signature_algorithm = 'rsa-pss';
-                      }
-                      const signatureStr = `${dsc.signature_algorithm.toUpperCase()} with ${dsc.hash_algorithm.toUpperCase()}`;
+                    let exponentStr = '';
+                    if (isNaN(dsc?.curve_exponent)) {
+                      exponentStr = `curve ${dsc?.curve_exponent}`;
+                    } else {
+                      exponentStr = `exponent ${dsc?.curve_exponent}`;
+                    }
+                    if (dsc.signature_algorithm === 'rsapss') {
+                      dsc.signature_algorithm = 'rsa-pss';
+                    }
+                    const signatureStr = `${dsc.signature_algorithm.toUpperCase()} with ${dsc.hash_algorithm.toUpperCase()}`;
 
-                      return (
-                        <p
-                          key={Math.random()}
-                          className="flex items-center text-nowrap"
-                        >
-                          &nbsp;-&nbsp;
-                          {`${dsc?.amount} issued with ${signatureStr}, ${exponentStr}, ${dsc?.bit_length} bits`}
-                          {dsc.is_supported
-                            ? '  ✅'
-                            : '  🚧'}
-                        </p>
-                      );
-                    })
+                    return (
+                      <p
+                        key={Math.random()}
+                        className="flex items-center text-nowrap"
+                      >
+                        &nbsp;-&nbsp;
+                        {`${dsc?.amount} issued with ${signatureStr}, ${exponentStr}, ${dsc?.bit_length} bits`}
+                        {dsc.is_supported
+                          ? '  ✅'
+                          : '  🚧'}
+                      </p>
+                    );
+                  })
                   : null}
               </div>
             )}
@@ -459,7 +460,7 @@ export default function MapChart() {
                           default: {
                             fill: allIssuesCountry[`${geo.properties.name}`]
                               ? allIssuesCountry[`${geo.properties.name}`]
-                                  .defaultColor
+                                .defaultColor
                               : '#b0bfa7',
                           },
                           hover: {
@@ -485,9 +486,8 @@ export default function MapChart() {
       <Grid
         container
         spacing={2}
-        className={`sm:mt-3 mt-0 countryDetailsRow ${
-          devMode ? 'devMode' : 'normalMode'
-        }`}
+        className={`sm:mt-3 mt-0 countryDetailsRow ${devMode ? 'devMode' : 'normalMode'
+          }`}
       >
         <Grid
           sm={6}
