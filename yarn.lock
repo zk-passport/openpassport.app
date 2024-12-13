@@ -924,9 +924,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openpassport/core@npm:0.0.10, @openpassport/core@npm:^0.0.10":
-  version: 0.0.10
-  resolution: "@openpassport/core@npm:0.0.10"
+"@openpassport/core@npm:0.0.11, @openpassport/core@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@openpassport/core@npm:0.0.11"
   dependencies:
     "@openpassport/zk-kit-imt": "npm:^0.0.5"
     "@openpassport/zk-kit-lean-imt": "npm:^0.0.6"
@@ -951,15 +951,15 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/c8713b9363b81030213672b97b5cad7ce22d1e1a9aa0c1a7d21748d7001bd5694e2ca224f923037b28a004761b25a3b245443f4c8c4670471a2e67524bd7e096
+  checksum: 10c0/f898583fa6202c928afd2e19eb58790cc6769f80803d3f1c5613e2a6fdebf8d1629fbbbbdd028e65e90e8c14687b89457dcaf51a37a3eb91ce1aa34de37c1151
   languageName: node
   linkType: hard
 
-"@openpassport/qrcode@npm:^0.0.13":
-  version: 0.0.13
-  resolution: "@openpassport/qrcode@npm:0.0.13"
+"@openpassport/qrcode@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "@openpassport/qrcode@npm:0.0.14"
   dependencies:
-    "@openpassport/core": "npm:0.0.10"
+    "@openpassport/core": "npm:0.0.11"
     "@types/react": "npm:^18.3.4"
     "@types/react-dom": "npm:^18.3.0"
     "@types/uuid": "npm:^10.0.0"
@@ -987,7 +987,7 @@ __metadata:
     lottie-react: ^2.4.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/f6027647af8a1a7b4afc1878283a917269fd2ae78cfeb1463921428023311770bb9f354cb738cf8c6158a2e4d72483d0392b9f92d2cfa9550c9ff0ebe7a41b8e
+  checksum: 10c0/7a6b2161279e29de163d9cb3ac2820bdc26af478f694f395c20a68f31260ca1b025eeb8cf2c6bf490f3cfbd993920161d41e400bda416741269fdd3dbc942c1e
   languageName: node
   linkType: hard
 
@@ -5074,8 +5074,8 @@ __metadata:
     "@emotion/styled": "npm:^11.11.5"
     "@lezer/highlight": "npm:^1.2.1"
     "@mui/material": "npm:^5.15.20"
-    "@openpassport/core": "npm:^0.0.10"
-    "@openpassport/qrcode": "npm:^0.0.13"
+    "@openpassport/core": "npm:^0.0.11"
+    "@openpassport/qrcode": "npm:^0.0.14"
     "@prisma/client": "npm:^5.19.0"
     "@tw-classed/react": "npm:^1.7.0"
     "@types/node": "npm:^20"

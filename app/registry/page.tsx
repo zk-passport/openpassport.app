@@ -77,7 +77,7 @@ const Registry: React.FC = () => {
     sha: ['sha256', 'sha1', 'sha512', 'sha384'],
     exponent: certificateType === 'csca' ? exponentCSCA : exponentDSC,
     algorithm: ['rsa', 'ecdsa', 'rsa-pss'],
-    curve: ['secp256r1', 'secp384r1', 'secp521r1', 'brainpoolP224r1', 'brainpoolP256r1', 'brainpoolP384r1', 'brainpoolP512r1'],
+    curve: ['secp224r1', 'secp256r1', 'secp384r1', 'secp521r1', 'brainpoolP224r1', 'brainpoolP256r1', 'brainpoolP384r1', 'brainpoolP512r1'],
     bits: ['256', '384', '512', '1024', '2048', '3072', '4096', '6144'],
   };
 
