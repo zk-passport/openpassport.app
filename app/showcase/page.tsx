@@ -80,43 +80,43 @@ function Showcase() {
     };
 
     const handleSuccessfulVerification = async (proof: OpenPassportAttestation) => {
-        try {
-            // Pass the verification arguments to the backend
-            const verifierArgs = {
-                scope: scope,
-                requirements: [
-                    ...(olderThan !== '' ? [["older_than", olderThan]] : []),
-                    ...(nationality !== '' ? [["nationality", nationality]] : [])
-                ],
-                dev_mode: true,
-            };
-            // API call to verify the proof in the backend too
-            const response = await fetch('/api/verify', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ proof: proof, verifierArgs: verifierArgs }),
-            });
+        // try {
+        //     // Pass the verification arguments to the backend
+        //     const verifierArgs = {
+        //         scope: scope,
+        //         requirements: [
+        //             ...(olderThan !== '' ? [["older_than", olderThan]] : []),
+        //             ...(nationality !== '' ? [["nationality", nationality]] : [])
+        //         ],
+        //         dev_mode: true,
+        //     };
+        //     // API call to verify the proof in the backend too
+        //     const response = await fetch('/api/verify', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({ proof: proof, verifierArgs: verifierArgs }),
+        //     });
 
-            if (response.status === 200) {
-                const data = await response.json();
-                console.log('Backend verification result:', data);
+        //     if (response.status === 200) {
+        //         const data = await response.json();
+        //         console.log('Backend verification result:', data);
 
-                // Extract the function body without the comment
-                const functionBody = callback.replace(/\/\/.*$/, '').trim();
-                // Create a new function from the extracted body
-                const callbackFunction = new Function('appName', 'toast', `
-                    return (${functionBody})
-                `);
-                callbackFunction()(appName, toast);
-            } else {
-                throw new Error('Failed to verify proof');
-            }
-        } catch (error) {
-            console.error('Error executing callback:', error);
-            toast.error('Error executing callback');
-        }
+        //         // Extract the function body without the comment
+        //         const functionBody = callback.replace(/\/\/.*$/, '').trim();
+        //         // Create a new function from the extracted body
+        //         const callbackFunction = new Function('appName', 'toast', `
+        //             return (${functionBody})
+        //         `);
+        //         callbackFunction()(appName, toast);
+        //     } else {
+        //         throw new Error('Failed to verify proof');
+        //     }
+        // } catch (error) {
+        //     console.error('Error executing callback:', error);
+        //     toast.error('Error executing callback');
+        // }
     };
     const handleToggleChange = (event: React.MouseEvent<HTMLElement>, value: string) => {
         if (value !== null) {
@@ -224,7 +224,7 @@ function Showcase() {
                             sx={{ color: '#666666' }}
                         />
                     </div>
-                    <div>
+                    {/* <div>
                         <h1 className="text-xs text-[#666666] ml-2 mb-1" style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' }}>Callback function</h1>
                         <div className="code-editor-container" style={{
                             width: '100%',
@@ -246,7 +246,7 @@ function Showcase() {
                                 className="custom-codemirror"
                             />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <ToastContainer />

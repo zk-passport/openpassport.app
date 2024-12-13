@@ -924,9 +924,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openpassport/core@npm:0.0.10, @openpassport/core@npm:^0.0.10":
-  version: 0.0.10
-  resolution: "@openpassport/core@npm:0.0.10"
+"@openpassport/core@npm:0.0.11, @openpassport/core@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@openpassport/core@npm:0.0.11"
   dependencies:
     "@openpassport/zk-kit-imt": "npm:^0.0.5"
     "@openpassport/zk-kit-lean-imt": "npm:^0.0.6"
@@ -951,15 +951,15 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/c8713b9363b81030213672b97b5cad7ce22d1e1a9aa0c1a7d21748d7001bd5694e2ca224f923037b28a004761b25a3b245443f4c8c4670471a2e67524bd7e096
+  checksum: 10c0/f898583fa6202c928afd2e19eb58790cc6769f80803d3f1c5613e2a6fdebf8d1629fbbbbdd028e65e90e8c14687b89457dcaf51a37a3eb91ce1aa34de37c1151
   languageName: node
   linkType: hard
 
-"@openpassport/qrcode@npm:^0.0.13":
-  version: 0.0.13
-  resolution: "@openpassport/qrcode@npm:0.0.13"
+"@openpassport/qrcode@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "@openpassport/qrcode@npm:0.0.14"
   dependencies:
-    "@openpassport/core": "npm:0.0.10"
+    "@openpassport/core": "npm:0.0.11"
     "@types/react": "npm:^18.3.4"
     "@types/react-dom": "npm:^18.3.0"
     "@types/uuid": "npm:^10.0.0"
@@ -987,7 +987,7 @@ __metadata:
     lottie-react: ^2.4.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/f6027647af8a1a7b4afc1878283a917269fd2ae78cfeb1463921428023311770bb9f354cb738cf8c6158a2e4d72483d0392b9f92d2cfa9550c9ff0ebe7a41b8e
+  checksum: 10c0/7a6b2161279e29de163d9cb3ac2820bdc26af478f694f395c20a68f31260ca1b025eeb8cf2c6bf490f3cfbd993920161d41e400bda416741269fdd3dbc942c1e
   languageName: node
   linkType: hard
 
@@ -1225,24 +1225,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18, @types/react-dom@npm:^18.3.0":
-  version: 18.3.0
-  resolution: "@types/react-dom@npm:18.3.0"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/6c90d2ed72c5a0e440d2c75d99287e4b5df3e7b011838cdc03ae5cd518ab52164d86990e73246b9d812eaf02ec351d74e3b4f5bd325bf341e13bf980392fd53b
+"@types/react-dom@npm:^18.2.0":
+  version: 18.3.5
+  resolution: "@types/react-dom@npm:18.3.5"
+  peerDependencies:
+    "@types/react": ^18.0.0
+  checksum: 10c0/b163d35a6b32a79f5782574a7aeb12a31a647e248792bf437e6d596e2676961c394c5e3c6e91d1ce44ae90441dbaf93158efb4f051c0d61e2612f1cb04ce4faa
   languageName: node
   linkType: hard
 
-"@types/react-simple-maps@npm:^3.0.4":
-  version: 3.0.6
-  resolution: "@types/react-simple-maps@npm:3.0.6"
+"@types/react-simple-maps@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@types/react-simple-maps@npm:3.0.0"
   dependencies:
     "@types/d3-geo": "npm:^2"
     "@types/d3-zoom": "npm:^2"
     "@types/geojson": "npm:*"
     "@types/react": "npm:*"
-  checksum: 10c0/2c906b5872f6cd7749a2103887792617fd1891910117263f72dd2bf9d767f3689d93fa5172b6028617f69f2fc59f98ba25c92cbe68e4be8cafe2009187e0f3b0
+  checksum: 10c0/a16e149d8f493fe78387a95bc0ee22ca500bee6f94ada84ef02121d42e25a61ea5802c1e8c7d3b109c90c6a65402c36e6550032d8fb0dc3da6b0ba8ffff38192
   languageName: node
   linkType: hard
 
@@ -1255,23 +1255,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18":
-  version: 18.3.3
-  resolution: "@types/react@npm:18.3.3"
+"@types/react@npm:^18.2.0":
+  version: 18.3.16
+  resolution: "@types/react@npm:18.3.16"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/fe455f805c5da13b89964c3d68060cebd43e73ec15001a68b34634604a78140e6fc202f3f61679b9d809dde6d7a7c2cb3ed51e0fd1462557911db09879b55114
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.3.4":
-  version: 18.3.5
-  resolution: "@types/react@npm:18.3.5"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10c0/548b1d3d7c2f0242fbfdbbd658731b4ce69a134be072fa83e6ab516f2840402a3f20e3e7f72e95133b23d4880ef24a6d864050dc8e1f7c68f39fa87ca8445917
+  checksum: 10c0/9113d3003865eda07be0fb596f5bd8d7784b8900675090c56e75bdee45499f0b0de2481cbbeb5980c3b4ad18f234a49f39c9e62fd7b89a4e8530c74789f739bd
   languageName: node
   linkType: hard
 
@@ -5074,14 +5064,14 @@ __metadata:
     "@emotion/styled": "npm:^11.11.5"
     "@lezer/highlight": "npm:^1.2.1"
     "@mui/material": "npm:^5.15.20"
-    "@openpassport/core": "npm:^0.0.10"
-    "@openpassport/qrcode": "npm:^0.0.13"
+    "@openpassport/core": "npm:^0.0.11"
+    "@openpassport/qrcode": "npm:^0.0.14"
     "@prisma/client": "npm:^5.19.0"
     "@tw-classed/react": "npm:^1.7.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
-    "@types/react-simple-maps": "npm:^3.0.4"
+    "@types/react-simple-maps": "npm:3.0.0"
     "@types/uuid": "npm:^10.0.0"
     "@uiw/codemirror-theme-tokyo-night-day": "npm:^4.23.0"
     "@uiw/codemirror-theme-white": "npm:^4.23.0"
@@ -5103,7 +5093,7 @@ __metadata:
     react-codemirror2: "npm:^8.0.0"
     react-country-flag: "npm:^3.1.0"
     react-dom: "npm:^18"
-    react-simple-maps: "npm:^3.0.0"
+    react-simple-maps: "npm:3.0.0"
     react-spinners: "npm:^0.14.1"
     react-toastify: "npm:^10.0.5"
     tailwindcss: "npm:^3.4.1"
@@ -5378,7 +5368,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-simple-maps@npm:^3.0.0":
+"react-simple-maps@npm:3.0.0":
   version: 3.0.0
   resolution: "react-simple-maps@npm:3.0.0"
   dependencies:
