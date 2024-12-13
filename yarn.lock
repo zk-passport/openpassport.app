@@ -1234,15 +1234,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-simple-maps@npm:^3.0.4":
-  version: 3.0.6
-  resolution: "@types/react-simple-maps@npm:3.0.6"
+"@types/react-simple-maps@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@types/react-simple-maps@npm:3.0.0"
   dependencies:
     "@types/d3-geo": "npm:^2"
     "@types/d3-zoom": "npm:^2"
     "@types/geojson": "npm:*"
     "@types/react": "npm:*"
-  checksum: 10c0/2c906b5872f6cd7749a2103887792617fd1891910117263f72dd2bf9d767f3689d93fa5172b6028617f69f2fc59f98ba25c92cbe68e4be8cafe2009187e0f3b0
+  checksum: 10c0/a16e149d8f493fe78387a95bc0ee22ca500bee6f94ada84ef02121d42e25a61ea5802c1e8c7d3b109c90c6a65402c36e6550032d8fb0dc3da6b0ba8ffff38192
   languageName: node
   linkType: hard
 
@@ -5081,7 +5081,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
-    "@types/react-simple-maps": "npm:^3.0.4"
+    "@types/react-simple-maps": "npm:3.0.0"
     "@types/uuid": "npm:^10.0.0"
     "@uiw/codemirror-theme-tokyo-night-day": "npm:^4.23.0"
     "@uiw/codemirror-theme-white": "npm:^4.23.0"
@@ -5103,7 +5103,7 @@ __metadata:
     react-codemirror2: "npm:^8.0.0"
     react-country-flag: "npm:^3.1.0"
     react-dom: "npm:^18"
-    react-simple-maps: "npm:^3.0.0"
+    react-simple-maps: "npm:3.0.0"
     react-spinners: "npm:^0.14.1"
     react-toastify: "npm:^10.0.5"
     tailwindcss: "npm:^3.4.1"
@@ -5378,7 +5378,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-simple-maps@npm:^3.0.0":
+"react-simple-maps@npm:3.0.0":
   version: 3.0.0
   resolution: "react-simple-maps@npm:3.0.0"
   dependencies:
