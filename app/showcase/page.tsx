@@ -21,7 +21,7 @@ function Showcase() {
             date_of_birth: true,
             passport_number: true,
             minimumAge: 20,
-            excludedCountries: ["IRN", "IRQ"],
+            excludedCountries: ["IRN", "IRQ", "PRK", "RUS", "SYR", "VEN"],
             ofac: true,
         }
     }).build();
