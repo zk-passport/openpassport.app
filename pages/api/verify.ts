@@ -26,14 +26,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.log(result);
 
             if (result.isValid) {
-                res.status(200).json({ 
-                    message: 'Proof is valid',
-                    details: result
+                res.status(200).json({
+                    status: 'success',
+                    result: result.isValid,
+                    // message: {result: result},
                 });
             } else {
-                res.status(400).json({ 
-                    message: 'Invalid proof',
-                    details: result.isValidDetails
+                res.status(500).json({
+                    status: 'error', 
+                    result: result.isValid,
+                    message: 'Verification failed'
                 });
             }
         } catch (error) {
