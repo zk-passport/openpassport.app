@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             );
 
             // Example setup - customize based on your needs
-            selfBackendVerifier.setMinimumAge(20);
+            selfBackendVerifier.setMinimumAge(18);
             selfBackendVerifier.setNationality('France');
             selfBackendVerifier.enableNameAndDobOfacCheck();
 

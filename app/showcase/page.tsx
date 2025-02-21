@@ -20,7 +20,7 @@ function Showcase() {
             nationality: true,
             date_of_birth: true,
             passport_number: true,
-            minimumAge: 18,
+            minimumAge: 20,
             excludedCountries: ["IRN", "IRQ"],
             ofac: true,
         }

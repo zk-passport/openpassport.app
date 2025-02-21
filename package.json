@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.11.5",
     "@lezer/highlight": "^1.2.1",
     "@mui/material": "^5.15.20",
-    "@openpassport/core": "^0.0.23",
+    "@openpassport/core": "^0.0.24",
     "@openpassport/qrcode": "^0.0.16",
     "@openpassport/qrcode2": "^0.0.4",
     "@prisma/client": "^5.19.0",

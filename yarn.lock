@@ -1009,9 +1009,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openpassport/core@npm:^0.0.23":
-  version: 0.0.23
-  resolution: "@openpassport/core@npm:0.0.23"
+"@openpassport/core@npm:^0.0.24":
+  version: 0.0.24
+  resolution: "@openpassport/core@npm:0.0.24"
   dependencies:
     "@openpassport/zk-kit-imt": "npm:^0.0.5"
     "@openpassport/zk-kit-lean-imt": "npm:^0.0.6"
@@ -1037,7 +1037,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/7cc885184b99e9c1aa5e0ad678e71ffcd73d5150563d4b3086ff887f019d30e557cfc0224e435ee71d6d914c02ff9f786e2ace441004042e710d00ed003c0715
+  checksum: 10c0/488397f0c064bbd66873e9addd89bbfc3dbf4621ea8f5b0922549e9fc8ecd83a95954ba498d0b880dff9e6ed84000f939a19c8523d6d35933df2e3a12ddfeff2
   languageName: node
   linkType: hard
 
@@ -5217,7 +5217,7 @@ __metadata:
     "@emotion/styled": "npm:^11.11.5"
     "@lezer/highlight": "npm:^1.2.1"
     "@mui/material": "npm:^5.15.20"
-    "@openpassport/core": "npm:^0.0.23"
+    "@openpassport/core": "npm:^0.0.24"
     "@openpassport/qrcode": "npm:^0.0.16"
     "@openpassport/qrcode2": "npm:^0.0.4"
     "@prisma/client": "npm:^5.19.0"
