@@ -10,7 +10,7 @@ function Showcase() {
     const userId = uuidv4();
 
     const selfApp = new SelfAppBuilder({
-        appName: "Mock App2",
+        appName: "Self Playground",
         scope: "my-scope",
         endpoint: "https://staging.openpassport.app/api/verify",
         logoBase64: logo,
