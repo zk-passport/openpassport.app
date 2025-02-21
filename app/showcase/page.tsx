@@ -12,7 +12,7 @@ function Showcase() {
     const selfApp = new SelfAppBuilder({
         appName: "Mock App2",
         scope: "my-scope",
-        endpoint: "https://staging.openpassport.app/verify",
+        endpoint: "https://staging.openpassport.app/api/verify",
         logoBase64: logo,
         userId,
         disclosures: {
