@@ -1,27 +1,43 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { OpenPassportVerifier, OpenPassportAttestation } from '@openpassport/core';
+import { SelfBackendVerifier } from '@openpassport/core';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        const { proof, verifierArgs } = req.body;
+        const { proof, publicSignals } = req.body;
 
-        if (!proof || !verifierArgs) {
-            return res.status(400).json({ message: 'Proof and verifierArgs are required' });
+        if (!proof || !publicSignals) {
+            return res.status(400).json({ message: 'Proof and publicSignals are required' });
         }
 
-        let isValid = false;
         try {
-            const openPassportVerifier = new OpenPassportVerifier('prove_offchain', 'myExampleApp')
-            isValid = (await openPassportVerifier.verify(proof as OpenPassportAttestation)).valid;
+            const selfBackendVerifier = new SelfBackendVerifier(
+                'https://forno.celo.org',
+                "test-scope"
+            );
+
+            // Example setup - customize based on your needs
+            selfBackendVerifier.setMinimumAge(20);
+            selfBackendVerifier.setNationality('France');
+            selfBackendVerifier.enableNameAndDobOfacCheck();
+
+            const result = await selfBackendVerifier.verify(proof, publicSignals);
+
+            console.log(result);
+
+            if (result.isValid) {
+                res.status(200).json({ 
+                    message: 'Proof is valid',
+                    details: result
+                });
+            } else {
+                res.status(400).json({ 
+                    message: 'Invalid proof',
+                    details: result.isValidDetails
+                });
+            }
         } catch (error) {
             console.error('Error verifying proof:', error);
             return res.status(500).json({ message: 'Error verifying proof' });
-        }
-
-        if (isValid) {
-            res.status(200).json({ message: 'Proof is valid' });
-        } else {
-            res.status(400).json({ message: 'Invalid proof' });
         }
     } else {
         res.status(405).json({ message: 'Method not allowed' });
