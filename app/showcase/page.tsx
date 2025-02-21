@@ -27,7 +27,7 @@ function Showcase() {
     }).build();
 
     return (
-        <div className="App flex flex-col items-center justify-center  px-4  h-screen" suppressHydrationWarning>
+        <div className="App flex flex-col items-center justify-center px-4 h-screen" suppressHydrationWarning>
             <h1 className="text-3xl md:text-4xl font-bold text-black text-center md:py-16 md:-mt-32">OpenPassport playground v2</h1>
             <OpenPassportQRcodeWrapper
                 selfApp={selfApp}

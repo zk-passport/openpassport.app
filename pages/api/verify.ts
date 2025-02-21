@@ -17,7 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             // Example setup - customize based on your needs
             selfBackendVerifier.setMinimumAge(18);
-            selfBackendVerifier.setNationality('United States of America');
             selfBackendVerifier.enableNameAndDobOfacCheck();
             selfBackendVerifier.excludeCountries("Iran (Islamic Republic of)", "Iraq", "Korea (Democratic People's Republic of)", "Russian Federation", "Syrian Arab Republic", "Venezuela (Bolivarian Republic of)");
 
