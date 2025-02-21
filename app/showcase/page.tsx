@@ -11,7 +11,7 @@ function Showcase() {
 
     const selfApp = new SelfAppBuilder({
         appName: "Self Playground",
-        scope: "my-scope",
+        scope: "self-playground",
         endpoint: "https://staging.openpassport.app/api/verify",
         logoBase64: logo,
         userId,

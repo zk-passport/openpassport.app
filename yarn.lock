@@ -1041,9 +1041,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openpassport/qrcode2@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "@openpassport/qrcode2@npm:0.0.3"
+"@openpassport/qrcode2@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@openpassport/qrcode2@npm:0.0.4"
   dependencies:
     "@openpassport/core": "npm:0.0.12"
     "@types/react": "npm:^18.3.4"
@@ -1073,7 +1073,7 @@ __metadata:
     lottie-react: ^2.4.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/496f23a1e12d3207a8a6881bacc993e8b3d6fe45e922abb7196460d9b435db759ebfc41d81675d7bd88a45676cc66e04cf0fce4e6dfd6e013e04e5defd7875f0
+  checksum: 10c0/8dbd13f6a637a588685021f3ad4e3447808aae607622b5e140b9a964235fe920d1e634d0c4888eeb574341c59ed7f46ba533b01d04e42d58a0009414b1b9b1fd
   languageName: node
   linkType: hard
 
@@ -5219,7 +5219,7 @@ __metadata:
     "@mui/material": "npm:^5.15.20"
     "@openpassport/core": "npm:^0.0.23"
     "@openpassport/qrcode": "npm:^0.0.16"
-    "@openpassport/qrcode2": "npm:^0.0.3"
+    "@openpassport/qrcode2": "npm:^0.0.4"
     "@prisma/client": "npm:^5.19.0"
     "@tw-classed/react": "npm:^1.7.0"
     "@types/node": "npm:^20"

@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             const selfBackendVerifier = new SelfBackendVerifier(
                 'https://forno.celo.org',
-                "test-scope"
+                "self-playground"
             );
 
             // Example setup - customize based on your needs
