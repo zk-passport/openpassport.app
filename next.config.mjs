@@ -5,7 +5,13 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        destination: 'https://self.xyz',
+        missing: [
+          {
+            type: 'host',
+            value: 'blog.openpassport.app',
+          },
+        ],
+        destination: 'https://self.xyz/',
         permanent: true,
       },
     ]
